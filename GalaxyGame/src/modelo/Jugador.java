@@ -61,4 +61,12 @@ public class Jugador extends Objeto {
 			disparoTemporal.avanzarDisparo();
 		}
 	}
+	public Disparo getDisparoTemporal() {
+		return disparoTemporal;
+	}
+	public void setDisparoTemporal(Disparo disparoTemporal) {
+		this.disparoTemporal = disparoTemporal;
+	}
+	
+	
 }

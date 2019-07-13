@@ -2,6 +2,7 @@ package vista;
 
 import javax.swing.*;
 
+import hilos.HiloJuego;
 import modelo.Jugador;
 
 import java.awt.*;
@@ -12,15 +13,14 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
 	public static final Image JUGADOR = Toolkit.getDefaultToolkit().createImage("./resources/nave_jugador.png");
+	public static final Image DISPARO = Toolkit.getDefaultToolkit().createImage("./resources/laserJugador.png");
 
 	private PanelOpciones opciones;
 
 	public PanelGame(PanelOpciones opciones) {
 
 		this.opciones = opciones;
-		
-		
-		
+
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -34,9 +34,10 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		g.drawImage(BACKGROUND, 0, 0, null);
 
-		Jugador jugador = opciones.getGame().getJuego().getJugador();		
-		
+		Jugador jugador = opciones.getGame().getJuego().getJugador();
+
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
+		g.drawImage(DISPARO, jugador.getDisparoTemporal().getPosx(),  jugador.getDisparoTemporal().getPosy(), jugador.getDisparoTemporal().getAncho(),  jugador.getDisparoTemporal().getAltura(), null);
 
 		repaint();
 
@@ -44,24 +45,36 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		Jugador jugador = opciones.getGame().getJuego().getJugador();		
-		
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			
+
+		Jugador jugador = opciones.getGame().getJuego().getJugador();
+		HiloJuego hilo = opciones.getGame().getHiloJuego();
+
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
 			jugador.irDerecha();
-			System.out.println("hola");
-//			opciones.getGame().refresh();
-			
+
 		}
-		
-		
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
 			jugador.irIzquierda();
-			
+
 		}
-		
+
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+
+			if (hilo.isAlive()) {
+
+				jugador.agregarDisparo();
+
+			} else {
+
+				jugador.agregarDisparo();
+				hilo.start();
+
+			}
+
+		}
 
 	}
 

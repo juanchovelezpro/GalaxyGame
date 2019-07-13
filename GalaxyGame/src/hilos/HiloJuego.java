@@ -1,15 +1,31 @@
 package hilos;
 
+import modelo.Juego;
+import vista.Game;
+
 public class HiloJuego extends Thread{
 
-	public HiloJuego() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	private Juego juego;
+	private Game game;
+	
+	
+	public HiloJuego(Juego juego, Game game) {
+		
+		this.juego = juego;
+		this.game = game;
+		
+		
 	}
 	@Override
 	public void run() {
 		try {
 			Thread.sleep(25);
+			
+			juego.getJugador().disparar();
+			
+			
+			
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

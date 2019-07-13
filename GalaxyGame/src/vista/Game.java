@@ -2,6 +2,7 @@ package vista;
 
 import javax.swing.*;
 
+import hilos.HiloJuego;
 import modelo.Juego;
 
 import java.awt.*;
@@ -11,6 +12,7 @@ public class Game extends JFrame {
 	
 	private Juego juego;
 	private PanelOpciones opciones;
+	private HiloJuego hiloJuego;
 
 	public Game() {
 
@@ -22,6 +24,8 @@ public class Game extends JFrame {
 
 		
 		juego = new Juego();
+		
+		hiloJuego = new HiloJuego(juego, this);
 		
 		opciones = new PanelOpciones(this);
 
@@ -36,6 +40,12 @@ public class Game extends JFrame {
 	public Juego getJuego() {
 		
 		return juego;
+		
+	}
+	
+	public HiloJuego getHiloJuego() {
+		
+	return hiloJuego;	
 		
 	}
 	
