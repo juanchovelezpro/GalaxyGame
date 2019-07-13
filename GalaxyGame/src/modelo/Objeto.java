@@ -3,6 +3,7 @@ package modelo;
 import java.awt.Rectangle;
 
 public class Objeto {
+
 	private int posx;
 	private int posy;
 	private Rectangle rectangulo;
@@ -66,6 +67,12 @@ public class Objeto {
 
 	public void setAltura(int altura) {
 		this.altura = altura;
+	}
+	
+	public Rectangle getBounds() {
+		
+	return new Rectangle(posx+ancho/8, posy+altura/8, ancho-ancho/4, altura-altura/4);	
+		
 	}
 	
 }

@@ -68,7 +68,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 			game.add(panelGame);
 			game.refresh();
 			
-			JOptionPane.showMessageDialog(null, "A Jugar", "", 1);
+			JOptionPane.showMessageDialog(null, "Mata a los enemigos.", "Galaxy Game", JOptionPane.INFORMATION_MESSAGE);
 			
 		}
 		

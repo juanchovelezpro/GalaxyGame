@@ -2,8 +2,10 @@ package vista;
 
 import javax.swing.*;
 
-import hilos.HiloJuego;
+import hilos.HiloDisparoJugador;
 import modelo.Disparo;
+import modelo.Enemigo;
+import modelo.Fisica;
 import modelo.Jugador;
 
 import java.awt.*;
@@ -22,7 +24,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		this.opciones = opciones;
 
-		opciones.getGame().getHiloJuego().start();
+		opciones.getGame().getHiloDisparoJugador().start();
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -39,13 +41,22 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
+		// Render del jugador.
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
 
-		Disparo temp = null;
+		// Render enemigo prueba.
+		Enemigo enemy = opciones.getGame().getJuego().getEnemigos().get(0);
+		g.setColor(Color.RED);
+		g.drawImage(JUGADOR, enemy.getPosx(), enemy.getPosy(), null);
+		g.drawRect(enemy.getPosx() + enemy.getAncho() / 8, enemy.getPosy() + enemy.getAltura() / 8,
+				enemy.getAncho() - enemy.getAncho() / 4, enemy.getAltura() - enemy.getAltura() / 4);
 
+		// Render disparos del jugador.
+		Disparo temp = null;
 		for (int i = 0; i < jugador.getDisparos().size(); i++) {
 
 			temp = jugador.getDisparos().get(i);
+
 			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
 
 		}
@@ -58,7 +69,6 @@ public class PanelGame extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
-		HiloJuego hilo = opciones.getGame().getHiloJuego();
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
