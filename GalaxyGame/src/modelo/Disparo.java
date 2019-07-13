@@ -15,5 +15,7 @@ public class Disparo extends Objeto{
 		this.damage = damage;
 	}
 
-
+	public void avanzarDisparo() {
+		super.setPosy(super.getPosy()- super.getVelocidad());
+	}
 }
