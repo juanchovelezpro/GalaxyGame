@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PanelOpciones extends JPanel {
 
-	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy.jpg");
+	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy2.jpg");
 	
 	
 	private Game game;
@@ -32,7 +32,7 @@ public class PanelOpciones extends JPanel {
 	butJugar = new JButton("JUGAR");
 	butJugar.setFont(fuente);
 	butJugar.setBackground(background);
-	butJugar.setBounds(400,300,450,60);
+	butJugar.setBounds(200,250,450,60);
 	
 	add(butJugar);
 		

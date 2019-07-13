@@ -15,7 +15,7 @@ public class Game extends JFrame{
 	setTitle("Galaxy Game");
 	setLayout(new BorderLayout());
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
-	setSize(1260,780);
+	setSize(850,1000);
 
 	
 	opciones = new PanelOpciones(this);
