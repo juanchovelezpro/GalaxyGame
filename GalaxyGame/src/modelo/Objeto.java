@@ -3,7 +3,6 @@ package modelo;
 import java.awt.Rectangle;
 
 public class Objeto {
-	private String imagen;
 	private int posx;
 	private int posy;
 	private Rectangle rectangulo;
@@ -11,8 +10,7 @@ public class Objeto {
 	private int altura;
 	private int velocidad;
 
-	public Objeto(String imagen, int posx, int posy, int ancho, int altura, int velocidad) {
-		this.imagen = imagen;
+	public Objeto(int posx, int posy, int ancho, int altura, int velocidad) {
 		this.posx = posx;
 		this.posy = posy;
 		this.altura = altura;
@@ -29,13 +27,6 @@ public class Objeto {
 		this.velocidad = velocidad;
 	}
 
-	public String getImagen() {
-		return imagen;
-	}
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
 
 	public int getPosx() {
 		return posx;
