@@ -2,7 +2,6 @@ package vista;
 
 import javax.swing.*;
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,11 +40,11 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		add(butJugar);
 
 	}
-	
+
 	public Game getGame() {
-		
-	return game;	
-		
+
+		return game;
+
 	}
 
 	@Override
@@ -61,18 +60,17 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-	
-		if(e.getSource().equals(butJugar)) {
-			
+
+		if (e.getSource().equals(butJugar)) {
+
 			game.remove(this);
 			game.add(panelGame);
 			game.refresh();
 			
-			JOptionPane.showMessageDialog(null, "Mata a los enemigos.", "Galaxy Game", JOptionPane.INFORMATION_MESSAGE);
-			
+			panelGame.requestFocus();
+
 		}
-		
-		
+
 	}
 
 }

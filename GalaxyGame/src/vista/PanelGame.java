@@ -25,6 +25,8 @@ public class PanelGame extends JPanel implements KeyListener {
 		this.opciones = opciones;
 
 		opciones.getGame().getHiloDisparoJugador().start();
+		
+		
 
 		addKeyListener(this);
 		setFocusable(true);
