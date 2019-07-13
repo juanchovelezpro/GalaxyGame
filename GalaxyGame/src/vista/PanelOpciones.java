@@ -2,7 +2,6 @@ package vista;
 
 import javax.swing.*;
 
-import com.sun.javafx.iio.png.PNGIDATChunkInputStream;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

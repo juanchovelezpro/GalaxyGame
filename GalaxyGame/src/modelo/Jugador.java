@@ -22,13 +22,13 @@ public class Jugador extends Objeto {
 		this.puntaje = puntaje;
 	}
 	public void irDerecha() {
-		if(super.getPosx()>=810) {
+		if(super.getPosx()>=770) {
 	}else{
 		super.setPosx(super.getPosx()+ super.getVelocidad());
 	}
 	}
 	public void irIzquierda() {
-		if(super.getPosx()<= 40) {
+		if(super.getPosx()<= 0) {
 			
 		}else {
 		super.setPosx(super.getPosx()- super.getVelocidad());
