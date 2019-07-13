@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class PanelOpciones extends JPanel {
 
-	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy2.jpg");
+	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
 	
 	
 	private Game game;
