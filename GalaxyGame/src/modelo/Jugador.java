@@ -47,7 +47,7 @@ public class Jugador extends Objeto {
 		this.disparos = disparos;
 	}
 	public void agregarDisparo() {
-		disparos.add(new Disparo(super.getPosx()+40,super.getPosy(),30,70,20,0));
+		disparos.add(new Disparo(super.getPosx()+25,super.getPosy()-30,30,70,20,0));
 	}
 	
 	public void eliminarDisparo(Disparo d) {

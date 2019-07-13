@@ -3,6 +3,7 @@ package vista;
 import javax.swing.*;
 
 import hilos.HiloJuego;
+import modelo.Disparo;
 import modelo.Jugador;
 
 import java.awt.*;
@@ -21,6 +22,8 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		this.opciones = opciones;
 
+		opciones.getGame().getHiloJuego().start();
+
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -37,7 +40,15 @@ public class PanelGame extends JPanel implements KeyListener {
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
-		g.drawImage(DISPARO, jugador.getDisparoTemporal().getPosx(),  jugador.getDisparoTemporal().getPosy(), jugador.getDisparoTemporal().getAncho(),  jugador.getDisparoTemporal().getAltura(), null);
+
+		Disparo temp = null;
+
+		for (int i = 0; i < jugador.getDisparos().size(); i++) {
+
+			temp = jugador.getDisparos().get(i);
+			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
+
+		}
 
 		repaint();
 
@@ -63,16 +74,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-			if (hilo.isAlive()) {
-
-				jugador.agregarDisparo();
-
-			} else {
-
-				jugador.agregarDisparo();
-				hilo.start();
-
-			}
+			jugador.agregarDisparo();
 
 		}
 
