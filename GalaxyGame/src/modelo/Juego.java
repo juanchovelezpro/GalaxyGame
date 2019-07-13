@@ -8,7 +8,9 @@ public class Juego {
 	private Jugador jugador;
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 	public Juego() {
-		jugador = new Jugador("./resources/nave_jugador.png", 360, 880, 80, 80, 10, "",0);
+
+		jugador = new Jugador(345, 920, 80, 80, 10, "",0);
+
 		
 	}
 	public Jugador getJugador() {
