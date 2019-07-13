@@ -34,6 +34,7 @@ public class Juego {
 	public void spawnEnemigos() {
 
 	enemigos.add(new Enemigo(200, 200, 80, 80, 10, 1));
+	enemigos.add(new Enemigo(400, 400, 80, 80, 10, 1));
 
 	}
 

@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.Iterator;
+
 import java.util.LinkedList;
 
 public class Jugador extends Objeto {

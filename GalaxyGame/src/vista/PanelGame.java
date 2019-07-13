@@ -45,11 +45,19 @@ public class PanelGame extends JPanel implements KeyListener {
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
 
 		// Render enemigo prueba.
-		Enemigo enemy = opciones.getGame().getJuego().getEnemigos().get(0);
-		g.setColor(Color.RED);
-		g.drawImage(JUGADOR, enemy.getPosx(), enemy.getPosy(), null);
-		g.drawRect(enemy.getPosx() + enemy.getAncho() / 8, enemy.getPosy() + enemy.getAltura() / 8,
-				enemy.getAncho() - enemy.getAncho() / 4, enemy.getAltura() - enemy.getAltura() / 4);
+		Enemigo tempEnemy = null;
+		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
+		
+			tempEnemy =  opciones.getGame().getJuego().getEnemigos().get(i);
+			g.drawImage(JUGADOR, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+			g.setColor(Color.RED);
+			g.drawRect(tempEnemy.getPosx() + tempEnemy.getAncho() / 8, tempEnemy.getPosy() + tempEnemy.getAltura() / 8,
+					tempEnemy.getAncho() - tempEnemy.getAncho() / 4, tempEnemy.getAltura() - tempEnemy.getAltura() / 4);
+			
+			
+		}
+	
+		
 
 		// Render disparos del jugador.
 		Disparo temp = null;
