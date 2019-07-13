@@ -80,12 +80,14 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 
+			jugador.setVelocidad(10);
 			jugador.irDerecha();
 
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 
+			jugador.setVelocidad(10);
 			jugador.irIzquierda();
 
 		}
@@ -100,8 +102,23 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		
+		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+
+			jugador.setVelocidad(0);
+
+		}
+
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+
+			jugador.setVelocidad(0);
+		}
+
+		
+		
+		
 	}
 
 	@Override

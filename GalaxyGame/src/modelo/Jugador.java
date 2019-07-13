@@ -51,6 +51,9 @@ public class Jugador extends Objeto {
 			super.setPosx(super.getPosx() - super.getVelocidad());
 		}
 	}
+	
+	
+
 
 	public LinkedList<Disparo> getDisparos() {
 		return disparos;
