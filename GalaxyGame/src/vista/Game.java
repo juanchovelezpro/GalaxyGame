@@ -17,7 +17,7 @@ public class Game extends JFrame {
 		setTitle("Galaxy Game");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(850, 1000);
+		setSize(850, 880);
 		setResizable(false);
 
 		
