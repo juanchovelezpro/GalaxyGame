@@ -1,6 +1,5 @@
 package modelo;
 
-
 import java.util.LinkedList;
 
 public class Jugador extends Objeto {
@@ -51,9 +50,6 @@ public class Jugador extends Objeto {
 			super.setPosx(super.getPosx() - super.getVelocidad());
 		}
 	}
-	
-	
-
 
 	public LinkedList<Disparo> getDisparos() {
 		return disparos;
@@ -72,9 +68,9 @@ public class Jugador extends Objeto {
 	}
 
 	public void disparar() {
-		
+
 		Disparo disparoTemporal = null;
-		
+
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
 
@@ -87,6 +83,5 @@ public class Jugador extends Objeto {
 			disparoTemporal.avanzarDisparo();
 		}
 	}
-
 
 }
