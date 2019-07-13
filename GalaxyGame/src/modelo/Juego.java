@@ -9,7 +9,7 @@ public class Juego {
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 	public Juego() {
 
-		jugador = new Jugador(345, 740, 80, 80, 20, "",0);
+		jugador = new Jugador(345, 740, 80, 80, 15, "",0);
 
 		
 	}
