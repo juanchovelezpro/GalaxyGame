@@ -25,7 +25,7 @@ public class Game extends JFrame {
 		
 		juego = new Juego();
 		
-		hiloJuego = new HiloJuego(juego, this);
+		hiloJuego = new HiloJuego(juego);
 		
 		opciones = new PanelOpciones(this);
 

@@ -7,13 +7,13 @@ public class HiloJuego extends Thread{
 
 	
 	private Juego juego;
-	private Game game;
+
 	
 	
-	public HiloJuego(Juego juego, Game game) {
+	public HiloJuego(Juego juego) {
 		
 		this.juego = juego;
-		this.game = game;
+		
 		
 		
 	}
