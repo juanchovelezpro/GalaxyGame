@@ -16,6 +16,7 @@ public class Game extends JFrame{
 	setLayout(new BorderLayout());
 	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	setSize(850,1000);
+	setResizable(false);
 
 	
 	opciones = new PanelOpciones(this);
