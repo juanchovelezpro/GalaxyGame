@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.*;
 
+import hilos.HiloAlternarDisparoEnemigo;
+import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import modelo.Juego;
@@ -10,11 +12,12 @@ import java.awt.*;
 
 public class Game extends JFrame {
 
-	
 	private Juego juego;
 	private PanelOpciones opciones;
 	private HiloDisparoJugador hiloDisparoJugador;
 	private HiloMovimientoEnemigos hiloMovimientoEnemigos;
+	private HiloDisparoEnemigo hiloDisparoEnemigo;
+	private HiloAlternarDisparoEnemigo hiloAlternarDisparoEnemigo;
 
 	public Game() {
 
@@ -24,12 +27,13 @@ public class Game extends JFrame {
 		setSize(850, 850);
 		setResizable(false);
 
-		
 		juego = new Juego();
-		
+
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
-		
+		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
+		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
+
 		opciones = new PanelOpciones(this);
 
 		add(opciones);
@@ -39,29 +43,37 @@ public class Game extends JFrame {
 		setVisible(true);
 
 	}
-	
+
+	public HiloAlternarDisparoEnemigo getHiloAlternarDisparoEnemigo() {
+		return hiloAlternarDisparoEnemigo;
+	}
+
+	public HiloDisparoEnemigo getHiloDisparoEnemigo() {
+		return hiloDisparoEnemigo;
+	}
+
 	public HiloMovimientoEnemigos getHiloMovimientoEnemigos() {
 		return hiloMovimientoEnemigos;
 	}
 
 	public Juego getJuego() {
-		
+
 		return juego;
-		
+
 	}
-	
+
 	public HiloDisparoJugador getHiloDisparoJugador() {
-		
-	return hiloDisparoJugador;	
-		
+
+		return hiloDisparoJugador;
+
 	}
-	
+
 	public void refresh() {
-		
-	invalidate();
-	revalidate();
-	repaint();
-		
+
+		invalidate();
+		revalidate();
+		repaint();
+
 	}
 
 }

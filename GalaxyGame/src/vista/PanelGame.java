@@ -6,6 +6,7 @@ import hilos.HiloDisparoJugador;
 import modelo.Disparo;
 import modelo.Enemigo;
 import modelo.Fisica;
+import modelo.Juego;
 import modelo.Jugador;
 
 import java.awt.*;
@@ -25,6 +26,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		this.opciones = opciones;
 
 		opciones.getGame().getHiloDisparoJugador().start();
+		opciones.getGame().getHiloDisparoEnemigo().start();
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -46,6 +48,8 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		
 		renderEnemigos(g);
+		
+		renderDisparosEnemigos(g);
 		
 		renderDisparosJugador(g);
 
@@ -132,5 +136,24 @@ public class PanelGame extends JPanel implements KeyListener {
 		}
 
 	}
+	
+	public void renderDisparosEnemigos(Graphics g) {
+		
+		Juego juego = opciones.getGame().getJuego();
+		
+	
+		Disparo temp = null;
+		
+		for(int i = 0; i< juego.getEnemigos().get(0).getDisparos().size(); i++) {
+			
+			temp = juego.getEnemigos().get(0).getDisparos().get(i);
+			
+			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
+		}
+	
+			
+			
+		}
+	
 
 }
