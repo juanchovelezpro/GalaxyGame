@@ -8,6 +8,8 @@ public class Jugador extends Objeto {
 	private long puntaje;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
+	private int vida;
+	private int damage;
 
 	public Jugador(int posx, int posy, int ancho, int altura, int velocidad, String nick, long puntaje, Juego juego) {
 		super(posx, posy, ancho, altura, velocidad);
@@ -16,7 +18,8 @@ public class Jugador extends Objeto {
 		this.nick = nick;
 		this.puntaje = puntaje;
 		disparos = new LinkedList<>();
-
+		vida = 3;
+		damage = 1;
 	}
 
 	public String getNick() {
@@ -60,7 +63,7 @@ public class Jugador extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15, 0));
+		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {

@@ -1,17 +1,19 @@
 package modelo;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Juego {
 
 	private Jugador jugador;
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
+	public static final int YMINIMO = -400;
+	public static final int YMAXIMO = -100;
 
 	public Juego() {
 
-		jugador = new Jugador(345, 740, 80, 80, 8, null, 0, this);
-
-		spawnEnemigos();
+		jugador = new Jugador(345, 740, 80, 80, 16, null, 0, this);
+		spawnEnemigos(15);
 
 	}
 
@@ -31,11 +33,15 @@ public class Juego {
 		this.enemigos = enemigos;
 	}
 
-	public void spawnEnemigos() {
-
-	enemigos.add(new Enemigo(200, 200, 80, 80, 10, 1));
-	enemigos.add(new Enemigo(400, 400, 80, 80, 10, 1));
+	public void spawnEnemigos(int cantidad) {
+		for (int i = 0; i < cantidad; i++) {
+			agregarEnemigo();
+		}
 
 	}
-
+	
+	public void agregarEnemigo() {
+		Random r = new Random();
+		enemigos.add(new Enemigo(r.nextInt(830)+20, r.nextInt(YMAXIMO+1-YMINIMO)+YMINIMO, 80, 80, 6, r.nextInt(5)+1, this));
+	}
 }
