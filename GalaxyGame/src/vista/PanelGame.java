@@ -25,8 +25,6 @@ public class PanelGame extends JPanel implements KeyListener {
 		this.opciones = opciones;
 
 		opciones.getGame().getHiloDisparoJugador().start();
-		
-		
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -46,30 +44,10 @@ public class PanelGame extends JPanel implements KeyListener {
 		// Render del jugador.
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
 
-		// Render enemigo prueba.
-		Enemigo tempEnemy = null;
-		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
 		
-			tempEnemy =  opciones.getGame().getJuego().getEnemigos().get(i);
-			g.drawImage(JUGADOR, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
-			g.setColor(Color.RED);
-			g.drawRect(tempEnemy.getPosx() + tempEnemy.getAncho() / 8, tempEnemy.getPosy() + tempEnemy.getAltura() / 8,
-					tempEnemy.getAncho() - tempEnemy.getAncho() / 4, tempEnemy.getAltura() - tempEnemy.getAltura() / 4);
-			
-			
-		}
-	
+		renderEnemigos(g);
 		
-
-		// Render disparos del jugador.
-		Disparo temp = null;
-		for (int i = 0; i < jugador.getDisparos().size(); i++) {
-
-			temp = jugador.getDisparos().get(i);
-
-			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
-
-		}
+		renderDisparosJugador(g);
 
 		repaint();
 
@@ -104,7 +82,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -118,14 +96,40 @@ public class PanelGame extends JPanel implements KeyListener {
 			jugador.setVelocidad(0);
 		}
 
-		
-		
-		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+
+	}
+
+	public void renderEnemigos(Graphics g) {
+
+		// Render enemigo prueba.
+		Enemigo tempEnemy = null;
+		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
+
+			tempEnemy = opciones.getGame().getJuego().getEnemigos().get(i);
+			g.drawImage(JUGADOR, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+
+		}
+
+	}
+
+	public void renderDisparosJugador(Graphics g) {
+
+		Jugador jugador = opciones.getGame().getJuego().getJugador();
+
+		// Render disparos del jugador.
+		Disparo temp = null;
+		for (int i = 0; i < jugador.getDisparos().size(); i++) {
+
+			temp = jugador.getDisparos().get(i);
+
+			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
+
+		}
 
 	}
 

@@ -8,12 +8,14 @@ public class Enemigo extends Objeto{
 	private int tipo;
 	private int vida;
 	private LinkedList<Disparo> disparos;
+	private boolean activarDisparo;
 	private Juego juego;
 
 
 	public Enemigo(int posx, int posy, int ancho, int altura, int velocidad, int tipo, Juego juego) {
 		super(posx, posy, ancho, altura, velocidad);
 		this.tipo = tipo;
+		activarDisparo = false;
 		switch(tipo) {
 		case 1:
 			vida = 2;
@@ -35,11 +37,29 @@ public class Enemigo extends Objeto{
 		this.juego = juego;
 	}
 	
+	public boolean isActivarDisparo() {
+		return activarDisparo;
+	}
+
+	public void setActivarDisparo(boolean activarDisparo) {
+		this.activarDisparo = activarDisparo;
+	}
+
 	public void moverse() {
 		Random r = new Random();
 		if(super.getPosy()>= 880) {
 			super.setPosy(r.nextInt(Juego.YMAXIMO+1-Juego.YMINIMO)+Juego.YMINIMO);
+			super.setPosx(r.nextInt(745));
 		}
+		
+		if(Fisica.colision(this, juego.getJugador())){
+			
+		juego.getJugador().setVida(juego.getJugador().getVida()-1);	
+	
+		System.out.println("Colision!");
+			
+		}
+		
 		super.setPosy(super.getPosy()+ super.getVelocidad());
 	}
 	public LinkedList<Disparo> getDisparos() {
@@ -71,7 +91,7 @@ public class Enemigo extends Objeto{
 			if (disparoTemporal.getPosy() < 870)
 				eliminarDisparo(disparoTemporal);
 
-			disparoTemporal.avanzarDisparo();
+			disparoTemporal.avanzarDisparoEnemigo();
 		}
 	}
 

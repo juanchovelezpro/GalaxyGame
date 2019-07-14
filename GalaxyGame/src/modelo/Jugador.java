@@ -22,6 +22,22 @@ public class Jugador extends Objeto {
 		damage = 1;
 	}
 
+	public int getVida() {
+		return vida;
+	}
+
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
+	}
+
 	public String getNick() {
 		return nick;
 	}
