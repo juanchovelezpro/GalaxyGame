@@ -12,6 +12,7 @@ import modelo.Jugador;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
@@ -120,13 +121,12 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	public void renderAccionesEnemigos(Graphics g) {
 
-		Juego juego = opciones.getGame().getJuego();
-		
+		LinkedList<Enemigo> enemigos = opciones.getGame().getJuego().getEnemigos();
 		// Render de los enemigos.
 		Enemigo tempEnemy = null;
-		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
+		for (int i = 0; i < enemigos.size(); i++) {
 
-			tempEnemy = opciones.getGame().getJuego().getEnemigos().get(i);
+			tempEnemy = enemigos.get(i);
 			g.drawImage(ENEMIGO, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
 		}
@@ -134,14 +134,16 @@ public class PanelGame extends JPanel implements KeyListener {
 		
 		// Render disparos de enemigos.
 		Disparo temp = null;
+		for (int i = 0; i < enemigos.size(); i++) {
+			
+		for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
-		for (int i = 0; i < juego.getEnemigos().get(0).getDisparos().size(); i++) {
-
-			temp = juego.getEnemigos().get(0).getDisparos().get(i);
+			temp = enemigos.get(i).getDisparos().get(j);
 
 			g.drawImage(DISPARO_ENEMIGO, temp.getPosx(), temp.getPosy(), null);
 		}
-
+		
+	}
 	}
 
 }

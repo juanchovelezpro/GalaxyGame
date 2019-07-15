@@ -8,13 +8,12 @@ public class Enemigo extends Objeto {
 	private int tipo;
 	private int vida;
 	private LinkedList<Disparo> disparos;
-	private boolean activarDisparo;
 	private Juego juego;
+	private Disparo disparoTemporal;
 
 	public Enemigo(int posx, int posy, int ancho, int altura, int velocidad, int tipo, Juego juego) {
 		super(posx, posy, ancho, altura, velocidad);
 		this.tipo = tipo;
-		activarDisparo = false;
 		switch (tipo) {
 		case 1:
 			vida = 2;
@@ -34,15 +33,9 @@ public class Enemigo extends Objeto {
 		}
 		disparos = new LinkedList<>();
 		this.juego = juego;
+		disparoTemporal = null;
 	}
 
-	public boolean isActivarDisparo() {
-		return activarDisparo;
-	}
-
-	public void setActivarDisparo(boolean activarDisparo) {
-		this.activarDisparo = activarDisparo;
-	}
 
 	public void moverse() {
 		Random r = new Random();
@@ -77,9 +70,9 @@ public class Enemigo extends Objeto {
 	public void eliminarDisparo(Disparo d) {
 		disparos.remove(d);
 	}
-
+	
 	public void disparar() {
-		Disparo disparoTemporal = null;
+		
 
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
@@ -89,11 +82,16 @@ public class Enemigo extends Objeto {
 
 			if (disparoTemporal.getPosy() > 870)
 				eliminarDisparo(disparoTemporal);
-
+			
 			disparoTemporal.avanzarDisparoEnemigo();
 		}
 
 		
 	}
+
+	public Disparo getDisparoTemporal() {
+		return disparoTemporal;
+	}
+	
 
 }
