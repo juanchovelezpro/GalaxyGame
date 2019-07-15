@@ -9,7 +9,6 @@ public class Enemigo extends Objeto {
 	private int vida;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
-	private Disparo disparoTemporal;
 
 	public Enemigo(int posx, int posy, int ancho, int altura, int velocidad, int tipo, Juego juego) {
 		super(posx, posy, ancho, altura, velocidad);
@@ -33,9 +32,8 @@ public class Enemigo extends Objeto {
 		}
 		disparos = new LinkedList<>();
 		this.juego = juego;
-		disparoTemporal = null;
-	}
 
+	}
 
 	public void moverse() {
 		Random r = new Random();
@@ -64,15 +62,16 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy()+40, 25, 65, 15));
+		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy() + 40, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
 		disparos.remove(d);
 	}
-	
+
 	public void disparar() {
-		
+
+		Disparo disparoTemporal = null;
 
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
@@ -82,16 +81,10 @@ public class Enemigo extends Objeto {
 
 			if (disparoTemporal.getPosy() > 870)
 				eliminarDisparo(disparoTemporal);
-			
+
 			disparoTemporal.avanzarDisparoEnemigo();
 		}
 
-		
 	}
-
-	public Disparo getDisparoTemporal() {
-		return disparoTemporal;
-	}
-	
 
 }
