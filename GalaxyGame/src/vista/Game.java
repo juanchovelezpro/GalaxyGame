@@ -6,6 +6,7 @@ import hilos.HiloAlternarDisparoEnemigo;
 import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
+import hilos.HiloMovimientoJugador;
 import modelo.Juego;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Game extends JFrame {
 	private Juego juego;
 	private PanelOpciones opciones;
 	private HiloDisparoJugador hiloDisparoJugador;
+	private HiloMovimientoJugador hiloMovimientoJugador;
 	private HiloMovimientoEnemigos hiloMovimientoEnemigos;
 	private HiloDisparoEnemigo hiloDisparoEnemigo;
 	private HiloAlternarDisparoEnemigo hiloAlternarDisparoEnemigo;
@@ -29,6 +31,7 @@ public class Game extends JFrame {
 
 		juego = new Juego();
 
+		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
 		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
@@ -42,6 +45,10 @@ public class Game extends JFrame {
 
 		setVisible(true);
 
+	}
+
+	public HiloMovimientoJugador getHiloMovimientoJugador() {
+		return hiloMovimientoJugador;
 	}
 
 	public HiloAlternarDisparoEnemigo getHiloAlternarDisparoEnemigo() {

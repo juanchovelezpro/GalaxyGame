@@ -54,20 +54,16 @@ public class Jugador extends Objeto {
 		this.puntaje = puntaje;
 	}
 
-	public void irDerecha() {
+	public void mover() {
+
 		if (super.getPosx() >= 770) {
 			super.setPosx(770);
-		} else {
-			super.setPosx(super.getPosx() + super.getVelocidad());
-		}
-	}
-
-	public void irIzquierda() {
-		if (super.getPosx() <= 0) {
+		} else if (super.getPosx() <= 0) {
 			super.setPosx(0);
-		} else {
-			super.setPosx(super.getPosx() - super.getVelocidad());
 		}
+
+		super.setPosx(super.getPosx() + super.getVelocidad());
+
 	}
 
 	public LinkedList<Disparo> getDisparos() {

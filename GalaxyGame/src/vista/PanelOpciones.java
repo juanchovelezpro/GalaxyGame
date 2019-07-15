@@ -67,6 +67,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 			game.add(panelGame);
 			game.refresh();
 			
+			game.getHiloMovimientoJugador().start();
 			game.getHiloAlternarDisparoEnemigo().start();
 			game.getHiloMovimientoEnemigos().start();
 			

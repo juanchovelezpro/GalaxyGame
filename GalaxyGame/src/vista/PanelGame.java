@@ -46,11 +46,10 @@ public class PanelGame extends JPanel implements KeyListener {
 		// Render del jugador.
 		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
 
-		
 		renderEnemigos(g);
-		
+
 		renderDisparosEnemigos(g);
-		
+
 		renderDisparosJugador(g);
 
 		repaint();
@@ -64,15 +63,13 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
 
-			jugador.setVelocidad(16);
-			jugador.irDerecha();
+			jugador.setVelocidad(5);
 
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
 
-			jugador.setVelocidad(16);
-			jugador.irIzquierda();
+			jugador.setVelocidad(-5);
 
 		}
 
@@ -136,24 +133,20 @@ public class PanelGame extends JPanel implements KeyListener {
 		}
 
 	}
-	
+
 	public void renderDisparosEnemigos(Graphics g) {
-		
+
 		Juego juego = opciones.getGame().getJuego();
-		
-	
+
 		Disparo temp = null;
-		
-		for(int i = 0; i< juego.getEnemigos().get(0).getDisparos().size(); i++) {
-			
+
+		for (int i = 0; i < juego.getEnemigos().get(0).getDisparos().size(); i++) {
+
 			temp = juego.getEnemigos().get(0).getDisparos().get(i);
-			
+
 			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
 		}
-	
-			
-			
-		}
-	
+
+	}
 
 }

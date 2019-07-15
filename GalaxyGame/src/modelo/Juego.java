@@ -12,7 +12,7 @@ public class Juego {
 
 	public Juego() {
 
-		jugador = new Jugador(345, 740, 80, 80, 16, null, 0, this);
+		jugador = new Jugador(345, 740, 80, 80, 0, null, 0, this);
 		spawnEnemigos(15);
 
 	}
