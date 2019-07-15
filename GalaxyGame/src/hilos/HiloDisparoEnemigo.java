@@ -19,14 +19,12 @@ public class HiloDisparoEnemigo extends Thread {
 
 			try {
 				Thread.sleep(25);
-				
+
 				for (int i = 0; i < juego.getEnemigos().size(); i++) {
 					juego.getEnemigos().get(i).disparar();
 				}
 
-				
-
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 
 				e.printStackTrace();
 			}

@@ -16,7 +16,7 @@ public class Objeto {
 		this.posy = posy;
 		this.altura = altura;
 		this.ancho = ancho;
-		rectangulo = new Rectangle(posx,posy,ancho,altura);
+		rectangulo = new Rectangle(posx, posy, ancho, altura);
 		this.velocidad = velocidad;
 	}
 
@@ -27,7 +27,6 @@ public class Objeto {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-
 
 	public int getPosx() {
 		return posx;
@@ -68,11 +67,11 @@ public class Objeto {
 	public void setAltura(int altura) {
 		this.altura = altura;
 	}
-	
+
 	public Rectangle getBounds() {
-		
-	return new Rectangle(posx+ancho/8, posy+altura/8, ancho-ancho/4, altura-altura/4);	
-		
+
+		return new Rectangle(posx + ancho / 8, posy + altura / 8, ancho - ancho / 4, altura - altura / 4);
+
 	}
-	
+
 }

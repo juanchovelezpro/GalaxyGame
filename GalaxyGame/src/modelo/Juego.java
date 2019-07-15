@@ -39,9 +39,10 @@ public class Juego {
 		}
 
 	}
-	
+
 	public void agregarEnemigo() {
 		Random r = new Random();
-		enemigos.add(new Enemigo(r.nextInt(830), r.nextInt(YMAXIMO+1-YMINIMO)+YMINIMO, 80, 80, 6, r.nextInt(5)+1, this));
+		enemigos.add(new Enemigo(r.nextInt(830), r.nextInt(YMAXIMO + 1 - YMINIMO) + YMINIMO, 80, 80, 6,
+				r.nextInt(5) + 1, this));
 	}
 }

@@ -19,7 +19,7 @@ public class HiloMovimientoEnemigos extends Thread {
 					if (juego.getEnemigos().get(i) != null)
 						juego.getEnemigos().get(i).moverse();
 				}
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 

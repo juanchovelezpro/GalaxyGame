@@ -18,16 +18,16 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	public static final ImageIcon BACKGROUND = new ImageIcon(
 			PanelOpciones.class.getClassLoader().getResource("galaxy3.jpg"));
-	
+
 	public static final ImageIcon JUGADOR = new ImageIcon(
 			PanelOpciones.class.getClassLoader().getResource("nave_jugador.png"));
-	
+
 	public static final ImageIcon DISPARO = new ImageIcon(
 			PanelOpciones.class.getClassLoader().getResource("laserJugador.png"));
-	
+
 	public static final ImageIcon DISPARO_ENEMIGO = new ImageIcon(
 			PanelOpciones.class.getClassLoader().getResource("laserEnemigo.png"));
-	
+
 	public static final ImageIcon ENEMIGO = new ImageIcon(
 			PanelOpciones.class.getClassLoader().getResource("nave_enemigo.png"));
 
@@ -61,17 +61,16 @@ public class PanelGame extends JPanel implements KeyListener {
 	}
 
 	public void iniciar() {
-		
+
 		opciones.getGame().getHiloMovimientoJugador().start();
 		opciones.getGame().getHiloDisparoJugador().start();
-		
+
 		opciones.getGame().getHiloMovimientoEnemigos().start();
 		opciones.getGame().getHiloAlternarDisparoEnemigo().start();
 		opciones.getGame().getHiloDisparoEnemigo().start();
-		
-		
+
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 
@@ -151,19 +150,18 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		}
 
-		
 		// Render disparos de enemigos.
 		Disparo temp = null;
 		for (int i = 0; i < enemigos.size(); i++) {
-			
-		for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
-			temp = enemigos.get(i).getDisparos().get(j);
+			for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
-			g.drawImage(DISPARO_ENEMIGO.getImage(), temp.getPosx(), temp.getPosy(), null);
+				temp = enemigos.get(i).getDisparos().get(j);
+
+				g.drawImage(DISPARO_ENEMIGO.getImage(), temp.getPosx(), temp.getPosy(), null);
+			}
+
 		}
-		
-	}
 	}
 
 }
