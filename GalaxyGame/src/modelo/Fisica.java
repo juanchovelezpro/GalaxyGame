@@ -12,25 +12,24 @@ public class Fisica {
 
 			if (objeto.getBounds().intersects(enemigos.get(i).getBounds())) {
 
-				
 				colision = true;
 				enemigos.remove(i);
-				
-				
+
 			}
 
 		}
 		return colision;
 	}
+
 	public static boolean colision(Objeto objeto, Objeto objeto2) {
 
 		boolean colision = false;
 
-			if (objeto.getBounds().intersects(objeto2.getBounds())) {
+		if (objeto.getBounds().intersects(objeto2.getBounds())) {
 
-				colision = true;
+			colision = true;
 
-			}
+		}
 
 		return colision;
 	}

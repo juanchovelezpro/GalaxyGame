@@ -1,6 +1,8 @@
-package vista;
+package interfaz;
 
 import javax.swing.*;
+
+import tools.ToolManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
-	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
+	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 
 	private Game game;
 	private JButton butJugar;
@@ -19,8 +21,6 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		this.game = game;
 
 		setLayout(null);
-
-		panelGame = new PanelGame(this);
 
 		componentes();
 
@@ -63,14 +63,12 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		if (e.getSource().equals(butJugar)) {
 
+			panelGame = new PanelGame(this);
+
 			game.remove(this);
 			game.add(panelGame);
 			game.refresh();
-			
-			game.getHiloMovimientoJugador().start();
-			game.getHiloAlternarDisparoEnemigo().start();
-			game.getHiloMovimientoEnemigos().start();
-			
+
 			panelGame.requestFocus();
 
 		}

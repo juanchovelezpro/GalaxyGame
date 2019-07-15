@@ -5,6 +5,9 @@ import java.util.Random;
 
 public class Enemigo extends Objeto {
 
+	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
+	public static final String DISPARO_NORMAL = "disparos/laserEnemigo.png";
+	
 	private int tipo;
 	private int vida;
 	private LinkedList<Disparo> disparos;
@@ -12,7 +15,10 @@ public class Enemigo extends Objeto {
 
 	public Enemigo(int posx, int posy, int ancho, int altura, int velocidad, int tipo, Juego juego) {
 		super(posx, posy, ancho, altura, velocidad);
+		
+		super.setSkin(SKIN_NORMAL);
 		this.tipo = tipo;
+		
 		switch (tipo) {
 		case 1:
 			vida = 2;
@@ -35,7 +41,7 @@ public class Enemigo extends Objeto {
 
 	}
 
-	public void moverse() {
+	public void mover() {
 		Random r = new Random();
 		if (super.getPosy() >= 880) {
 			super.setPosy(r.nextInt(Juego.YMAXIMO + 1 - Juego.YMINIMO) + Juego.YMINIMO);
@@ -62,7 +68,7 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy() + 40, 25, 65, 15));
+		disparos.add(new Disparo(DISPARO_NORMAL,super.getPosx() + 25, super.getPosy() + 40, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
