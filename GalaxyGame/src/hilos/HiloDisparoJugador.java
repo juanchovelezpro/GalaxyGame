@@ -1,7 +1,7 @@
 package hilos;
 
+import interfaz.Game;
 import modelo.Juego;
-import vista.Game;
 
 public class HiloDisparoJugador extends Thread {
 

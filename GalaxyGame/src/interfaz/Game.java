@@ -1,4 +1,4 @@
-package vista;
+package interfaz;
 
 import javax.swing.*;
 

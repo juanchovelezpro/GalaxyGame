@@ -1,6 +1,6 @@
 package launcher;
 
-import vista.Game;
+import interfaz.Game;
 
 public class Launcher {
 
