@@ -43,16 +43,9 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		g.drawImage(BACKGROUND, 0, 0, null);
 
-		Jugador jugador = opciones.getGame().getJuego().getJugador();
+		renderAccionesJugador(g);
 
-		// Render del jugador.
-		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
-
-		renderEnemigos(g);
-
-		renderDisparosEnemigos(g);
-
-		renderDisparosJugador(g);
+		renderAccionesEnemigos(g);
 
 		repaint();
 
@@ -103,26 +96,15 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
-	public void renderEnemigos(Graphics g) {
-
-		// Render enemigo prueba.
-		Enemigo tempEnemy = null;
-		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
-
-			tempEnemy = opciones.getGame().getJuego().getEnemigos().get(i);
-			g.drawImage(ENEMIGO, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
-
-		}
-
-	}
-
-	public void renderDisparosJugador(Graphics g) {
+	public void renderAccionesJugador(Graphics g) {
 
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
+
+		// Render del jugador.
+		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
 
 		// Render disparos del jugador.
 		Disparo temp = null;
@@ -136,10 +118,21 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	}
 
-	public void renderDisparosEnemigos(Graphics g) {
+	public void renderAccionesEnemigos(Graphics g) {
 
 		Juego juego = opciones.getGame().getJuego();
+		
+		// Render de los enemigos.
+		Enemigo tempEnemy = null;
+		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
 
+			tempEnemy = opciones.getGame().getJuego().getEnemigos().get(i);
+			g.drawImage(ENEMIGO, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+
+		}
+
+		
+		// Render disparos de enemigos.
 		Disparo temp = null;
 
 		for (int i = 0; i < juego.getEnemigos().get(0).getDisparos().size(); i++) {
