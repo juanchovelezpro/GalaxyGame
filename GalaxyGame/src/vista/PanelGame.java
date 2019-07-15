@@ -16,11 +16,20 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
-	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
-	public static final Image JUGADOR = Toolkit.getDefaultToolkit().createImage("./resources/nave_jugador.png");
-	public static final Image DISPARO = Toolkit.getDefaultToolkit().createImage("./resources/laserJugador.png");
-	public static final Image DISPARO_ENEMIGO = Toolkit.getDefaultToolkit().createImage("./resources/laserEnemigo.png");
-	public static final Image ENEMIGO = Toolkit.getDefaultToolkit().createImage("./resources/nave_enemigo.png");
+	public static final ImageIcon BACKGROUND = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("galaxy3.jpg"));
+	
+	public static final ImageIcon JUGADOR = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("nave_jugador.png"));
+	
+	public static final ImageIcon DISPARO = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("laserJugador.png"));
+	
+	public static final ImageIcon DISPARO_ENEMIGO = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("laserEnemigo.png"));
+	
+	public static final ImageIcon ENEMIGO = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("nave_enemigo.png"));
 
 	private PanelOpciones opciones;
 
@@ -41,7 +50,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		super.paintComponent(g);
 
-		g.drawImage(BACKGROUND, 0, 0, null);
+		g.drawImage(BACKGROUND.getImage(), 0, 0, null);
 
 		renderAccionesJugador(g);
 
@@ -116,7 +125,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		// Render del jugador.
-		g.drawImage(JUGADOR, jugador.getPosx(), jugador.getPosy(), null);
+		g.drawImage(JUGADOR.getImage(), jugador.getPosx(), jugador.getPosy(), null);
 
 		// Render disparos del jugador.
 		Disparo temp = null;
@@ -124,7 +133,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			temp = jugador.getDisparos().get(i);
 
-			g.drawImage(DISPARO, temp.getPosx(), temp.getPosy(), null);
+			g.drawImage(DISPARO.getImage(), temp.getPosx(), temp.getPosy(), null);
 
 		}
 
@@ -138,7 +147,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		for (int i = 0; i < enemigos.size(); i++) {
 
 			tempEnemy = enemigos.get(i);
-			g.drawImage(ENEMIGO, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+			g.drawImage(ENEMIGO.getImage(), tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
 		}
 
@@ -151,7 +160,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			temp = enemigos.get(i).getDisparos().get(j);
 
-			g.drawImage(DISPARO_ENEMIGO, temp.getPosx(), temp.getPosy(), null);
+			g.drawImage(DISPARO_ENEMIGO.getImage(), temp.getPosx(), temp.getPosy(), null);
 		}
 		
 	}

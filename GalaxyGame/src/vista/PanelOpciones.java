@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
-	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
+	public static final ImageIcon BACKGROUND = new ImageIcon(
+			PanelOpciones.class.getClassLoader().getResource("galaxy3.jpg"));
 
 	private Game game;
 	private JButton butJugar;
@@ -20,7 +21,6 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		setLayout(null);
 
-		
 		componentes();
 
 	}
@@ -51,7 +51,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		super.paintComponent(g);
 
-		g.drawImage(BACKGROUND, 0, 0, null);
+		g.drawImage(BACKGROUND.getImage(), 0, 0, null);
 
 		repaint();
 
@@ -63,11 +63,11 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		if (e.getSource().equals(butJugar)) {
 
 			panelGame = new PanelGame(this);
-			
+
 			game.remove(this);
 			game.add(panelGame);
 			game.refresh();
-			
+
 			panelGame.requestFocus();
 
 		}
