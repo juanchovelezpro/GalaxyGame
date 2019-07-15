@@ -18,6 +18,7 @@ public class PanelGame extends JPanel implements KeyListener {
 	public static final Image BACKGROUND = Toolkit.getDefaultToolkit().createImage("./resources/galaxy3.jpg");
 	public static final Image JUGADOR = Toolkit.getDefaultToolkit().createImage("./resources/nave_jugador.png");
 	public static final Image DISPARO = Toolkit.getDefaultToolkit().createImage("./resources/laserJugador.png");
+	public static final Image ENEMIGO = Toolkit.getDefaultToolkit().createImage("./resources/nave_enemigo.png");
 
 	private PanelOpciones opciones;
 
@@ -112,7 +113,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
 
 			tempEnemy = opciones.getGame().getJuego().getEnemigos().get(i);
-			g.drawImage(JUGADOR, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+			g.drawImage(ENEMIGO, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
 		}
 

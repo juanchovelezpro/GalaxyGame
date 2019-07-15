@@ -71,7 +71,7 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15));
+		disparos.add(new Disparo(super.getPosx() + 25, super.getPosy()+40, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
