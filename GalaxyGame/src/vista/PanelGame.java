@@ -28,8 +28,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		this.opciones = opciones;
 
-		opciones.getGame().getHiloDisparoJugador().start();
-		opciones.getGame().getHiloDisparoEnemigo().start();
+		iniciar();
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -52,6 +51,18 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	}
 
+	public void iniciar() {
+		
+		opciones.getGame().getHiloMovimientoJugador().start();
+		opciones.getGame().getHiloDisparoJugador().start();
+		
+		opciones.getGame().getHiloMovimientoEnemigos().start();
+		opciones.getGame().getHiloAlternarDisparoEnemigo().start();
+		opciones.getGame().getHiloDisparoEnemigo().start();
+		
+		
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 

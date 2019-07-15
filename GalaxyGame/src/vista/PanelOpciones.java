@@ -20,8 +20,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		setLayout(null);
 
-		panelGame = new PanelGame(this);
-
+		
 		componentes();
 
 	}
@@ -63,13 +62,11 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		if (e.getSource().equals(butJugar)) {
 
+			panelGame = new PanelGame(this);
+			
 			game.remove(this);
 			game.add(panelGame);
 			game.refresh();
-			
-			game.getHiloMovimientoJugador().start();
-			game.getHiloAlternarDisparoEnemigo().start();
-			game.getHiloMovimientoEnemigos().start();
 			
 			panelGame.requestFocus();
 
