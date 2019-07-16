@@ -28,6 +28,9 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(850, 850);
 		setResizable(false);
+		
+		ImageIcon icon = new ImageIcon(Game.class.getClassLoader().getResource("iconos/icon2.jpg"));
+		setIconImage(icon.getImage());
 
 		juego = new Juego();
 

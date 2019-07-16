@@ -17,19 +17,19 @@ import java.util.LinkedList;
 public class PanelGame extends JPanel implements KeyListener {
 
 	public static final ImageIcon BACKGROUND = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("galaxy3.jpg"));
+			PanelOpciones.class.getClassLoader().getResource("fondos/galaxy3.jpg"));
 
 	public static final ImageIcon JUGADOR = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("nave_jugador.png"));
+			PanelOpciones.class.getClassLoader().getResource("naves/nave_jugador.png"));
 
 	public static final ImageIcon DISPARO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("laserJugador.png"));
+			PanelOpciones.class.getClassLoader().getResource("disparos/laserJugador.png"));
 
 	public static final ImageIcon DISPARO_ENEMIGO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("laserEnemigo.png"));
+			PanelOpciones.class.getClassLoader().getResource("disparos/laserEnemigo.png"));
 
 	public static final ImageIcon ENEMIGO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("nave_enemigo.png"));
+			PanelOpciones.class.getClassLoader().getResource("naves/nave_enemigo.png"));
 
 	private PanelOpciones opciones;
 

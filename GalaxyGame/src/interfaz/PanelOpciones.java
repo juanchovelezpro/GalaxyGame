@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class PanelOpciones extends JPanel implements ActionListener {
 
 	public static final ImageIcon BACKGROUND = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("galaxy3.jpg"));
+			PanelOpciones.class.getClassLoader().getResource("fondos/galaxy3.jpg"));
 
 	private Game game;
 	private JButton butJugar;
