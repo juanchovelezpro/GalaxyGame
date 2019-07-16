@@ -8,6 +8,7 @@ import modelo.Enemigo;
 import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
+import tools.ToolManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,21 +17,7 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
-	public static final ImageIcon BACKGROUND = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("fondos/galaxy3.jpg"));
-
-	public static final ImageIcon JUGADOR = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("naves/nave_jugador.png"));
-
-	public static final ImageIcon DISPARO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("disparos/laserJugador.png"));
-
-	public static final ImageIcon DISPARO_ENEMIGO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("disparos/laserEnemigo.png"));
-
-	public static final ImageIcon ENEMIGO = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("naves/nave_enemigo.png"));
-
+	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 	private PanelOpciones opciones;
 
 	public PanelGame(PanelOpciones opciones) {
@@ -50,7 +37,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		super.paintComponent(g);
 
-		g.drawImage(BACKGROUND.getImage(), 0, 0, null);
+		g.drawImage(BACKGROUND, 0, 0, null);
 
 		renderAccionesJugador(g);
 
@@ -123,16 +110,20 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
+		Image skinJugador = ToolManager.cargarImagen(jugador.getSkin());
+		
 		// Render del jugador.
-		g.drawImage(JUGADOR.getImage(), jugador.getPosx(), jugador.getPosy(), null);
+		g.drawImage(skinJugador, jugador.getPosx(), jugador.getPosy(), null);
 
 		// Render disparos del jugador.
 		Disparo temp = null;
 		for (int i = 0; i < jugador.getDisparos().size(); i++) {
 
 			temp = jugador.getDisparos().get(i);
+			
+			Image skinDisparoJugador = ToolManager.cargarImagen(temp.getSkin());
 
-			g.drawImage(DISPARO.getImage(), temp.getPosx(), temp.getPosy(), null);
+			g.drawImage(skinDisparoJugador, temp.getPosx(), temp.getPosy(), null);
 
 		}
 
@@ -146,7 +137,10 @@ public class PanelGame extends JPanel implements KeyListener {
 		for (int i = 0; i < enemigos.size(); i++) {
 
 			tempEnemy = enemigos.get(i);
-			g.drawImage(ENEMIGO.getImage(), tempEnemy.getPosx(), tempEnemy.getPosy(), null);
+			
+			Image skinEnemy = ToolManager.cargarImagen(tempEnemy.getSkin());
+			
+			g.drawImage(skinEnemy, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
 		}
 
@@ -157,8 +151,10 @@ public class PanelGame extends JPanel implements KeyListener {
 			for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
 				temp = enemigos.get(i).getDisparos().get(j);
+				
+				Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
 
-				g.drawImage(DISPARO_ENEMIGO.getImage(), temp.getPosx(), temp.getPosy(), null);
+				g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
 			}
 
 		}

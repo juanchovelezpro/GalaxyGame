@@ -2,8 +2,8 @@ package modelo;
 
 public class Disparo extends Objeto {
 
-	public Disparo(int posx, int posy, int ancho, int altura, int velocidad) {
-		super(posx, posy, ancho, altura, velocidad);
+	public Disparo(String skin,int posx, int posy, int ancho, int altura, int velocidad) {
+		super(skin,posx, posy, ancho, altura, velocidad);
 	}
 
 	public void avanzarDisparo() {
