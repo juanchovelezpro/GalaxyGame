@@ -18,6 +18,7 @@ import java.util.LinkedList;
 public class PanelGame extends JPanel implements KeyListener {
 
 	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
+
 	private PanelOpciones opciones;
 
 	public PanelGame(PanelOpciones opciones) {
@@ -111,7 +112,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		Image skinJugador = ToolManager.cargarImagen(jugador.getSkin());
-		
+
 		// Render del jugador.
 		g.drawImage(skinJugador, jugador.getPosx(), jugador.getPosy(), null);
 
@@ -120,7 +121,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		for (int i = 0; i < jugador.getDisparos().size(); i++) {
 
 			temp = jugador.getDisparos().get(i);
-			
+
 			Image skinDisparoJugador = ToolManager.cargarImagen(temp.getSkin());
 
 			g.drawImage(skinDisparoJugador, temp.getPosx(), temp.getPosy(), null);
@@ -137,9 +138,9 @@ public class PanelGame extends JPanel implements KeyListener {
 		for (int i = 0; i < enemigos.size(); i++) {
 
 			tempEnemy = enemigos.get(i);
-			
+
 			Image skinEnemy = ToolManager.cargarImagen(tempEnemy.getSkin());
-			
+
 			g.drawImage(skinEnemy, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
 		}
@@ -151,7 +152,7 @@ public class PanelGame extends JPanel implements KeyListener {
 			for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
 				temp = enemigos.get(i).getDisparos().get(j);
-				
+
 				Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
 
 				g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);

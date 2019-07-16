@@ -2,14 +2,15 @@ package interfaz;
 
 import javax.swing.*;
 
+import tools.ToolManager;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
-	public static final ImageIcon BACKGROUND = new ImageIcon(
-			PanelOpciones.class.getClassLoader().getResource("fondos/galaxy3.jpg"));
+	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 
 	private Game game;
 	private JButton butJugar;
@@ -51,7 +52,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		super.paintComponent(g);
 
-		g.drawImage(BACKGROUND.getImage(), 0, 0, null);
+		g.drawImage(BACKGROUND, 0, 0, null);
 
 		repaint();
 

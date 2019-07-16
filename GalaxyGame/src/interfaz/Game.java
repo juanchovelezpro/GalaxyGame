@@ -8,6 +8,7 @@ import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import modelo.Juego;
+import tools.ToolManager;
 
 import java.awt.*;
 
@@ -28,9 +29,8 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(850, 850);
 		setResizable(false);
-		
-		ImageIcon icon = new ImageIcon(Game.class.getClassLoader().getResource("iconos/icon2.jpg"));
-		setIconImage(icon.getImage());
+
+		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		juego = new Juego();
 
