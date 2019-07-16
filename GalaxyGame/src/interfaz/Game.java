@@ -77,6 +77,7 @@ public class Game extends JFrame {
 		return hiloDisparoJugador;
 
 	}
+	
 
 	public void refresh() {
 
