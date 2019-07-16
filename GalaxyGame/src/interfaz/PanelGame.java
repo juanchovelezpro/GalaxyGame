@@ -8,6 +8,7 @@ import modelo.Enemigo;
 import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
+import tools.ManagerFPS;
 import tools.ToolManager;
 
 import java.awt.*;
@@ -40,11 +41,15 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		g.drawImage(BACKGROUND, 0, 0, null);
 
+		ManagerFPS.StartCounter();
+		
 		renderAccionesJugador(g);
 
 		renderAccionesEnemigos(g);
-
+		
 		repaint();
+		
+		ManagerFPS.StopAndPost();
 
 	}
 
