@@ -9,6 +9,7 @@ import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
 import tools.ManagerFPS;
+import tools.ScreenResolution;
 import tools.ToolManager;
 
 import java.awt.*;
@@ -18,25 +19,17 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
-		
-	
 	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 
-	
-	
-	
 	private PanelOpciones opciones;
 
 	public PanelGame(PanelOpciones opciones) {
 
 		this.opciones = opciones;
 
-		setBounds(Game.WIDTH/2, 0, Game.WIDTH_GAME, Game.HEIGHT_GAME);
-//		setSize(Game.WIDTH_GAME, Game.HEIGHT_GAME);
-		
+		setBounds(ScreenResolution.WIDTH / 4, 0, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
+
 		iniciar();
-		
-		
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -52,13 +45,13 @@ public class PanelGame extends JPanel implements KeyListener {
 		g.drawImage(BACKGROUND, 0, 0, null);
 
 		ManagerFPS.StartCounter();
-		
+
 		renderAccionesJugador(g);
 
 		renderAccionesEnemigos(g);
-		
+
 		repaint();
-		
+
 		ManagerFPS.StopAndPost();
 
 	}

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import interfaz.Game;
+import tools.ScreenResolution;
 
 public class Juego {
 
@@ -14,7 +15,7 @@ public class Juego {
 
 	public Juego() {
 
-		jugador = new Jugador(Game.WIDTH/2-Jugador.WIDTH, Game.HEIGHT-Jugador.HEIGHT*2+20, null, this);
+		jugador = new Jugador(ScreenResolution.WIDTH_GAME/2, ScreenResolution.HEIGHT_GAME-Jugador.HEIGHT, null, this);
 		spawnEnemigos(15);
 
 	}

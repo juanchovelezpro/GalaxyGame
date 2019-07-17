@@ -8,20 +8,13 @@ import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import modelo.Juego;
+import tools.ScreenResolution;
 import tools.ToolManager;
 
 import java.awt.*;
 
 public class Game extends JFrame {
 
-	
-	public static final int HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-	public static final int WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	public static final int HEIGHT_GAME = HEIGHT/2;
-	public static final int WIDTH_GAME = HEIGHT_GAME;
-	
-	
-	
 	private Juego juego;
 	private PanelOpciones opciones;
 	private HiloDisparoJugador hiloDisparoJugador;
@@ -33,18 +26,14 @@ public class Game extends JFrame {
 	public Game() {
 
 		setTitle("Galaxy Game");
-		setLayout(new BorderLayout());
+		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(WIDTH, HEIGHT);
+		setSize(ScreenResolution.WIDTH, ScreenResolution.HEIGHT);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setResizable(true);
-		
-
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		juego = new Juego();
-		
-		System.out.println(WIDTH+" "+"- "+HEIGHT);
 
 		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
@@ -89,7 +78,6 @@ public class Game extends JFrame {
 		return hiloDisparoJugador;
 
 	}
-	
 
 	public void refresh() {
 

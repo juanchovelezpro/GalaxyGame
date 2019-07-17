@@ -2,6 +2,7 @@ package interfaz;
 
 import javax.swing.*;
 
+import tools.ScreenResolution;
 import tools.ToolManager;
 
 import java.awt.*;
@@ -21,6 +22,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		this.game = game;
 
 		setLayout(null);
+		setBounds(0,0,ScreenResolution.WIDTH,ScreenResolution.HEIGHT);
 
 		componentes();
 
