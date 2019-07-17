@@ -157,15 +157,17 @@ public class PanelGame extends JPanel implements KeyListener {
 		Disparo temp = null;
 		for (int i = 0; i < enemigos.size(); i++) {
 
-			for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
+			if (i < enemigos.size()) {
+				for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
 
-				temp = enemigos.get(i).getDisparos().get(j);
+					temp = enemigos.get(i).getDisparos().get(j);
 
-				Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
+					Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
 
-				g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
+					g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
+				}
+
 			}
-
 		}
 	}
 
