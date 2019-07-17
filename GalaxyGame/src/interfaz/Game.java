@@ -43,7 +43,9 @@ public class Game extends JFrame {
 
 		opciones = new PanelOpciones(this);
 
-		add(opciones);
+		setContentPane(opciones);
+		
+//		add(opciones);
 
 		setLocationRelativeTo(null);
 

@@ -28,7 +28,8 @@ public class PanelGame extends JPanel implements KeyListener {
 		this.opciones = opciones;
 
 		setBounds(ScreenResolution.WIDTH / 4, 0, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
-
+	
+		setBackground(new Color(0,0,0,0));
 		iniciar();
 
 		addKeyListener(this);
