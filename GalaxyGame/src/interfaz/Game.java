@@ -14,6 +14,10 @@ import java.awt.*;
 
 public class Game extends JFrame {
 
+	public static final int WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+	public static final int HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50;
+	
+	
 	private Juego juego;
 	private PanelOpciones opciones;
 	private HiloDisparoJugador hiloDisparoJugador;
@@ -27,8 +31,10 @@ public class Game extends JFrame {
 		setTitle("Galaxy Game");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(850, 850);
-		setResizable(false);
+		setSize(WIDTH, HEIGHT);
+//		setExtendedState(Frame.MAXIMIZED_BOTH);
+		setResizable(true);
+		
 
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 

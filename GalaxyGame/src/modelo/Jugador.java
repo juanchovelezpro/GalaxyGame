@@ -4,9 +4,13 @@ import java.util.LinkedList;
 
 public class Jugador extends Objeto {
 
+	
+	public static final int HEIGHT = 80;
+	public static final int WIDTH = 80;
+	public static final int SPEED = 0;
 	public static final String SKIN_NORMAL = "naves/nave_jugador.png";
 	public static final String DISPARO = "disparos/laserJugador.png";
-	
+
 	private String nick;
 	private long puntaje;
 	private LinkedList<Disparo> disparos;
@@ -14,16 +18,19 @@ public class Jugador extends Objeto {
 	private int vida;
 	private int damage;
 
-	public Jugador(int posx, int posy, int ancho, int altura, int velocidad, String nick, long puntaje, Juego juego) {
-		super(posx, posy, ancho, altura, velocidad);
+	public Jugador(int posx, int posy, String nick, Juego juego) {
+		super(posx, posy, WIDTH, HEIGHT, SPEED);
 
 		super.setSkin(SKIN_NORMAL);
-		this.juego = juego;
-		this.nick = nick;
-		this.puntaje = puntaje;
 		disparos = new LinkedList<>();
+
+		this.nick = nick;
+		puntaje = 0;
 		vida = 3;
 		damage = 1;
+
+		this.juego = juego;
+
 	}
 
 	public int getVida() {
@@ -60,11 +67,11 @@ public class Jugador extends Objeto {
 
 	public void mover() {
 
-		if (super.getPosx() >= 770) {
-			super.setPosx(770);
-		} else if (super.getPosx() <= 0) {
-			super.setPosx(0);
-		}
+//		if (super.getPosx() >= 770) {
+//			super.setPosx(770);
+//		} else if (super.getPosx() <= 0) {
+//			super.setPosx(0);
+//		}
 
 		super.setPosx(super.getPosx() + super.getVelocidad());
 
@@ -79,7 +86,7 @@ public class Jugador extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO,super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15));
+		disparos.add(new Disparo(DISPARO, super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {

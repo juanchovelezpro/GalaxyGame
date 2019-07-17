@@ -3,6 +3,8 @@ package modelo;
 import java.util.LinkedList;
 import java.util.Random;
 
+import interfaz.Game;
+
 public class Juego {
 
 	private Jugador jugador;
@@ -12,7 +14,7 @@ public class Juego {
 
 	public Juego() {
 
-		jugador = new Jugador(345, 740, 80, 80, 0, null, 0, this);
+		jugador = new Jugador(Game.WIDTH, 740, null, this);
 		spawnEnemigos(15);
 
 	}
