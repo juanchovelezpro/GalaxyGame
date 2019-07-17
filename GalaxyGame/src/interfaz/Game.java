@@ -34,21 +34,23 @@ public class Game extends JFrame {
 
 		juego = new Juego();
 
+		crearProcesos(juego);
+
+		opciones = new PanelOpciones(this);
+
+		setContentPane(opciones);
+
+		setLocationRelativeTo(null);
+
+	}
+
+	public void crearProcesos(Juego juego) {
+
 		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
 		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
 		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
-
-		opciones = new PanelOpciones(this);
-
-		setContentPane(opciones);
-		
-//		add(opciones);
-
-		setLocationRelativeTo(null);
-
-		setVisible(true);
 
 	}
 
@@ -68,15 +70,15 @@ public class Game extends JFrame {
 		return hiloMovimientoEnemigos;
 	}
 
-	public Juego getJuego() {
-
-		return juego;
-
-	}
-
 	public HiloDisparoJugador getHiloDisparoJugador() {
 
 		return hiloDisparoJugador;
+
+	}
+
+	public Juego getJuego() {
+
+		return juego;
 
 	}
 

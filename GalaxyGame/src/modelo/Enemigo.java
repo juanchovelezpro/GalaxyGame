@@ -2,9 +2,7 @@ package modelo;
 
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Scanner;
 
-import javax.xml.bind.annotation.W3CDomHandler;
 
 import tools.ScreenResolution;
 
