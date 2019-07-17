@@ -18,15 +18,25 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
+		
+	
 	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 
+	
+	
+	
 	private PanelOpciones opciones;
 
 	public PanelGame(PanelOpciones opciones) {
 
 		this.opciones = opciones;
 
+		setBounds(Game.WIDTH/2, 0, Game.WIDTH_GAME, Game.HEIGHT_GAME);
+//		setSize(Game.WIDTH_GAME, Game.HEIGHT_GAME);
+		
 		iniciar();
+		
+		
 
 		addKeyListener(this);
 		setFocusable(true);

@@ -64,6 +64,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		if (e.getSource().equals(butJugar)) {
 
 			panelGame = new PanelGame(this);
+			
 
 			game.remove(this);
 			game.add(panelGame);

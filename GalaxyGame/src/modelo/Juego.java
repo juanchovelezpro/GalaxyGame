@@ -14,7 +14,7 @@ public class Juego {
 
 	public Juego() {
 
-		jugador = new Jugador(Game.WIDTH, 740, null, this);
+		jugador = new Jugador(Game.WIDTH/2-Jugador.WIDTH, Game.HEIGHT-Jugador.HEIGHT*2+20, null, this);
 		spawnEnemigos(15);
 
 	}

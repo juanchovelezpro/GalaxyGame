@@ -14,8 +14,12 @@ import java.awt.*;
 
 public class Game extends JFrame {
 
+	
+	public static final int HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	public static final int WIDTH = (int)Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-	public static final int HEIGHT = (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()-50;
+	public static final int HEIGHT_GAME = HEIGHT/2;
+	public static final int WIDTH_GAME = HEIGHT_GAME;
+	
 	
 	
 	private Juego juego;
@@ -32,13 +36,15 @@ public class Game extends JFrame {
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(WIDTH, HEIGHT);
-//		setExtendedState(Frame.MAXIMIZED_BOTH);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setResizable(true);
 		
 
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		juego = new Juego();
+		
+		System.out.println(WIDTH+" "+"- "+HEIGHT);
 
 		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
