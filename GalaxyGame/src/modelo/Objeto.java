@@ -34,6 +34,18 @@ public class Objeto {
 		this.velocidad = velocidad;
 	}
 
+	public Objeto(int ancho, int altura) {
+
+		this.altura = altura;
+		this.ancho = ancho;
+		skin = null;
+		posx = 0;
+		posy = 0;
+		rectangulo = new Rectangle(posx, posy, ancho, altura);
+		velocidad = 0;
+
+	}
+
 	public String getSkin() {
 		return skin;
 	}

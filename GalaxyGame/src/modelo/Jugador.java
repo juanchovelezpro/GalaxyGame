@@ -2,12 +2,21 @@ package modelo;
 
 import java.util.LinkedList;
 
+import tools.ScreenResolution;
+
 public class Jugador extends Objeto {
 
-	
 	public static final int HEIGHT = 80;
 	public static final int WIDTH = 80;
 	public static final int SPEED = 0;
+	public static final int X_RIGHT_LIMIT = ScreenResolution.WIDTH_GAME - WIDTH;
+	public static final int X_LEFT_LIMIT = 0;
+	public static final int SHOT_LIMIT = -70;
+	public static final int SHOT_OFFSET_X = 25;
+	public static final int SHOT_OFFSET_Y = -35;
+	public static final int SPAWN_X = ScreenResolution.WIDTH_GAME / 2 - Jugador.WIDTH / 2;
+	public static final int SPAWN_Y = ScreenResolution.HEIGHT_GAME - Jugador.HEIGHT;
+
 	public static final String SKIN_NORMAL = "naves/nave_jugador.png";
 	public static final String DISPARO = "disparos/laserJugador.png";
 
@@ -18,13 +27,16 @@ public class Jugador extends Objeto {
 	private int vida;
 	private int damage;
 
-	public Jugador(int posx, int posy, String nick, Juego juego) {
-		super(posx, posy, WIDTH, HEIGHT, SPEED);
-
+	public Jugador(Juego juego) {
+		
+		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
+		super.setPosx(SPAWN_X);
+		super.setPosy(SPAWN_Y);
+		
 		disparos = new LinkedList<>();
 
-		this.nick = nick;
+		nick = "";
 		puntaje = 0;
 		vida = 3;
 		damage = 1;
@@ -67,11 +79,11 @@ public class Jugador extends Objeto {
 
 	public void mover() {
 
-//		if (super.getPosx() >= 770) {
-//			super.setPosx(770);
-//		} else if (super.getPosx() <= 0) {
-//			super.setPosx(0);
-//		}
+		if (super.getPosx() >= X_RIGHT_LIMIT) {
+			super.setPosx(X_RIGHT_LIMIT);
+		} else if (super.getPosx() <= X_LEFT_LIMIT) {
+			super.setPosx(X_LEFT_LIMIT);
+		}
 
 		super.setPosx(super.getPosx() + super.getVelocidad());
 
@@ -86,7 +98,7 @@ public class Jugador extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO, super.getPosx() + 25, super.getPosy() - 30, 25, 65, 15));
+		disparos.add(new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy()+SHOT_OFFSET_Y, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
@@ -103,7 +115,7 @@ public class Jugador extends Objeto {
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos()))
 				eliminarDisparo(disparoTemporal);
 
-			if (disparoTemporal.getPosy() < -70)
+			if (disparoTemporal.getPosy() < SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
 			disparoTemporal.avanzarDisparo();

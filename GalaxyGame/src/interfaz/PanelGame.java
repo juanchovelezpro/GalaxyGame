@@ -15,6 +15,7 @@ import tools.ToolManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
@@ -29,7 +30,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		setBounds(ScreenResolution.WIDTH / 4, 0, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
 	
-		setBackground(new Color(0,0,0,0));
+//		setBackground(new Color(0,0,0,0));
 		iniciar();
 
 		addKeyListener(this);

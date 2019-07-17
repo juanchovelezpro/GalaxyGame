@@ -30,7 +30,6 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(ScreenResolution.WIDTH, ScreenResolution.HEIGHT);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
-		setResizable(true);
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		juego = new Juego();
