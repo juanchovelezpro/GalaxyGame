@@ -29,8 +29,7 @@ public class PanelGame extends JPanel implements KeyListener {
 		this.opciones = opciones;
 
 		setBounds(ScreenResolution.WIDTH / 4, 0, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
-	
-//		setBackground(new Color(0,0,0,0));
+
 		iniciar();
 
 		addKeyListener(this);
@@ -72,21 +71,23 @@ public class PanelGame extends JPanel implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
+		int event = e.getKeyCode();
+
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_D) {
+		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
 
 			jugador.setVelocidad(5);
 
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_A) {
+		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
 			jugador.setVelocidad(-5);
 
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if (event == KeyEvent.VK_SPACE) {
 
 			jugador.agregarDisparo();
 
@@ -97,15 +98,17 @@ public class PanelGame extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
+		int event = e.getKeyCode();
+		
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
 
 			jugador.setVelocidad(0);
 
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
 			jugador.setVelocidad(0);
 		}

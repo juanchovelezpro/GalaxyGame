@@ -3,7 +3,6 @@ package modelo;
 import java.util.LinkedList;
 import java.util.Random;
 
-
 import tools.ScreenResolution;
 
 public class Enemigo extends Objeto {
@@ -33,13 +32,22 @@ public class Enemigo extends Objeto {
 		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
 		super.setVelocidad(SPEED);
-		
+
 		r = new Random();
 
 		super.setPosx(r.nextInt(X_BOUND));
 		super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 
 		this.tipo = tipo;
+		
+		crearPorTipo(tipo);
+
+		disparos = new LinkedList<>();
+		this.juego = juego;
+
+	}
+
+	public void crearPorTipo(int tipo) {
 
 		switch (tipo) {
 		case 1:
@@ -58,8 +66,6 @@ public class Enemigo extends Objeto {
 			vida = 5;
 			break;
 		}
-		disparos = new LinkedList<>();
-		this.juego = juego;
 
 	}
 
@@ -90,9 +96,6 @@ public class Enemigo extends Objeto {
 
 			juego.getJugador().setVida(juego.getJugador().getVida() - 1);
 
-			
-			System.out.println("Colision!");
-
 		}
 
 		super.setPosy(super.getPosy() + super.getVelocidad());
@@ -107,7 +110,8 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25, 65, 15));
+		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25,
+				65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
