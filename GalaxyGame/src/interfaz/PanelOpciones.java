@@ -23,7 +23,6 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		setLayout(null);
 
-
 		componentes();
 
 	}
@@ -37,12 +36,10 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		butJugar.setFont(fuente);
 		butJugar.setBackground(background);
 		butJugar.setFocusable(false);
-		butJugar.setSize(450,60);
-		butJugar.setLocation(ScreenResolution.WIDTH/2-butJugar.getWidth()/2, ScreenResolution.HEIGHT/2);
-		
-		
+		butJugar.setSize(450, 60);
+		butJugar.setLocation(ScreenResolution.WIDTH / 2 - butJugar.getWidth() / 2, ScreenResolution.HEIGHT / 2);
+
 		butJugar.addActionListener(this);
-		
 
 		add(butJugar);
 
@@ -71,13 +68,11 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		if (e.getSource().equals(butJugar)) {
 
 			panelGame = new PanelGame(this);
-			
 
 			this.removeAll();
 			game.add(panelGame);
 			game.refresh();
-			
-			
+
 			panelGame.requestFocus();
 
 		}

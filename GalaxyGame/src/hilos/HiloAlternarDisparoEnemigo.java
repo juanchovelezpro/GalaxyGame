@@ -23,20 +23,34 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 		while (true) {
 
 			try {
-				Thread.sleep(500);
 
-				for (int i = 0; i < juego.getEnemigos().size(); i++) {
-					int g = r.nextInt(6);
-					if (activar[g])
-						juego.getEnemigos().get(i).agregarDisparo();
+				if (!juego.isPausa()) {
+					Thread.sleep(500);
+
+					for (int i = 0; i < juego.getEnemigos().size(); i++) {
+						int g = r.nextInt(6);
+						if (activar[g])
+							juego.getEnemigos().get(i).agregarDisparo();
+					}
+				} else {
+
+					synchronized (this) {
+						wait();
+					}
+
 				}
-
 			} catch (InterruptedException e) {
 
 				e.printStackTrace();
 			}
 
 		}
+
+	}
+
+	public synchronized void reanudar() {
+
+		notify();
 
 	}
 

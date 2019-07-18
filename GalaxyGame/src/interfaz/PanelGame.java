@@ -67,12 +67,24 @@ public class PanelGame extends JPanel implements KeyListener {
 		opciones.getGame().getHiloDisparoEnemigo().start();
 
 	}
+	
+	public void reanudar() {
+		
+		opciones.getGame().getHiloMovimientoJugador().reanudar();
+		opciones.getGame().getHiloDisparoJugador().reanudar();
+
+		opciones.getGame().getHiloMovimientoEnemigos().reanudar();
+		opciones.getGame().getHiloAlternarDisparoEnemigo().reanudar();
+		opciones.getGame().getHiloDisparoEnemigo().reanudar();
+		
+	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 
 		int event = e.getKeyCode();
 
+		Juego juego = opciones.getGame().getJuego();
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
@@ -93,13 +105,28 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		}
 
+		if (event == KeyEvent.VK_P) {
+
+			if (!juego.isPausa()) {
+
+				juego.setPausa(true);
+
+			} else {
+
+				juego.setPausa(false);
+				reanudar();
+
+			}
+
+		}
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 
 		int event = e.getKeyCode();
-		
+
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
 		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {

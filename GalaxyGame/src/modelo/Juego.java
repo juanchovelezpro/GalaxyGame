@@ -6,13 +6,25 @@ import java.util.Random;
 public class Juego {
 
 	private Jugador jugador;
+	private boolean pausa;
+
+
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 
 	public Juego() {
 
+		pausa = false;
 		jugador = new Jugador(this);
 		spawnEnemigos(15);
 
+	}
+	
+	public boolean isPausa() {
+		return pausa;
+	}
+
+	public void setPausa(boolean pausa) {
+		this.pausa = pausa;
 	}
 
 	public Jugador getJugador() {

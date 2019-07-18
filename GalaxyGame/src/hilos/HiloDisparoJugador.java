@@ -17,13 +17,30 @@ public class HiloDisparoJugador extends Thread {
 
 		while (true) {
 			try {
-				Thread.sleep(25);
 
-				juego.getJugador().disparar();
+				if (!juego.isPausa()) {
+					Thread.sleep(25);
+
+					juego.getJugador().disparar();
+
+				} else {
+
+					synchronized (this) {
+						wait();
+					}
+
+				}
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
+
+	public synchronized void reanudar() {
+
+		notify();
+
+	}
+
 }

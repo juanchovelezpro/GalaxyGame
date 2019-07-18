@@ -18,18 +18,32 @@ public class HiloDisparoEnemigo extends Thread {
 		while (true) {
 
 			try {
-				Thread.sleep(25);
 
-				for (int i = 0; i < juego.getEnemigos().size(); i++) {
-					juego.getEnemigos().get(i).disparar();
+				if (!juego.isPausa()) {
+					Thread.sleep(25);
+
+					for (int i = 0; i < juego.getEnemigos().size(); i++) {
+						juego.getEnemigos().get(i).disparar();
+					}
+				} else {
+
+					synchronized (this) {
+						wait();
+					}
+
 				}
-
 			} catch (Exception e) {
 
 				e.printStackTrace();
 			}
 
 		}
+
+	}
+
+	public synchronized void reanudar() {
+
+		notify();
 
 	}
 
