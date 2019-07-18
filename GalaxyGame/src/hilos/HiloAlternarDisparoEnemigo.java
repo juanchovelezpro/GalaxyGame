@@ -27,7 +27,7 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 				if (!juego.isPausa()) {
 					Thread.sleep(500);
 
-					for (int i = 0; i < juego.getEnemigos().size(); i++) {
+					for (int i = 0; i < juego.getEnemigos().size() && !juego.isPausa(); i++) {
 						int g = r.nextInt(6);
 						if (activar[g])
 							juego.getEnemigos().get(i).agregarDisparo();
