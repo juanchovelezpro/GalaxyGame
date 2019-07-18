@@ -7,12 +7,10 @@ public class Juego {
 
 	private Jugador jugador;
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
-	public static final int YMINIMO = -400;
-	public static final int YMAXIMO = -100;
 
 	public Juego() {
 
-		jugador = new Jugador(345, 740, 80, 80, 0, null, 0, this);
+		jugador = new Jugador(this);
 		spawnEnemigos(15);
 
 	}
@@ -41,8 +39,9 @@ public class Juego {
 	}
 
 	public void agregarEnemigo() {
+
 		Random r = new Random();
-		enemigos.add(new Enemigo(r.nextInt(830), r.nextInt(YMAXIMO + 1 - YMINIMO) + YMINIMO, 80, 80, 6,
-				r.nextInt(5) + 1, this));
+
+		enemigos.add(new Enemigo(r.nextInt(6), this));
 	}
 }

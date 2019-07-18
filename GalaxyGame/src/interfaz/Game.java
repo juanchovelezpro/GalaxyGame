@@ -8,6 +8,7 @@ import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import modelo.Juego;
+import tools.ScreenResolution;
 import tools.ToolManager;
 
 import java.awt.*;
@@ -25,28 +26,31 @@ public class Game extends JFrame {
 	public Game() {
 
 		setTitle("Galaxy Game");
-		setLayout(new BorderLayout());
+		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(850, 850);
-		setResizable(false);
-
+		setSize(ScreenResolution.WIDTH, ScreenResolution.HEIGHT);
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		juego = new Juego();
+
+		crearProcesos(juego);
+
+		opciones = new PanelOpciones(this);
+
+		setContentPane(opciones);
+
+		setLocationRelativeTo(null);
+
+	}
+
+	public void crearProcesos(Juego juego) {
 
 		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
 		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
 		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
-
-		opciones = new PanelOpciones(this);
-
-		add(opciones);
-
-		setLocationRelativeTo(null);
-
-		setVisible(true);
 
 	}
 
@@ -66,18 +70,17 @@ public class Game extends JFrame {
 		return hiloMovimientoEnemigos;
 	}
 
-	public Juego getJuego() {
-
-		return juego;
-
-	}
-
 	public HiloDisparoJugador getHiloDisparoJugador() {
 
 		return hiloDisparoJugador;
 
 	}
-	
+
+	public Juego getJuego() {
+
+		return juego;
+
+	}
 
 	public void refresh() {
 

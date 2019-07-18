@@ -3,22 +3,44 @@ package modelo;
 import java.util.LinkedList;
 import java.util.Random;
 
+
+import tools.ScreenResolution;
+
 public class Enemigo extends Objeto {
+
+	public static final int WIDTH = 80;
+	public static final int HEIGHT = 80;
+	public static final int SPEED = 5;
+	public static final int Y_LIMIT = ScreenResolution.HEIGHT_GAME + HEIGHT;
+	public static final int X_BOUND = ScreenResolution.WIDTH_GAME;
+	public static final int Y_MAX = -100;
+	public static final int Y_MIN = -600;
+	public static final int SHOT_LIMIT = ScreenResolution.HEIGHT_GAME + 50;
+	public static final int SHOT_OFFSET_X = 25;
+	public static final int SHOT_OFFSET_Y = 40;
 
 	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
 	public static final String DISPARO_NORMAL = "disparos/laserEnemigo.png";
-	
+
 	private int tipo;
 	private int vida;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
+	private Random r;
 
-	public Enemigo(int posx, int posy, int ancho, int altura, int velocidad, int tipo, Juego juego) {
-		super(posx, posy, ancho, altura, velocidad);
-		
+	public Enemigo(int tipo, Juego juego) {
+
+		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
-		this.tipo = tipo;
+		super.setVelocidad(SPEED);
 		
+		r = new Random();
+
+		super.setPosx(r.nextInt(X_BOUND));
+		super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+
+		this.tipo = tipo;
+
 		switch (tipo) {
 		case 1:
 			vida = 2;
@@ -41,17 +63,34 @@ public class Enemigo extends Objeto {
 
 	}
 
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getVida() {
+		return vida;
+	}
+
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
 	public void mover() {
-		Random r = new Random();
-		if (super.getPosy() >= 880) {
-			super.setPosy(r.nextInt(Juego.YMAXIMO + 1 - Juego.YMINIMO) + Juego.YMINIMO);
-			super.setPosx(r.nextInt(745));
+
+		if (super.getPosy() >= Y_LIMIT) {
+			super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+			super.setPosx(r.nextInt(X_BOUND));
 		}
 
 		if (Fisica.colision(this, juego.getJugador())) {
 
 			juego.getJugador().setVida(juego.getJugador().getVida() - 1);
 
+			
 			System.out.println("Colision!");
 
 		}
@@ -68,7 +107,7 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO_NORMAL,super.getPosx() + 25, super.getPosy() + 40, 25, 65, 15));
+		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
@@ -85,7 +124,7 @@ public class Enemigo extends Objeto {
 			if (Fisica.colision(disparoTemporal, juego.getJugador()))
 				eliminarDisparo(disparoTemporal);
 
-			if (disparoTemporal.getPosy() > 870)
+			if (disparoTemporal.getPosy() > SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
 			disparoTemporal.avanzarDisparoEnemigo();
