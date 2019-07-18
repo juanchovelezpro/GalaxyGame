@@ -101,6 +101,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_SPACE) {
 
+			if(!juego.isPausa())
 			jugador.agregarDisparo();
 
 		}
