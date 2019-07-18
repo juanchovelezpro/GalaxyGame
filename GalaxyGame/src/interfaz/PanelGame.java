@@ -41,11 +41,11 @@ public class PanelGame extends JPanel implements KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 
+		ManagerFPS.StartCounter();
+
 		super.paintComponent(g);
 
 		g.drawImage(BACKGROUND, 0, 0, null);
-
-		ManagerFPS.StartCounter();
 
 		renderAccionesJugador(g);
 
@@ -67,16 +67,16 @@ public class PanelGame extends JPanel implements KeyListener {
 		opciones.getGame().getHiloDisparoEnemigo().start();
 
 	}
-	
+
 	public void reanudar() {
-		
+
 		opciones.getGame().getHiloMovimientoJugador().reanudar();
 		opciones.getGame().getHiloDisparoJugador().reanudar();
 
 		opciones.getGame().getHiloMovimientoEnemigos().reanudar();
 		opciones.getGame().getHiloAlternarDisparoEnemigo().reanudar();
 		opciones.getGame().getHiloDisparoEnemigo().reanudar();
-		
+
 	}
 
 	@Override
@@ -101,8 +101,8 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_SPACE) {
 
-			if(!juego.isPausa())
-			jugador.agregarDisparo();
+			if (!juego.isPausa())
+				jugador.agregarDisparo();
 
 		}
 
@@ -184,24 +184,21 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			g.drawImage(skinEnemy, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
 
-		}
+			// Render disparo de los enemigos
+			Disparo temp = null;
+			for (int j = 0; j < tempEnemy.getDisparos().size(); j++) {
 
-		// Render disparos de enemigos.
-		Disparo temp = null;
-		for (int i = 0; i < enemigos.size(); i++) {
+				temp = enemigos.get(i).getDisparos().get(j);
 
-			if (i < enemigos.size()) {
-				for (int j = 0; j < enemigos.get(i).getDisparos().size(); j++) {
+				Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
 
-					temp = enemigos.get(i).getDisparos().get(j);
-
-					Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
-
-					g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
-				}
+				g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
 
 			}
+
 		}
+
+
 	}
 
 }
