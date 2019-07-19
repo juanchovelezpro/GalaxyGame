@@ -23,6 +23,7 @@ public class PanelGame extends JPanel implements KeyListener {
 	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
 
 	private PanelOpciones opciones;
+	private PanelPausa panelPausa;
 
 	public PanelGame(PanelOpciones opciones) {
 
@@ -110,17 +111,24 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			if (!juego.isPausa()) {
 
+				panelPausa = new PanelPausa(this);
 				juego.setPausa(true);
+				add(panelPausa);
 
 			} else {
 
 				juego.setPausa(false);
 				reanudar();
-
+				remove(panelPausa);
+				panelPausa = null;
 			}
 
 		}
 
+	}
+
+	public PanelOpciones getPanelOpciones() {
+		return opciones;
 	}
 
 	@Override
@@ -197,7 +205,6 @@ public class PanelGame extends JPanel implements KeyListener {
 			}
 
 		}
-
 
 	}
 

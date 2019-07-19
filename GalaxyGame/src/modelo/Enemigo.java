@@ -11,7 +11,7 @@ public class Enemigo extends Objeto {
 	public static final int HEIGHT = 80;
 	public static final int SPEED = 5;
 	public static final int Y_LIMIT = ScreenResolution.HEIGHT_GAME + HEIGHT;
-	public static final int X_BOUND = ScreenResolution.WIDTH_GAME;
+	public static final int X_BOUND = ScreenResolution.WIDTH_GAME-WIDTH;
 	public static final int Y_MAX = -100;
 	public static final int Y_MIN = -600;
 	public static final int SHOT_LIMIT = ScreenResolution.HEIGHT_GAME + 50;
@@ -95,6 +95,7 @@ public class Enemigo extends Objeto {
 		if (Fisica.colision(this, juego.getJugador())) {
 
 			juego.getJugador().setVida(juego.getJugador().getVida() - 1);
+			
 
 		}
 
