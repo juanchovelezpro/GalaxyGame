@@ -148,7 +148,7 @@ public class Jugador extends Objeto {
 
 	public void agregarDisparo() {
 		disparos.add(
-				new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25, 65, 15));
+				new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 30, 70, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {

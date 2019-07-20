@@ -121,8 +121,8 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25,
-				65, 15));
+		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 30,
+				70, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
