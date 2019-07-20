@@ -63,6 +63,8 @@ public class PanelGame extends JPanel implements KeyListener {
 		opciones.getGame().getHiloMovimientoJugador().start();
 		opciones.getGame().getHiloDisparoJugador().start();
 
+		opciones.getGame().getHiloDesplegarEnemigos().start();
+
 		opciones.getGame().getHiloMovimientoEnemigos().start();
 		opciones.getGame().getHiloAlternarDisparoEnemigo().start();
 		opciones.getGame().getHiloDisparoEnemigo().start();
@@ -71,6 +73,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	public void reanudar() {
 
+		opciones.getGame().getHiloDesplegarEnemigos().reanudar();
 		opciones.getGame().getHiloMovimientoJugador().reanudar();
 		opciones.getGame().getHiloDisparoJugador().reanudar();
 
@@ -100,11 +103,12 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		}
 
-		if (event == KeyEvent.VK_SPACE) {
+		if (event == KeyEvent.VK_SPACE && !juego.getJugador().isRecargaDisparo()) {
 
 			if (!juego.isPausa())
 				jugador.agregarDisparo();
-
+				jugador.setRecargaDisparo(true);
+			
 		}
 
 		if (event == KeyEvent.VK_P) {
@@ -147,6 +151,12 @@ public class PanelGame extends JPanel implements KeyListener {
 		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
 			jugador.setVelocidad(0);
+		}
+		
+		if(event == KeyEvent.VK_SPACE) {
+			
+			jugador.setRecargaDisparo(false);
+			
 		}
 
 	}

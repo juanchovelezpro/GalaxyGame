@@ -28,6 +28,7 @@ public class Jugador extends Objeto {
 	private int vidas;
 	private int damage;
 	private boolean vivo;
+	private boolean recargaDisparo;
 
 	public Jugador(Juego juego) {
 
@@ -43,9 +44,18 @@ public class Jugador extends Objeto {
 		vidas = 3;
 		damage = 1;
 		vivo = true;
+		recargaDisparo = false;
 
 		this.juego = juego;
 
+	}
+
+	public boolean isRecargaDisparo() {
+		return recargaDisparo;
+	}
+
+	public void setRecargaDisparo(boolean recargaDisparo) {
+		this.recargaDisparo = recargaDisparo;
 	}
 
 	public boolean isVivo() {
