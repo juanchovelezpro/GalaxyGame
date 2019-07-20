@@ -3,6 +3,7 @@ package interfaz;
 import javax.swing.*;
 
 import hilos.HiloAlternarDisparoEnemigo;
+import hilos.HiloDesplegarEnemigos;
 import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
@@ -22,6 +23,7 @@ public class Game extends JFrame {
 	private HiloMovimientoEnemigos hiloMovimientoEnemigos;
 	private HiloDisparoEnemigo hiloDisparoEnemigo;
 	private HiloAlternarDisparoEnemigo hiloAlternarDisparoEnemigo;
+	private HiloDesplegarEnemigos hiloDesplegarEnemigos;
 
 	public Game() {
 
@@ -51,6 +53,7 @@ public class Game extends JFrame {
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
 		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
 		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
+		hiloDesplegarEnemigos = new HiloDesplegarEnemigos(juego, 10);
 
 	}
 
@@ -74,6 +77,10 @@ public class Game extends JFrame {
 
 		return hiloDisparoJugador;
 
+	}
+
+	public HiloDesplegarEnemigos getHiloDesplegarEnemigos() {
+		return hiloDesplegarEnemigos;
 	}
 
 	public Juego getJuego() {

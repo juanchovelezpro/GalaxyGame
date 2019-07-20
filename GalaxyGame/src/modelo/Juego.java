@@ -8,17 +8,16 @@ public class Juego {
 	private Jugador jugador;
 	private boolean pausa;
 
-
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 
 	public Juego() {
 
 		pausa = false;
 		jugador = new Jugador(this);
-		spawnEnemigos(5);
+		
 
 	}
-	
+
 	public boolean isPausa() {
 		return pausa;
 	}
