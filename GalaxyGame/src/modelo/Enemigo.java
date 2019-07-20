@@ -96,6 +96,8 @@ public class Enemigo extends Objeto {
 		if (Fisica.colision(this, juego.getJugador())) {
 
 			morir();
+			
+			if(!juego.getJugador().isInvulnerable())
 			juego.getJugador().morir();
 
 		}
@@ -136,6 +138,8 @@ public class Enemigo extends Objeto {
 
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 				eliminarDisparo(disparoTemporal);
+				
+				if(!juego.getJugador().isInvulnerable())
 				juego.getJugador().morir();
 
 			}

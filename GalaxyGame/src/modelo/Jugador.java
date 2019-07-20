@@ -29,6 +29,7 @@ public class Jugador extends Objeto {
 	private int damage;
 	private boolean vivo;
 	private boolean recargaDisparo;
+	private boolean invulnerable;
 
 	public Jugador(Juego juego) {
 
@@ -45,9 +46,18 @@ public class Jugador extends Objeto {
 		damage = 1;
 		vivo = true;
 		recargaDisparo = false;
+		invulnerable = false;
 
 		this.juego = juego;
 
+	}
+
+	public boolean isInvulnerable() {
+		return invulnerable;
+	}
+
+	public void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
 	}
 
 	public boolean isRecargaDisparo() {
@@ -111,12 +121,20 @@ public class Jugador extends Objeto {
 		}
 	}
 
+	public void revivir() {
+
+		setPosx(SPAWN_X);
+		setPosy(SPAWN_Y);
+		setVivo(true);
+
+	}
+
 	public void morir() {
 
 		setPosx(X_DEATH);
 		setVelocidad(0);
 		setVivo(false);
-		setVidas(vidas-1);
+		setVidas(vidas - 1);
 
 	}
 
