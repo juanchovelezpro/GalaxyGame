@@ -15,7 +15,7 @@ public class Juego {
 
 		pausa = false;
 		jugador = new Jugador(this);
-		spawnEnemigos(15);
+		spawnEnemigos(5);
 
 	}
 	

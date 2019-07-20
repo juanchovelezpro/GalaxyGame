@@ -16,7 +16,7 @@ public class HiloMovimientoEnemigos extends Thread {
 			try {
 
 				if (!juego.isPausa()) {
-					Thread.sleep(20);
+					Thread.sleep(5);
 					for (int i = 0; i < juego.getEnemigos().size(); i++) {
 
 						if (juego.getEnemigos().get(i) != null)

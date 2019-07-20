@@ -15,7 +15,8 @@ public class Fisica {
 			if (objeto.getBounds().intersects(enemigos.get(i).getBounds())) {
 
 				colision = true;
-				enemigos.remove(i);
+				
+				enemigos.get(i).morir();
 
 			}
 

@@ -9,14 +9,15 @@ public class Enemigo extends Objeto {
 
 	public static final int WIDTH = 80;
 	public static final int HEIGHT = 80;
-	public static final int SPEED = 5;
+	public static final int SPEED = 1;
 	public static final int Y_LIMIT = ScreenResolution.HEIGHT_GAME + HEIGHT;
-	public static final int X_BOUND = ScreenResolution.WIDTH_GAME-WIDTH;
+	public static final int X_BOUND = ScreenResolution.WIDTH_GAME - WIDTH;
 	public static final int Y_MAX = -100;
 	public static final int Y_MIN = -600;
 	public static final int SHOT_LIMIT = ScreenResolution.HEIGHT_GAME + 50;
 	public static final int SHOT_OFFSET_X = 25;
 	public static final int SHOT_OFFSET_Y = 40;
+	public static final int X_DEATH = -250;
 
 	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
 	public static final String DISPARO_NORMAL = "disparos/laserEnemigo.png";
@@ -39,7 +40,7 @@ public class Enemigo extends Objeto {
 		super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 
 		this.tipo = tipo;
-		
+
 		crearPorTipo(tipo);
 
 		disparos = new LinkedList<>();
@@ -94,12 +95,19 @@ public class Enemigo extends Objeto {
 
 		if (Fisica.colision(this, juego.getJugador())) {
 
-			juego.getJugador().setVida(juego.getJugador().getVida() - 1);
-			
+			morir();
+			juego.getJugador().morir();
 
 		}
 
 		super.setPosy(super.getPosy() + super.getVelocidad());
+	}
+
+	public void morir() {
+
+		setPosx(X_DEATH);
+		setVelocidad(0);
+
 	}
 
 	public LinkedList<Disparo> getDisparos() {
@@ -126,9 +134,11 @@ public class Enemigo extends Objeto {
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
 
-			if (Fisica.colision(disparoTemporal, juego.getJugador()))
+			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 				eliminarDisparo(disparoTemporal);
+				juego.getJugador().morir();
 
+			}
 			if (disparoTemporal.getPosy() > SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
