@@ -8,6 +8,7 @@ import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
+import hilos.HiloRevivirJugador;
 import modelo.Juego;
 import tools.ScreenResolution;
 import tools.ToolManager;
@@ -20,6 +21,7 @@ public class Game extends JFrame {
 	private PanelOpciones opciones;
 	private HiloDisparoJugador hiloDisparoJugador;
 	private HiloMovimientoJugador hiloMovimientoJugador;
+	private HiloRevivirJugador hiloRevivirJugador;
 	private HiloMovimientoEnemigos hiloMovimientoEnemigos;
 	private HiloDisparoEnemigo hiloDisparoEnemigo;
 	private HiloAlternarDisparoEnemigo hiloAlternarDisparoEnemigo;
@@ -50,11 +52,16 @@ public class Game extends JFrame {
 
 		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
 		hiloDisparoJugador = new HiloDisparoJugador(juego);
+		hiloRevivirJugador = new HiloRevivirJugador(juego);
 		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
 		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
 		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
 		hiloDesplegarEnemigos = new HiloDesplegarEnemigos(juego, 10);
 
+	}
+
+	public HiloRevivirJugador getHiloRevivirJugador() {
+		return hiloRevivirJugador;
 	}
 
 	public HiloMovimientoJugador getHiloMovimientoJugador() {

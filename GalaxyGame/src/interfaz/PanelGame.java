@@ -62,6 +62,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		opciones.getGame().getHiloMovimientoJugador().start();
 		opciones.getGame().getHiloDisparoJugador().start();
+		opciones.getGame().getHiloRevivirJugador().start();
 
 		opciones.getGame().getHiloDesplegarEnemigos().start();
 
@@ -73,6 +74,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	public void reanudar() {
 
+		opciones.getGame().getHiloRevivirJugador().reanudar();
 		opciones.getGame().getHiloDesplegarEnemigos().reanudar();
 		opciones.getGame().getHiloMovimientoJugador().reanudar();
 		opciones.getGame().getHiloDisparoJugador().reanudar();
