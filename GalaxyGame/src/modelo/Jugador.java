@@ -16,6 +16,7 @@ public class Jugador extends Objeto {
 	public static final int SHOT_OFFSET_Y = -35;
 	public static final int SPAWN_X = ScreenResolution.WIDTH_GAME / 2 - Jugador.WIDTH / 2;
 	public static final int SPAWN_Y = ScreenResolution.HEIGHT_GAME - Jugador.HEIGHT;
+	public static final int X_DEATH = -100;
 
 	public static final String SKIN_NORMAL = "naves/nave_jugador.png";
 	public static final String DISPARO = "disparos/laserJugador.png";
@@ -24,33 +25,43 @@ public class Jugador extends Objeto {
 	private long puntaje;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
-	private int vida;
+	private int vidas;
 	private int damage;
+	private boolean vivo;
 
 	public Jugador(Juego juego) {
-		
+
 		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
 		super.setPosx(SPAWN_X);
 		super.setPosy(SPAWN_Y);
-		
+
 		disparos = new LinkedList<>();
 
 		nick = "";
 		puntaje = 0;
-		vida = 3;
+		vidas = 3;
 		damage = 1;
+		vivo = true;
 
 		this.juego = juego;
 
 	}
 
-	public int getVida() {
-		return vida;
+	public boolean isVivo() {
+		return vivo;
 	}
 
-	public void setVida(int vida) {
-		this.vida = vida;
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
+
+	public int getVidas() {
+		return vidas;
+	}
+
+	public void setVidas(int vidas) {
+		this.vidas = vidas;
 	}
 
 	public int getDamage() {
@@ -79,13 +90,23 @@ public class Jugador extends Objeto {
 
 	public void mover() {
 
-		if (super.getPosx() >= X_RIGHT_LIMIT) {
-			super.setPosx(X_RIGHT_LIMIT);
-		} else if (super.getPosx() <= X_LEFT_LIMIT) {
-			super.setPosx(X_LEFT_LIMIT);
-		}
+		if (vivo) {
+			if (super.getPosx() >= X_RIGHT_LIMIT) {
+				super.setPosx(X_RIGHT_LIMIT);
+			} else if (super.getPosx() <= X_LEFT_LIMIT) {
+				super.setPosx(X_LEFT_LIMIT);
+			}
 
-		super.setPosx(super.getPosx() + super.getVelocidad());
+			super.setPosx(super.getPosx() + super.getVelocidad());
+		}
+	}
+
+	public void morir() {
+
+		setPosx(X_DEATH);
+		setVelocidad(0);
+		setVivo(false);
+		setVidas(vidas-1);
 
 	}
 
@@ -98,7 +119,8 @@ public class Jugador extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy()+SHOT_OFFSET_Y, 25, 65, 15));
+		disparos.add(
+				new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 25, 65, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
