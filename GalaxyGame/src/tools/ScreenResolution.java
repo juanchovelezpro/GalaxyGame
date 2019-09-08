@@ -31,6 +31,8 @@ public class ScreenResolution {
 	private BufferedImage imageToResize;
 
 	public ScreenResolution() {
+		
+		createResizeResources();
 
 	}
 
@@ -57,7 +59,7 @@ public class ScreenResolution {
 
 					if (k == temp.length - 1) {
 
-						s += "R" + temp[k];
+						s +="R"+temp[k];
 
 					} else {
 
@@ -72,6 +74,12 @@ public class ScreenResolution {
 
 		}
 
+	}
+	
+	public static void main(String[] args) {
+		
+		ScreenResolution s = new ScreenResolution();
+		
 	}
 
 }
