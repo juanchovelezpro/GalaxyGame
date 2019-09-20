@@ -18,7 +18,6 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 	public void run() {
 
 		Random r = new Random();
-		boolean[] activar = { false, true, false, false, false, false };
 
 		while (true) {
 
@@ -29,7 +28,7 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 
 					for (int i = 0; i < juego.getEnemigos().size() && !juego.isPausa(); i++) {
 						int g = r.nextInt(6);
-						if (activar[g])
+						if (g==1)
 							juego.getEnemigos().get(i).agregarDisparo();
 					}
 				} else {
