@@ -10,11 +10,14 @@ import modelo.Juego;
 import modelo.Jugador;
 import tools.ManagerFPS;
 import tools.ScreenResolution;
+import tools.SoundPlayer;
 import tools.ToolManager;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -109,8 +112,11 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			if (!juego.isPausa())
 				jugador.agregarDisparo();
-				jugador.setRecargaDisparo(true);
-			
+
+			SoundPlayer.play(new File("resources/sounds/laser.WAV"));
+
+			jugador.setRecargaDisparo(true);
+
 		}
 
 		if (event == KeyEvent.VK_P) {
@@ -154,11 +160,11 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			jugador.setVelocidad(0);
 		}
-		
-		if(event == KeyEvent.VK_SPACE) {
-			
+
+		if (event == KeyEvent.VK_SPACE) {
+
 			jugador.setRecargaDisparo(false);
-			
+
 		}
 
 	}

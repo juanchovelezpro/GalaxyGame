@@ -1,8 +1,10 @@
 package hilos;
 
+import java.io.File;
 import java.util.Random;
 
 import modelo.Juego;
+import tools.SoundPlayer;
 
 public class HiloAlternarDisparoEnemigo extends Thread {
 
@@ -28,8 +30,10 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 
 					for (int i = 0; i < juego.getEnemigos().size() && !juego.isPausa(); i++) {
 						int g = r.nextInt(6);
-						if (g==1)
+						if (g == 1) {
 							juego.getEnemigos().get(i).agregarDisparo();
+
+						}
 					}
 				} else {
 
