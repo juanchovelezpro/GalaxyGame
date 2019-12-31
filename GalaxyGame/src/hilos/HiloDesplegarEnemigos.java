@@ -19,7 +19,7 @@ public class HiloDesplegarEnemigos extends Thread {
 	@Override
 	public void run() {
 
-		int i = 0;
+		int i = 1;
 
 		while (!desplegados) {
 
