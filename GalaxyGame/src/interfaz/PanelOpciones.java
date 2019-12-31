@@ -16,6 +16,9 @@ public class PanelOpciones extends JPanel implements ActionListener {
 	private Game game;
 	private JButton butJugar;
 	private PanelGame panelGame;
+	
+	private JLabel labEnemigosRestantes;
+	private JLabel labFPS;
 
 	public PanelOpciones(Game game) {
 
@@ -61,6 +64,35 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		repaint();
 
 	}
+	
+	public void HUD() {
+		
+		Font font = new Font("Garamond", 1, 36);
+		
+		labEnemigosRestantes = new JLabel("Enemigos restantes:");
+		labEnemigosRestantes.setForeground(Color.WHITE);
+		labEnemigosRestantes.setFont(font);
+		labEnemigosRestantes.setSize(400, 60);
+		labEnemigosRestantes.setLocation(0, 0);
+		
+		labFPS = new JLabel("FPS");
+		labFPS.setForeground(Color.WHITE);
+		labFPS.setFont(font);
+		labFPS.setSize(300, 60);
+		labFPS.setLocation(0, 62);
+		
+		game.add(labEnemigosRestantes);
+		game.add(labFPS);
+		
+	}
+
+	public JLabel getLabFPS() {
+		return labFPS;
+	}
+
+	public void setLabFPS(JLabel labFPS) {
+		this.labFPS = labFPS;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -71,12 +103,21 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 			this.removeAll();
 			game.add(panelGame);
+			HUD();
 			game.refresh();
 
 			panelGame.requestFocus();
 
 		}
 
+	}
+
+	public JLabel getLabEnemigosRestantes() {
+		return labEnemigosRestantes;
+	}
+
+	public void setLabEnemigosRestantes(JLabel labEnemigosRestantes) {
+		this.labEnemigosRestantes = labEnemigosRestantes;
 	}
 
 }

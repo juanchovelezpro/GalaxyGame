@@ -162,9 +162,12 @@ public class Jugador extends Objeto {
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
 
-			if (Fisica.colision(disparoTemporal, juego.getEnemigos()))
+			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
 				eliminarDisparo(disparoTemporal);
-
+				juego.setEnemigosRestantes(juego.getEnemigosRestantes()-1);
+				
+			}
+				
 			if (disparoTemporal.getPosy() < SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 

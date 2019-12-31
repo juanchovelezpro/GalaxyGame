@@ -7,6 +7,7 @@ public class Juego {
 
 	private Jugador jugador;
 	private boolean pausa;
+	private int enemigosRestantes;
 
 	private LinkedList<Enemigo> enemigos = new LinkedList<>();
 
@@ -54,5 +55,16 @@ public class Juego {
 		Random r = new Random();
 
 		enemigos.add(new Enemigo(r.nextInt(6), this));
+		
+		enemigosRestantes++;
+		
+	}
+
+	public int getEnemigosRestantes() {
+		return enemigosRestantes;
+	}
+
+	public void setEnemigosRestantes(int enemigosRestantes) {
+		this.enemigosRestantes = enemigosRestantes;
 	}
 }

@@ -6,6 +6,7 @@ public final class ManagerFPS {
 	private static int endTime;
 	private static int frameTimes = 0;
 	private static short frames = 0;
+	public static int fps;
 
 	/** Start counting the fps **/
 	public final static void StartCounter() {
@@ -25,6 +26,7 @@ public final class ManagerFPS {
 		if (frameTimes >= 1000) {
 			// post results at the console
 			System.out.println("FPS: " + Long.toString(frames));
+			fps = Integer.parseInt(Long.toString(frames));
 			// reset time differences and number of counted frames
 			frames = 0;
 			frameTimes = 0;

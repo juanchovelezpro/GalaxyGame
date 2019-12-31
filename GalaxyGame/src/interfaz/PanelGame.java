@@ -16,6 +16,7 @@ import tools.ToolManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,6 +43,22 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	}
 
+	public PanelOpciones getOpciones() {
+		return opciones;
+	}
+
+	public void setOpciones(PanelOpciones opciones) {
+		this.opciones = opciones;
+	}
+
+	public PanelPausa getPanelPausa() {
+		return panelPausa;
+	}
+
+	public void setPanelPausa(PanelPausa panelPausa) {
+		this.panelPausa = panelPausa;
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 
@@ -50,6 +67,9 @@ public class PanelGame extends JPanel implements KeyListener {
 		super.paintComponent(g);
 
 		g.drawImage(BACKGROUND, 0, 0, null);
+
+		opciones.getLabEnemigosRestantes().setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
+		opciones.getLabFPS().setText("FPS: "+ManagerFPS.fps);
 
 		renderAccionesJugador(g);
 
@@ -110,13 +130,16 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_SPACE && !juego.getJugador().isRecargaDisparo()) {
 
-			if (!juego.isPausa())
-				jugador.agregarDisparo();
+			if (!juego.isPausa()) {
 
-			SoundPlayer.play(new File("resources/sounds/laser.WAV"));
+				if (jugador.isVivo()) {
+					jugador.agregarDisparo();
 
-			jugador.setRecargaDisparo(true);
+					SoundPlayer.play(new File("resources/sounds/laser.WAV"));
 
+					jugador.setRecargaDisparo(true);
+				}
+			}
 		}
 
 		if (event == KeyEvent.VK_P) {
