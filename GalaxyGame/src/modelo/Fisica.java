@@ -1,8 +1,6 @@
 package modelo;
 
-
 import java.util.LinkedList;
-
 
 public class Fisica {
 
@@ -16,8 +14,13 @@ public class Fisica {
 
 				colision = true;
 				
-				enemigos.get(i).morir();
+				enemigos.get(i).setVida(enemigos.get(i).getVida()-1);
 
+				if (enemigos.get(i).getVida() <= 0) {
+					
+					enemigos.get(i).morir();
+					
+				}
 			}
 
 		}

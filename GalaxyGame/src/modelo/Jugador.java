@@ -19,6 +19,7 @@ public class Jugador extends Objeto {
 	public static final int X_DEATH = -100;
 
 	public static final String SKIN_NORMAL = "naves/nave_jugador.png";
+	public static final String SKIN_INVULNERABLE = "naves/skinInvulnerableJugador.png";
 	public static final String DISPARO = "disparos/laserJugador.png";
 
 	private String nick;
@@ -164,10 +165,9 @@ public class Jugador extends Objeto {
 
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
 				eliminarDisparo(disparoTemporal);
-				juego.setEnemigosRestantes(juego.getEnemigosRestantes()-1);
-				
+
 			}
-				
+
 			if (disparoTemporal.getPosy() < SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 

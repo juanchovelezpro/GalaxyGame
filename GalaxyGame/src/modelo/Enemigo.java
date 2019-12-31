@@ -10,6 +10,7 @@ public class Enemigo extends Objeto {
 	public static final int WIDTH = 80;
 	public static final int HEIGHT = 80;
 	public static final int SPEED = 1;
+	public static final int SPEED_FAST = 3;
 	public static final int Y_LIMIT = ScreenResolution.HEIGHT_GAME + HEIGHT;
 	public static final int X_BOUND = ScreenResolution.WIDTH_GAME - WIDTH;
 	public static final int Y_MAX = -100;
@@ -20,7 +21,9 @@ public class Enemigo extends Objeto {
 	public static final int X_DEATH = -250;
 
 	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
+	public static final String SKIN_FAST = "naves/fastEnemy.png";
 	public static final String DISPARO_NORMAL = "disparos/laserEnemigo.png";
+	public static final String DISPARO_FAST = "disparos/laserGama.png";
 
 	private int tipo;
 	private int vida;
@@ -52,13 +55,16 @@ public class Enemigo extends Objeto {
 
 		switch (tipo) {
 		case 1:
-			vida = 2;
+			vida = 1;
+			setSkin(SKIN_NORMAL);
 			break;
 		case 2:
-			vida = 3;
+			vida = 2;
+			setSkin(SKIN_FAST);
+			setVelocidad(SPEED_FAST);
 			break;
 		case 3:
-			vida = 4;
+			vida = 3;
 			break;
 		case 4:
 			vida = 4;
@@ -95,7 +101,13 @@ public class Enemigo extends Objeto {
 
 		if (Fisica.colision(this, juego.getJugador())) {
 
-			morir();
+			if (vida <= 0) {
+				morir();
+			} else {
+
+				vida--;
+
+			}
 
 			if (!juego.getJugador().isInvulnerable())
 				juego.getJugador().morir();
@@ -109,6 +121,7 @@ public class Enemigo extends Objeto {
 
 		setPosx(X_DEATH);
 		setVelocidad(0);
+		juego.setEnemigosRestantes(juego.getEnemigosRestantes() - 1);
 
 	}
 
@@ -121,8 +134,16 @@ public class Enemigo extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 30,
-				70, 15));
+
+		if (tipo == 1) {
+			disparos.add(new Disparo(DISPARO_FAST, super.getPosx() + SHOT_OFFSET_X - 3, super.getPosy() + SHOT_OFFSET_Y,
+					30, 70, 15));
+		}
+
+		if (tipo == 2) {
+			disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y,
+					35, 85, 20));
+		}
 	}
 
 	public void eliminarDisparo(Disparo d) {

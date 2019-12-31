@@ -1,6 +1,7 @@
 package hilos;
 
 import modelo.Juego;
+import modelo.Jugador;
 
 public class HiloRevivirJugador extends Thread {
 
@@ -22,11 +23,13 @@ public class HiloRevivirJugador extends Thread {
 					if (!juego.getJugador().isVivo()) {
 
 						Thread.sleep(2000);
+						juego.getJugador().setSkin(Jugador.SKIN_INVULNERABLE);
 						juego.getJugador().revivir();
 						juego.getJugador().setInvulnerable(true);
 
 						Thread.sleep(3000);
 
+						juego.getJugador().setSkin(Jugador.SKIN_NORMAL);
 						juego.getJugador().setInvulnerable(false);
 
 					}
