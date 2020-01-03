@@ -135,7 +135,8 @@ public class PanelGame extends JPanel implements KeyListener {
 				if (jugador.isVivo()) {
 					jugador.agregarDisparo();
 
-					SoundPlayer.play(new File("resources/sounds/laser.WAV"));
+					SoundPlayer.play(getClass().getResource(("/sounds/laser.WAV")));
+					
 
 					jugador.setRecargaDisparo(true);
 				}

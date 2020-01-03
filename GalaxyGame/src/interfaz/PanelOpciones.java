@@ -3,11 +3,13 @@ package interfaz;
 import javax.swing.*;
 
 import tools.ScreenResolution;
+import tools.SoundPlayer;
 import tools.ToolManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
@@ -107,6 +109,8 @@ public class PanelOpciones extends JPanel implements ActionListener {
 			game.refresh();
 
 			panelGame.requestFocus();
+			
+			SoundPlayer.play(getClass().getResource("/sounds/backgroundMusic.WAV"));
 
 		}
 
