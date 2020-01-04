@@ -110,7 +110,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 			panelGame.requestFocus();
 			
-			SoundPlayer.play(getClass().getResource("/sounds/backgroundMusic.WAV"));
+			SoundPlayer.play("/sounds/backgroundMusic.wav");
 
 		}
 

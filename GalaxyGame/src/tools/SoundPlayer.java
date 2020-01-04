@@ -9,12 +9,12 @@ import javax.sound.sampled.Clip;
 
 public class SoundPlayer {
 
-	public static void play(URL file) {
+	public static void play(String path) {
 
 		try {
 
 			Clip sound = AudioSystem.getClip();
-			sound.open(AudioSystem.getAudioInputStream(file));
+			sound.open(AudioSystem.getAudioInputStream(SoundPlayer.class.getResource(path)));
 			sound.start();
 
 			new Thread() {
