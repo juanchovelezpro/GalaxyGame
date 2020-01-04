@@ -39,7 +39,7 @@ public class HiloGarbageSystem extends Thread {
 
 					Enemigo temp = juego.getEnemigos().get(i);
 
-					if (temp.getVida() <= 0) {
+					if (!temp.isVivo()) {
 
 						juego.getEnemigos().remove(temp);
 

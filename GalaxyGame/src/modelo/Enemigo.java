@@ -27,6 +27,7 @@ public class Enemigo extends Objeto {
 
 	private int tipo;
 	private int vida;
+	private boolean vivo;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
 	private Random r;
@@ -43,6 +44,7 @@ public class Enemigo extends Objeto {
 		super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 
 		this.tipo = tipo;
+		vivo = true;
 
 		crearPorTipo(tipo);
 
@@ -99,15 +101,15 @@ public class Enemigo extends Objeto {
 			super.setPosx(r.nextInt(X_BOUND));
 		}
 
+		if (vida <= 0 && vivo)
+			morir();
+
 		if (Fisica.colision(this, juego.getJugador())) {
 
-			if (vida <= 0) {
-				morir();
-			} else {
+			vida--;
 
-				vida--;
-
-			}
+			juego.getExplosiones().add(new Explosion(this.getPosx() + WIDTH / 2, this.getPosy() + HEIGHT));
+			juego.getExplosiones().getLast().start();
 
 			if (!juego.getJugador().isInvulnerable())
 				juego.getJugador().morir();
@@ -117,10 +119,19 @@ public class Enemigo extends Objeto {
 		super.setPosy(super.getPosy() + super.getVelocidad());
 	}
 
+	public boolean isVivo() {
+		return vivo;
+	}
+
+	public void setVivo(boolean vivo) {
+		this.vivo = vivo;
+	}
+
 	public void morir() {
 
 		setPosx(X_DEATH);
 		setVelocidad(0);
+		vivo = false;
 		juego.setEnemigosRestantes(juego.getEnemigosRestantes() - 1);
 
 	}
@@ -158,6 +169,10 @@ public class Enemigo extends Objeto {
 			disparoTemporal = disparos.get(i);
 
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
+				
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(), disparoTemporal.getPosy()+disparoTemporal.getAltura()));
+				juego.getExplosiones().getLast().start();
+				
 				eliminarDisparo(disparoTemporal);
 
 				if (!juego.getJugador().isInvulnerable())
