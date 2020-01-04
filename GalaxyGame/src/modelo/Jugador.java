@@ -3,6 +3,7 @@ package modelo;
 import java.util.LinkedList;
 
 import tools.ScreenResolution;
+import tools.SoundPlayer;
 
 public class Jugador extends Objeto {
 
@@ -164,9 +165,10 @@ public class Jugador extends Objeto {
 			disparoTemporal = disparos.get(i);
 
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
-			
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(),disparoTemporal.getPosy()));
+
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(), disparoTemporal.getPosy()));
 				juego.getExplosiones().getLast().start();
+
 				eliminarDisparo(disparoTemporal);
 
 			}

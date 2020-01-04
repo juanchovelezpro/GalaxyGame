@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.LinkedList;
 
+import tools.SoundPlayer;
+
 public class Fisica {
 
 	public static boolean colision(Objeto objeto, LinkedList<Enemigo> enemigos) {
@@ -13,6 +15,7 @@ public class Fisica {
 			if (objeto.getBounds().intersects(enemigos.get(i).getBounds())) {
 
 				colision = true;
+				SoundPlayer.play("/sounds/explosion.wav");
 				
 				enemigos.get(i).setVida(enemigos.get(i).getVida()-1);
 
@@ -34,6 +37,7 @@ public class Fisica {
 		if (objeto.getBounds().intersects(objeto2.getBounds())) {
 
 			colision = true;
+			SoundPlayer.play("/sounds/explosion.wav");
 
 		}
 
