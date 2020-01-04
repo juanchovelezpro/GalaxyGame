@@ -1,22 +1,34 @@
 package modelo;
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Juego {
 
 	private Jugador jugador;
 	private boolean pausa;
-	private int enemigosRestantes;
 
-	private LinkedList<Enemigo> enemigos = new LinkedList<>();
+	private LinkedList<Enemigo> enemigos;
+	private LinkedList<Explosion> explosiones;
+
+	private int enemigosRestantes;
 
 	public Juego() {
 
 		pausa = false;
 		jugador = new Jugador(this);
-		
+		explosiones = new LinkedList<>();
+		enemigos = new LinkedList<>();
 
+	}
+
+	public LinkedList<Explosion> getExplosiones() {
+		return explosiones;
+	}
+
+	public void setExplosiones(LinkedList<Explosion> explosiones) {
+		this.explosiones = explosiones;
 	}
 
 	public boolean isPausa() {
@@ -54,10 +66,10 @@ public class Juego {
 
 		Random r = new Random();
 
-		enemigos.add(new Enemigo(r.nextInt(2)+1, this));
-		
+		enemigos.add(new Enemigo(r.nextInt(2) + 1, this));
+
 		enemigosRestantes++;
-		
+
 	}
 
 	public int getEnemigosRestantes() {

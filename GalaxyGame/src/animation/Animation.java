@@ -54,6 +54,11 @@ public class Animation {
 	 * It is the current sprite for the animation.
 	 */
 	private BufferedImage currentImage;
+	
+	/**
+	 * Variable to know if the animation has finished.
+	 */
+	private boolean alive;
 
 	/**
 	 * Constructor to create an animation
@@ -73,6 +78,7 @@ public class Animation {
 		this.col = col;
 		this.row = row;
 		images = new BufferedImage[frames];
+		alive = true;
 
 		fillSprites();
 
@@ -111,11 +117,19 @@ public class Animation {
 
 		if (count >= frames - 1) {  // You can modify frames - 1 to another number if your image does not have sprite sheets in all the image.
 									// If your image has sprite sheets in all the image you can put only frames.
-			
+			alive = false;
 			count = 0;
 
 		}
 
+	}
+
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
 	}
 
 	/**

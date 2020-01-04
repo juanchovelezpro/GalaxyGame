@@ -2,9 +2,11 @@ package interfaz;
 
 import javax.swing.*;
 
+import animation.Animation;
 import hilos.HiloDisparoJugador;
 import modelo.Disparo;
 import modelo.Enemigo;
+import modelo.Explosion;
 import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
@@ -16,6 +18,7 @@ import tools.ToolManager;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.Console;
 import java.io.File;
 import java.io.IOException;
@@ -68,12 +71,15 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		g.drawImage(BACKGROUND, 0, 0, null);
 
-		opciones.getLabEnemigosRestantes().setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
-		opciones.getLabFPS().setText("FPS: "+ManagerFPS.fps);
+		opciones.getLabEnemigosRestantes()
+				.setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
+		opciones.getLabFPS().setText("FPS: " + ManagerFPS.fps);
 
 		renderAccionesJugador(g);
 
 		renderAccionesEnemigos(g);
+
+		renderExplosiones(g);
 
 		repaint();
 
@@ -136,7 +142,6 @@ public class PanelGame extends JPanel implements KeyListener {
 					jugador.agregarDisparo();
 
 					SoundPlayer.play("/sounds/laser.wav");
-					
 
 					jugador.setRecargaDisparo(true);
 				}
@@ -195,6 +200,25 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+
+	}
+
+	public void renderExplosiones(Graphics g) {
+
+		LinkedList<Explosion> explosiones = opciones.getGame().getJuego().getExplosiones();
+
+		Explosion temp = null;
+
+		for (int i = 0; i < explosiones.size(); i++) {
+
+			temp = explosiones.get(i);
+
+			if (temp.isAlive()) {
+
+				temp.getAnimation().drawAnimation(g, temp.getX(), temp.getY() - 30, 25);
+
+			}
+		}
 
 	}
 
