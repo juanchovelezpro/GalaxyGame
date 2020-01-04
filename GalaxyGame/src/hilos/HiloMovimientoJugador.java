@@ -20,7 +20,7 @@ public class HiloMovimientoJugador extends Thread {
 			try {
 
 				if (!juego.isPausa()) {
-					Thread.sleep(20);
+					Thread.sleep(10);
 					juego.getJugador().mover();
 				} else {
 					synchronized (this) {

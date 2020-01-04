@@ -118,13 +118,13 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
 
-			jugador.setVelocidad(5);
+			jugador.setVelocidad(2);
 
 		}
 
 		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
-			jugador.setVelocidad(-5);
+			jugador.setVelocidad(-2);
 
 		}
 
