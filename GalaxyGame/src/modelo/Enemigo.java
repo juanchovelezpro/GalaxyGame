@@ -18,7 +18,9 @@ public class Enemigo extends Objeto {
 	public static final int SHOT_LIMIT = ScreenResolution.HEIGHT_GAME + 50;
 	public static final int SHOT_OFFSET_X = 25;
 	public static final int SHOT_OFFSET_Y = 40;
-	public static final int X_DEATH = -250;
+	public static final int X_DEATH = -500;
+	public static final int MOVER_NORMAL = 1;
+	public static final int MOVER_ZIGZAG = 2;
 
 	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
 	public static final String SKIN_FAST = "naves/fastEnemy.png";
@@ -30,6 +32,10 @@ public class Enemigo extends Objeto {
 	private boolean vivo;
 	private LinkedList<Disparo> disparos;
 	private Juego juego;
+
+	private int movimiento;
+	private double auxMovs;
+
 	private Random r;
 
 	public Enemigo(int tipo, Juego juego) {
@@ -46,6 +52,9 @@ public class Enemigo extends Objeto {
 		this.tipo = tipo;
 		vivo = true;
 
+		movimiento = 0;
+		auxMovs = 0.0;
+
 		crearPorTipo(tipo);
 
 		disparos = new LinkedList<>();
@@ -58,10 +67,12 @@ public class Enemigo extends Objeto {
 		switch (tipo) {
 		case 1:
 			vida = 1;
+			movimiento = 1;
 			setSkin(SKIN_NORMAL);
 			break;
 		case 2:
 			vida = 2;
+			movimiento = 1;
 			setSkin(SKIN_FAST);
 			setVelocidad(SPEED_FAST);
 			break;
@@ -96,27 +107,93 @@ public class Enemigo extends Objeto {
 
 	public void mover() {
 
-		if (super.getPosy() >= Y_LIMIT) {
-			super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
-			super.setPosx(r.nextInt(X_BOUND));
+		if (vivo) {
+			if (super.getPosy() >= Y_LIMIT) {
+				super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+				super.setPosx(r.nextInt(X_BOUND));
+			}
+
+			if (vida <= 0 && vivo)
+				morir();
+
+			if (Fisica.colision(this, juego.getJugador())) {
+
+				vida--;
+
+				juego.getExplosiones().add(new Explosion(this.getPosx() + WIDTH / 2, this.getPosy() + HEIGHT));
+				juego.getExplosiones().getLast().start();
+
+				if (!juego.getJugador().isInvulnerable())
+					juego.getJugador().morir();
+
+			}
+
+			switch (movimiento) {
+
+			case 1:
+				movimientoNormal();
+				break;
+
+			case 2:
+				movimientoZigZag();
+				break;
+
+			case 3:
+				movimientoCircular();
+				break;
+
+			}
 		}
+	}
 
-		if (vida <= 0 && vivo)
-			morir();
-
-		if (Fisica.colision(this, juego.getJugador())) {
-
-			vida--;
-
-			juego.getExplosiones().add(new Explosion(this.getPosx() + WIDTH / 2, this.getPosy() + HEIGHT));
-			juego.getExplosiones().getLast().start();
-
-			if (!juego.getJugador().isInvulnerable())
-				juego.getJugador().morir();
-
-		}
+	public void movimientoNormal() {
 
 		super.setPosy(super.getPosy() + super.getVelocidad());
+
+	}
+
+	public void movimientoZigZag() {
+
+		if (auxMovs >= Math.PI * 2) {
+
+			auxMovs = 0.0;
+
+		}
+
+		if (auxMovs < Math.PI * 2) {
+
+			int posX = (int) (Math.sin(auxMovs) * 15);
+			int posY = (int) (Math.asin(auxMovs) * 2);
+
+			super.setPosx(super.getPosx() + posX);
+			super.setPosy(super.getPosy() + posY + 4);
+
+			auxMovs += 0.1;
+
+		}
+
+	}
+
+	public void movimientoCircular() {
+
+		if (auxMovs >= Math.PI * 2) {
+
+			auxMovs = 0.0;
+
+		}
+
+		if (auxMovs < Math.PI * 2) {
+
+			int posX = (int) (Math.sin(auxMovs) * 15);
+			int posY = (int) (Math.cos(auxMovs) * 15);
+
+			super.setPosx(super.getPosx() + posX);
+			super.setPosy(super.getPosy() + posY + 2);
+
+			auxMovs += 0.1;
+
+		}
+
 	}
 
 	public boolean isVivo() {
@@ -169,10 +246,11 @@ public class Enemigo extends Objeto {
 			disparoTemporal = disparos.get(i);
 
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
-				
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(), disparoTemporal.getPosy()+disparoTemporal.getAltura()));
+
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(),
+						disparoTemporal.getPosy() + disparoTemporal.getAltura()));
 				juego.getExplosiones().getLast().start();
-				
+
 				eliminarDisparo(disparoTemporal);
 
 				if (!juego.getJugador().isInvulnerable())

@@ -66,7 +66,7 @@ public class Juego {
 
 		Random r = new Random();
 
-		enemigos.add(new Enemigo(r.nextInt(2) + 1, this));
+		enemigos.add(new Enemigo(r.nextInt(2)+1, this));
 
 		enemigosRestantes++;
 
