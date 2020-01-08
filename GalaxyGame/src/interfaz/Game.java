@@ -10,8 +10,10 @@ import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import hilos.HiloRevivirJugador;
+import modelo.Explosion;
 import modelo.Juego;
 import tools.ScreenResolution;
+import tools.SoundPlayer;
 import tools.ToolManager;
 
 import java.awt.*;
@@ -33,7 +35,7 @@ public class Game extends JFrame {
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
 		threads = new LinkedList<HiloAbstract>();
-		
+
 		juego = new Juego();
 
 		crearProcesos(juego);
@@ -43,6 +45,10 @@ public class Game extends JFrame {
 		setContentPane(opciones);
 
 		setLocationRelativeTo(null);
+
+		// Cargar recurso de explosion.
+		getJuego().getExplosiones().add(new Explosion(0, 0));
+		getJuego().getExplosiones().getLast().start();
 
 	}
 
