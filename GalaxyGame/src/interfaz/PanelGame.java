@@ -65,52 +65,64 @@ public class PanelGame extends JPanel implements KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 
-		ManagerFPS.StartCounter();
+		if (!opciones.getGame().getJuego().isPausa()) {
 
-		super.paintComponent(g);
+			ManagerFPS.StartCounter();
 
-		g.drawImage(BACKGROUND, 0, 0, null);
+			super.paintComponent(g);
 
-		opciones.getLabEnemigosRestantes()
-				.setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
-		opciones.getLabFPS().setText("FPS: " + ManagerFPS.fps);
+			g.drawImage(BACKGROUND, 0, 0, null);
 
-		renderJugador(g);
+			renderHUD();
 
-		renderEnemigos(g);
+			renderJugador(g);
 
-		renderExplosiones(g);
+			renderEnemigos(g);
 
-		repaint();
+			renderExplosiones(g);
 
-		ManagerFPS.StopAndPost();
+			repaint();
+
+			ManagerFPS.StopAndPost();
+		} else {
+
+			ManagerFPS.StartCounter();
+
+			super.paintComponent(g);
+
+			g.drawImage(BACKGROUND, 0, 0, null);
+
+			renderJugador(g);
+
+			renderEnemigos(g);
+
+			renderExplosiones(g);
+
+			repaint();
+
+			ManagerFPS.StopAndPost();
+
+		}
 
 	}
 
 	public void iniciar() {
 
-		opciones.getGame().getHiloMovimientoJugador().start();
-		opciones.getGame().getHiloDisparoJugador().start();
-		opciones.getGame().getHiloRevivirJugador().start();
-
-		opciones.getGame().getHiloDesplegarEnemigos().start();
-
-		opciones.getGame().getHiloMovimientoEnemigos().start();
-		opciones.getGame().getHiloAlternarDisparoEnemigo().start();
-		opciones.getGame().getHiloDisparoEnemigo().start();
+		for(int i = 0; i<opciones.getGame().getThreads().size();i++) {
+			
+			opciones.getGame().getThreads().get(i).start();
+			
+		}
 
 	}
 
 	public void reanudar() {
 
-		opciones.getGame().getHiloRevivirJugador().reanudar();
-		opciones.getGame().getHiloDesplegarEnemigos().reanudar();
-		opciones.getGame().getHiloMovimientoJugador().reanudar();
-		opciones.getGame().getHiloDisparoJugador().reanudar();
-
-		opciones.getGame().getHiloMovimientoEnemigos().reanudar();
-		opciones.getGame().getHiloAlternarDisparoEnemigo().reanudar();
-		opciones.getGame().getHiloDisparoEnemigo().reanudar();
+	for(int i = 0; i<opciones.getGame().getThreads().size();i++) {
+			
+			opciones.getGame().getThreads().get(i).reanudar();;
+			
+		}
 
 	}
 
@@ -200,6 +212,14 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+
+	}
+
+	public void renderHUD() {
+
+		opciones.getLabEnemigosRestantes()
+				.setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
+		opciones.getLabFPS().setText("FPS: " + ManagerFPS.fps);
 
 	}
 

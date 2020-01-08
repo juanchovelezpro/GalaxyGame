@@ -3,13 +3,11 @@ package hilos;
 import modelo.Juego;
 import modelo.Jugador;
 
-public class HiloRevivirJugador extends Thread {
-
-	private Juego juego;
+public class HiloRevivirJugador extends HiloAbstract {
 
 	public HiloRevivirJugador(Juego juego) {
 
-		this.juego = juego;
+		super(juego);
 
 	}
 
@@ -18,19 +16,19 @@ public class HiloRevivirJugador extends Thread {
 
 		while (true) {
 			try {
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 					Thread.sleep(10);
-					if (!juego.getJugador().isVivo()) {
+					if (!getJuego().getJugador().isVivo()) {
 
 						Thread.sleep(2000);
-						juego.getJugador().setSkin(Jugador.SKIN_INVULNERABLE);
-						juego.getJugador().revivir();
-						juego.getJugador().setInvulnerable(true);
+						getJuego().getJugador().setSkin(Jugador.SKIN_INVULNERABLE);
+						getJuego().getJugador().revivir();
+						getJuego().getJugador().setInvulnerable(true);
 
 						Thread.sleep(3000);
 
-						juego.getJugador().setSkin(Jugador.SKIN_NORMAL);
-						juego.getJugador().setInvulnerable(false);
+						getJuego().getJugador().setSkin(Jugador.SKIN_NORMAL);
+						getJuego().getJugador().setInvulnerable(false);
 
 					}
 
@@ -47,12 +45,6 @@ public class HiloRevivirJugador extends Thread {
 				ex.printStackTrace();
 			}
 		}
-
-	}
-
-	public synchronized void reanudar() {
-
-		notify();
 
 	}
 

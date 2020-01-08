@@ -2,11 +2,10 @@ package hilos;
 
 import modelo.Juego;
 
-public class HiloMovimientoEnemigos extends Thread {
-	private Juego juego;
+public class HiloMovimientoEnemigos extends HiloAbstract {
 
 	public HiloMovimientoEnemigos(Juego juego) {
-		this.juego = juego;
+		super(juego);
 	}
 
 	@Override
@@ -15,12 +14,12 @@ public class HiloMovimientoEnemigos extends Thread {
 
 			try {
 
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 					Thread.sleep(5);
-					for (int i = 0; i < juego.getEnemigos().size(); i++) {
+					for (int i = 0; i < getJuego().getEnemigos().size(); i++) {
 
-						if (juego.getEnemigos().get(i) != null)
-							juego.getEnemigos().get(i).mover();
+						if (getJuego().getEnemigos().get(i) != null)
+							getJuego().getEnemigos().get(i).mover();
 					}
 				} else {
 
@@ -34,12 +33,6 @@ public class HiloMovimientoEnemigos extends Thread {
 			}
 
 		}
-	}
-
-	public synchronized void reanudar() {
-
-		notify();
-
 	}
 
 }

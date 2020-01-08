@@ -2,13 +2,11 @@ package hilos;
 
 import modelo.Juego;
 
-public class HiloDisparoEnemigo extends Thread {
-
-	private Juego juego;
+public class HiloDisparoEnemigo extends HiloAbstract {
 
 	public HiloDisparoEnemigo(Juego juego) {
 
-		this.juego = juego;
+		super(juego);
 
 	}
 
@@ -19,11 +17,11 @@ public class HiloDisparoEnemigo extends Thread {
 
 			try {
 
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 					Thread.sleep(25);
 
-					for (int i = 0; i < juego.getEnemigos().size(); i++) {
-						juego.getEnemigos().get(i).disparar();
+					for (int i = 0; i < getJuego().getEnemigos().size(); i++) {
+						getJuego().getEnemigos().get(i).disparar();
 					}
 				} else {
 
@@ -38,12 +36,6 @@ public class HiloDisparoEnemigo extends Thread {
 			}
 
 		}
-
-	}
-
-	public synchronized void reanudar() {
-
-		notify();
 
 	}
 

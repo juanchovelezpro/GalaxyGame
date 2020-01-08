@@ -2,15 +2,14 @@ package hilos;
 
 import modelo.Juego;
 
-public class HiloDesplegarEnemigos extends Thread {
+public class HiloDesplegarEnemigos extends HiloAbstract {
 
-	private Juego juego;
 	private boolean desplegados;
 	private int cantEnemigos;
 
 	public HiloDesplegarEnemigos(Juego juego, int cantEnemigos) {
 
-		this.juego = juego;
+		super(juego);
 		this.cantEnemigos = cantEnemigos;
 		desplegados = false;
 
@@ -25,12 +24,12 @@ public class HiloDesplegarEnemigos extends Thread {
 
 			try {
 
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 
 					if (i <= cantEnemigos) {
 						Thread.sleep(500);
 
-						juego.agregarEnemigo();
+						getJuego().agregarEnemigo();
 						i++;
 					} else {
 
@@ -56,10 +55,6 @@ public class HiloDesplegarEnemigos extends Thread {
 
 	}
 
-	public synchronized void reanudar() {
 
-		notify();
-
-	}
 
 }

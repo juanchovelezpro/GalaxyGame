@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import animation.Animation;
 import tools.ToolManager;
 
-public class Explosion extends Thread{
+public class Explosion extends Thread {
+
+	public static final BufferedImage BOOM = ToolManager.cargarSprites("sprites/explosion.png");
 
 	private Animation animation;
 	private int x;
@@ -16,9 +18,7 @@ public class Explosion extends Thread{
 		this.x = x;
 		this.y = y;
 
-		BufferedImage image = ToolManager.cargarSprites("sprites/explosion.png");
-
-		animation = new Animation(image, 81, 1, 9, 9);
+		animation = new Animation(BOOM, 81, 1, 9, 9);
 
 	}
 
@@ -45,25 +45,25 @@ public class Explosion extends Thread{
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	@Override
 	public void run() {
-		
-		while(animation.isAlive()) {
-			
+
+		while (animation.isAlive()) {
+
 			try {
-				
-				Thread.sleep(5);
+
+				Thread.sleep(3);
 				animation.runAnimation();
-				
-			}catch(Exception ex) {
-				
+
+			} catch (Exception ex) {
+
 				ex.printStackTrace();
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 }

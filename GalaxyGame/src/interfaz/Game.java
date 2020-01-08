@@ -2,6 +2,7 @@ package interfaz;
 
 import javax.swing.*;
 
+import hilos.HiloAbstract;
 import hilos.HiloAlternarDisparoEnemigo;
 import hilos.HiloDesplegarEnemigos;
 import hilos.HiloDisparoEnemigo;
@@ -14,18 +15,13 @@ import tools.ScreenResolution;
 import tools.ToolManager;
 
 import java.awt.*;
+import java.util.LinkedList;
 
 public class Game extends JFrame {
 
 	private Juego juego;
 	private PanelOpciones opciones;
-	private HiloDisparoJugador hiloDisparoJugador;
-	private HiloMovimientoJugador hiloMovimientoJugador;
-	private HiloRevivirJugador hiloRevivirJugador;
-	private HiloMovimientoEnemigos hiloMovimientoEnemigos;
-	private HiloDisparoEnemigo hiloDisparoEnemigo;
-	private HiloAlternarDisparoEnemigo hiloAlternarDisparoEnemigo;
-	private HiloDesplegarEnemigos hiloDesplegarEnemigos;
+	private LinkedList<HiloAbstract> threads;
 
 	public Game() {
 
@@ -36,6 +32,8 @@ public class Game extends JFrame {
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
 
+		threads = new LinkedList<HiloAbstract>();
+		
 		juego = new Juego();
 
 		crearProcesos(juego);
@@ -50,44 +48,22 @@ public class Game extends JFrame {
 
 	public void crearProcesos(Juego juego) {
 
-		hiloMovimientoJugador = new HiloMovimientoJugador(juego);
-		hiloDisparoJugador = new HiloDisparoJugador(juego);
-		hiloRevivirJugador = new HiloRevivirJugador(juego);
-		hiloMovimientoEnemigos = new HiloMovimientoEnemigos(juego);
-		hiloAlternarDisparoEnemigo = new HiloAlternarDisparoEnemigo(juego);
-		hiloDisparoEnemigo = new HiloDisparoEnemigo(juego);
-		hiloDesplegarEnemigos = new HiloDesplegarEnemigos(juego, 10);
+		threads.add(new HiloMovimientoJugador(juego));
+		threads.add(new HiloDisparoJugador(juego));
+		threads.add(new HiloRevivirJugador(juego));
+		threads.add(new HiloMovimientoEnemigos(juego));
+		threads.add(new HiloAlternarDisparoEnemigo(juego));
+		threads.add(new HiloDisparoEnemigo(juego));
+		threads.add(new HiloDesplegarEnemigos(juego, 10));
 
 	}
 
-	public HiloRevivirJugador getHiloRevivirJugador() {
-		return hiloRevivirJugador;
+	public LinkedList<HiloAbstract> getThreads() {
+		return threads;
 	}
 
-	public HiloMovimientoJugador getHiloMovimientoJugador() {
-		return hiloMovimientoJugador;
-	}
-
-	public HiloAlternarDisparoEnemigo getHiloAlternarDisparoEnemigo() {
-		return hiloAlternarDisparoEnemigo;
-	}
-
-	public HiloDisparoEnemigo getHiloDisparoEnemigo() {
-		return hiloDisparoEnemigo;
-	}
-
-	public HiloMovimientoEnemigos getHiloMovimientoEnemigos() {
-		return hiloMovimientoEnemigos;
-	}
-
-	public HiloDisparoJugador getHiloDisparoJugador() {
-
-		return hiloDisparoJugador;
-
-	}
-
-	public HiloDesplegarEnemigos getHiloDesplegarEnemigos() {
-		return hiloDesplegarEnemigos;
+	public void setThreads(LinkedList<HiloAbstract> threads) {
+		this.threads = threads;
 	}
 
 	public Juego getJuego() {

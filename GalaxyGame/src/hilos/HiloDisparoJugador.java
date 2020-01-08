@@ -2,13 +2,11 @@ package hilos;
 
 import modelo.Juego;
 
-public class HiloDisparoJugador extends Thread {
-
-	private Juego juego;
+public class HiloDisparoJugador extends HiloAbstract {
 
 	public HiloDisparoJugador(Juego juego) {
 
-		this.juego = juego;
+		super(juego);
 
 	}
 
@@ -18,10 +16,10 @@ public class HiloDisparoJugador extends Thread {
 		while (true) {
 			try {
 
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 					Thread.sleep(25);
 
-					juego.getJugador().disparar();
+					getJuego().getJugador().disparar();
 
 				} else {
 
@@ -35,12 +33,6 @@ public class HiloDisparoJugador extends Thread {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public synchronized void reanudar() {
-
-		notify();
-
 	}
 
 }

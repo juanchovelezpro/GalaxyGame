@@ -4,13 +4,13 @@ import modelo.Enemigo;
 import modelo.Explosion;
 import modelo.Juego;
 
-public class HiloGarbageSystem extends Thread {
+public class HiloGarbageSystem extends HiloAbstract {
 
-	private Juego juego;
+
 
 	public HiloGarbageSystem(Juego juego) {
 
-		this.juego = juego;
+		super(juego);
 
 	}
 
@@ -23,25 +23,25 @@ public class HiloGarbageSystem extends Thread {
 
 				Thread.sleep(1500);
 
-				for (int i = 0; i < juego.getExplosiones().size(); i++) {
+				for (int i = 0; i < getJuego().getExplosiones().size(); i++) {
 
-					Explosion temp = juego.getExplosiones().get(i);
+					Explosion temp = getJuego().getExplosiones().get(i);
 
 					if (!temp.isAlive()) {
 
-						juego.getExplosiones().remove(temp);
+						getJuego().getExplosiones().remove(temp);
 
 					}
 
 				}
 
-				for (int i = 0; i < juego.getEnemigos().size(); i++) {
+				for (int i = 0; i < getJuego().getEnemigos().size(); i++) {
 
-					Enemigo temp = juego.getEnemigos().get(i);
+					Enemigo temp = getJuego().getEnemigos().get(i);
 
 					if (!temp.isVivo()) {
 
-						juego.getEnemigos().remove(temp);
+						getJuego().getEnemigos().remove(temp);
 
 					}
 

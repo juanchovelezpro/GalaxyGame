@@ -6,13 +6,11 @@ import java.util.Random;
 import modelo.Juego;
 import tools.SoundPlayer;
 
-public class HiloAlternarDisparoEnemigo extends Thread {
-
-	private Juego juego;
+public class HiloAlternarDisparoEnemigo extends HiloAbstract {
 
 	public HiloAlternarDisparoEnemigo(Juego juego) {
 
-		this.juego = juego;
+		super(juego);
 
 	}
 
@@ -25,13 +23,13 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 
 			try {
 
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 					Thread.sleep(500);
 
-					for (int i = 0; i < juego.getEnemigos().size() && !juego.isPausa(); i++) {
+					for (int i = 0; i < getJuego().getEnemigos().size() && !getJuego().isPausa(); i++) {
 						int g = r.nextInt(6);
 						if (g == 1) {
-							juego.getEnemigos().get(i).agregarDisparo();
+							getJuego().getEnemigos().get(i).agregarDisparo();
 
 						}
 					}
@@ -48,12 +46,6 @@ public class HiloAlternarDisparoEnemigo extends Thread {
 			}
 
 		}
-
-	}
-
-	public synchronized void reanudar() {
-
-		notify();
 
 	}
 
