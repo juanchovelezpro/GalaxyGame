@@ -6,7 +6,7 @@ import tools.SoundPlayer;
 
 public class Fisica {
 
-	public static boolean colision(Objeto objeto, LinkedList<Enemigo> enemigos) {
+	public static boolean colision(GameObject objeto, LinkedList<Enemigo> enemigos) {
 
 		boolean colision = false;
 
@@ -30,7 +30,7 @@ public class Fisica {
 		return colision;
 	}
 
-	public static boolean colision(Objeto objeto, Objeto objeto2) {
+	public static boolean colision(GameObject objeto, GameObject objeto2) {
 
 		boolean colision = false;
 

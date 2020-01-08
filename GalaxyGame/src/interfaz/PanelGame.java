@@ -75,9 +75,9 @@ public class PanelGame extends JPanel implements KeyListener {
 				.setText("Enemigos restantes: " + opciones.getGame().getJuego().getEnemigosRestantes());
 		opciones.getLabFPS().setText("FPS: " + ManagerFPS.fps);
 
-		renderAccionesJugador(g);
+		renderJugador(g);
 
-		renderAccionesEnemigos(g);
+		renderEnemigos(g);
 
 		renderExplosiones(g);
 
@@ -124,13 +124,13 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
 
-			jugador.setVelocidad(2);
+			jugador.setVelX(2);
 
 		}
 
 		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
-			jugador.setVelocidad(-2);
+			jugador.setVelX(-2);
 
 		}
 
@@ -181,13 +181,13 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
 
-			jugador.setVelocidad(0);
+			jugador.setVelX(0);
 
 		}
 
 		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
 
-			jugador.setVelocidad(0);
+			jugador.setVelX(0);
 		}
 
 		if (event == KeyEvent.VK_SPACE) {
@@ -207,11 +207,9 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		LinkedList<Explosion> explosiones = opciones.getGame().getJuego().getExplosiones();
 
-		Explosion temp = null;
-
 		for (int i = 0; i < explosiones.size(); i++) {
 
-			temp = explosiones.get(i);
+			Explosion temp = explosiones.get(i);
 
 			if (temp.isAlive()) {
 
@@ -222,53 +220,17 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	}
 
-	public void renderAccionesJugador(Graphics g) {
+	public void renderJugador(Graphics g) {
 
-		Jugador jugador = opciones.getGame().getJuego().getJugador();
-
-		Image skinJugador = ToolManager.cargarImagen(jugador.getSkin());
-
-		// Render del jugador.
-		g.drawImage(skinJugador, jugador.getPosx(), jugador.getPosy(), null);
-
-		// Render disparos del jugador.
-		Disparo temp = null;
-		for (int i = 0; i < jugador.getDisparos().size(); i++) {
-
-			temp = jugador.getDisparos().get(i);
-
-			Image skinDisparoJugador = ToolManager.cargarImagen(temp.getSkin());
-
-			g.drawImage(skinDisparoJugador, temp.getPosx(), temp.getPosy(), null);
-
-		}
+		opciones.getGame().getJuego().getJugador().render(g);
 
 	}
 
-	public void renderAccionesEnemigos(Graphics g) {
+	public void renderEnemigos(Graphics g) {
 
-		LinkedList<Enemigo> enemigos = opciones.getGame().getJuego().getEnemigos();
-		// Render de los enemigos.
-		Enemigo tempEnemy = null;
-		for (int i = 0; i < enemigos.size(); i++) {
+		for (int i = 0; i < opciones.getGame().getJuego().getEnemigos().size(); i++) {
 
-			tempEnemy = enemigos.get(i);
-
-			Image skinEnemy = ToolManager.cargarImagen(tempEnemy.getSkin());
-
-			g.drawImage(skinEnemy, tempEnemy.getPosx(), tempEnemy.getPosy(), null);
-
-			// Render disparo de los enemigos
-			Disparo temp = null;
-			for (int j = 0; j < tempEnemy.getDisparos().size(); j++) {
-
-				temp = tempEnemy.getDisparos().get(j);
-
-				Image skinDisparoEnemy = ToolManager.cargarImagen(temp.getSkin());
-
-				g.drawImage(skinDisparoEnemy, temp.getPosx(), temp.getPosy(), null);
-
-			}
+			opciones.getGame().getJuego().getEnemigos().get(i).render(g);
 
 		}
 

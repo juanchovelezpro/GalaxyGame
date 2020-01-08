@@ -1,11 +1,14 @@
 package modelo;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.LinkedList;
 import java.util.Random;
 
 import tools.ScreenResolution;
+import tools.ToolManager;
 
-public class Enemigo extends Objeto {
+public class Enemigo extends GameObject {
 
 	public static final int WIDTH = 80;
 	public static final int HEIGHT = 80;
@@ -22,10 +25,10 @@ public class Enemigo extends Objeto {
 	public static final int MOVER_NORMAL = 1;
 	public static final int MOVER_ZIGZAG = 2;
 
-	public static final String SKIN_NORMAL = "naves/nave_enemigo.png";
-	public static final String SKIN_FAST = "naves/fastEnemy.png";
-	public static final String DISPARO_NORMAL = "disparos/laserEnemigo.png";
-	public static final String DISPARO_FAST = "disparos/laserGama.png";
+	public static final Image SKIN_NORMAL = ToolManager.cargarImagen("naves/nave_enemigo.png");
+	public static final Image SKIN_FAST = ToolManager.cargarImagen("naves/fastEnemy.png");
+	public static final Image DISPARO_NORMAL = ToolManager.cargarImagen("disparos/laserEnemigo.png");
+	public static final Image DISPARO_FAST = ToolManager.cargarImagen("disparos/laserGama.png");
 
 	private int tipo;
 	private int vida;
@@ -42,12 +45,12 @@ public class Enemigo extends Objeto {
 
 		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
-		super.setVelocidad(SPEED);
+		super.setVelY(SPEED);
 
 		r = new Random();
 
-		super.setPosx(r.nextInt(X_BOUND));
-		super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+		super.setX(r.nextInt(X_BOUND));
+		super.setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 
 		this.tipo = tipo;
 		vivo = true;
@@ -74,7 +77,7 @@ public class Enemigo extends Objeto {
 			vida = 2;
 			movimiento = 1;
 			setSkin(SKIN_FAST);
-			setVelocidad(SPEED_FAST);
+			setVelY(SPEED_FAST);
 			break;
 		case 3:
 			vida = 3;
@@ -108,9 +111,9 @@ public class Enemigo extends Objeto {
 	public void mover() {
 
 		if (vivo) {
-			if (super.getPosy() >= Y_LIMIT) {
-				super.setPosy(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
-				super.setPosx(r.nextInt(X_BOUND));
+			if (super.getY() >= Y_LIMIT) {
+				super.setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+				super.setX(r.nextInt(X_BOUND));
 			}
 
 			if (vida <= 0 && vivo)
@@ -120,7 +123,7 @@ public class Enemigo extends Objeto {
 
 				vida--;
 
-				juego.getExplosiones().add(new Explosion(this.getPosx() + WIDTH / 2, this.getPosy() + HEIGHT));
+				juego.getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT));
 				juego.getExplosiones().getLast().start();
 
 				if (!juego.getJugador().isInvulnerable())
@@ -148,7 +151,7 @@ public class Enemigo extends Objeto {
 
 	public void movimientoNormal() {
 
-		super.setPosy(super.getPosy() + super.getVelocidad());
+		super.setY(super.getY() + super.getVelY());
 
 	}
 
@@ -165,8 +168,8 @@ public class Enemigo extends Objeto {
 			int posX = (int) (Math.sin(auxMovs) * 15);
 			int posY = (int) (Math.asin(auxMovs) * 2);
 
-			super.setPosx(super.getPosx() + posX);
-			super.setPosy(super.getPosy() + posY + 4);
+			super.setX(super.getX() + posX);
+			super.setY(super.getY() + posY + 4);
 
 			auxMovs += 0.1;
 
@@ -187,8 +190,8 @@ public class Enemigo extends Objeto {
 			int posX = (int) (Math.sin(auxMovs) * 15);
 			int posY = (int) (Math.cos(auxMovs) * 15);
 
-			super.setPosx(super.getPosx() + posX);
-			super.setPosy(super.getPosy() + posY + 2);
+			super.setX(super.getX() + posX);
+			super.setY(super.getY() + posY + 2);
 
 			auxMovs += 0.1;
 
@@ -206,8 +209,8 @@ public class Enemigo extends Objeto {
 
 	public void morir() {
 
-		setPosx(X_DEATH);
-		setVelocidad(0);
+		setX(X_DEATH);
+		setVelY(0);
 		vivo = false;
 		juego.setEnemigosRestantes(juego.getEnemigosRestantes() - 1);
 
@@ -224,13 +227,13 @@ public class Enemigo extends Objeto {
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(DISPARO_FAST, super.getPosx() + SHOT_OFFSET_X - 3, super.getPosy() + SHOT_OFFSET_Y,
-					30, 70, 15));
+			disparos.add(new Disparo(DISPARO_FAST, super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 30,
+					70, 0, 15));
 		}
 
 		if (tipo == 2) {
-			disparos.add(new Disparo(DISPARO_NORMAL, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y,
-					35, 85, 20));
+			disparos.add(new Disparo(DISPARO_NORMAL, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 35, 85,
+					0, 20));
 		}
 	}
 
@@ -247,8 +250,8 @@ public class Enemigo extends Objeto {
 
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(),
-						disparoTemporal.getPosy() + disparoTemporal.getAltura()));
+				juego.getExplosiones().add(
+						new Explosion(disparoTemporal.getX(), disparoTemporal.getY() + disparoTemporal.getAltura()));
 				juego.getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);
@@ -257,10 +260,25 @@ public class Enemigo extends Objeto {
 					juego.getJugador().morir();
 
 			}
-			if (disparoTemporal.getPosy() > SHOT_LIMIT)
+			if (disparoTemporal.getY() > SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
 			disparoTemporal.avanzarDisparoEnemigo();
+		}
+
+	}
+
+	@Override
+	public void render(Graphics g) {
+
+		g.drawImage(getSkin(), getX(), getY(), null);
+
+		for (int i = 0; i < disparos.size(); i++) {
+
+			Disparo temp = disparos.get(i);
+
+			temp.render(g);
+
 		}
 
 	}

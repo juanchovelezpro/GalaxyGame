@@ -1,18 +1,28 @@
 package modelo;
 
-public class Disparo extends Objeto {
+import java.awt.Graphics;
+import java.awt.Image;
 
-	public Disparo(String skin, int posx, int posy, int ancho, int altura, int velocidad) {
-		super(skin, posx, posy, ancho, altura, velocidad);
+public class Disparo extends GameObject {
+
+	public Disparo(Image skin, int x, int y, int ancho, int altura, int velX, int velY) {
+		super(skin, x, y, ancho, altura, 0, velY);
 	}
 
 	public void avanzarDisparo() {
 
-		super.setPosy(super.getPosy() - super.getVelocidad());
+		super.setY(super.getY() - super.getVelY());
 	}
 
 	public void avanzarDisparoEnemigo() {
 
-		super.setPosy(super.getPosy() + super.getVelocidad());
+		super.setY(super.getY() + super.getVelY());
+	}
+
+	@Override
+	public void render(Graphics g) {
+		
+		g.drawImage(getSkin(), getX(), getY(), null);
+		
 	}
 }

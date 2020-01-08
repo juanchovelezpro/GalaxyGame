@@ -1,11 +1,14 @@
 package modelo;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.LinkedList;
 
 import tools.ScreenResolution;
 import tools.SoundPlayer;
+import tools.ToolManager;
 
-public class Jugador extends Objeto {
+public class Jugador extends GameObject {
 
 	public static final int HEIGHT = 80;
 	public static final int WIDTH = 80;
@@ -19,9 +22,9 @@ public class Jugador extends Objeto {
 	public static final int SPAWN_Y = ScreenResolution.HEIGHT_GAME - Jugador.HEIGHT;
 	public static final int X_DEATH = -100;
 
-	public static final String SKIN_NORMAL = "naves/nave_jugador.png";
-	public static final String SKIN_INVULNERABLE = "naves/skinInvulnerableJugador.png";
-	public static final String DISPARO = "disparos/laserJugador.png";
+	public static final Image SKIN_NORMAL = ToolManager.cargarImagen("naves/nave_jugador.png");
+	public static final Image SKIN_INVULNERABLE = ToolManager.cargarImagen("naves/skinInvulnerableJugador.png");
+	public static final Image DISPARO = ToolManager.cargarImagen("disparos/laserJugador.png");
 
 	private String nick;
 	private long puntaje;
@@ -37,8 +40,8 @@ public class Jugador extends Objeto {
 
 		super(WIDTH, HEIGHT);
 		super.setSkin(SKIN_NORMAL);
-		super.setPosx(SPAWN_X);
-		super.setPosy(SPAWN_Y);
+		super.setX(SPAWN_X);
+		super.setY(SPAWN_Y);
 
 		disparos = new LinkedList<>();
 
@@ -113,28 +116,28 @@ public class Jugador extends Objeto {
 	public void mover() {
 
 		if (vivo) {
-			if (super.getPosx() >= X_RIGHT_LIMIT) {
-				super.setPosx(X_RIGHT_LIMIT);
-			} else if (super.getPosx() <= X_LEFT_LIMIT) {
-				super.setPosx(X_LEFT_LIMIT);
+			if (super.getX() >= X_RIGHT_LIMIT) {
+				super.setX(X_RIGHT_LIMIT);
+			} else if (super.getX() <= X_LEFT_LIMIT) {
+				super.setX(X_LEFT_LIMIT);
 			}
 
-			super.setPosx(super.getPosx() + super.getVelocidad());
+			super.setX(super.getX() + super.getVelX());
 		}
 	}
 
 	public void revivir() {
 
-		setPosx(SPAWN_X);
-		setPosy(SPAWN_Y);
+		setX(SPAWN_X);
+		setY(SPAWN_Y);
 		setVivo(true);
 
 	}
 
 	public void morir() {
 
-		setPosx(X_DEATH);
-		setVelocidad(0);
+		setX(X_DEATH);
+		setVelX(0);
 		setVivo(false);
 		setVidas(vidas - 1);
 
@@ -149,8 +152,7 @@ public class Jugador extends Objeto {
 	}
 
 	public void agregarDisparo() {
-		disparos.add(
-				new Disparo(DISPARO, super.getPosx() + SHOT_OFFSET_X, super.getPosy() + SHOT_OFFSET_Y, 30, 70, 15));
+		disparos.add(new Disparo(DISPARO, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 30, 70, 0, 15));
 	}
 
 	public void eliminarDisparo(Disparo d) {
@@ -166,18 +168,33 @@ public class Jugador extends Objeto {
 
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
 
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getPosx(), disparoTemporal.getPosy()));
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY()));
 				juego.getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);
 
 			}
 
-			if (disparoTemporal.getPosy() < SHOT_LIMIT)
+			if (disparoTemporal.getY() < SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
 			disparoTemporal.avanzarDisparo();
 		}
+	}
+
+	@Override
+	public void render(Graphics g) {
+
+		g.drawImage(super.getSkin(), super.getX(), super.getY(), null);
+
+		for (int i = 0; i < disparos.size(); i++) {
+
+			Disparo temp = disparos.get(i);
+
+			temp.render(g);
+
+		}
+
 	}
 
 }
