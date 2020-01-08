@@ -1,5 +1,6 @@
 package modelo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -24,5 +25,7 @@ public class Disparo extends GameObject {
 		
 		g.drawImage(getSkin(), getX(), getY(), null);
 		
+		g.setColor(Color.RED.brighter());
+		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
 	}
 }

@@ -1,5 +1,6 @@
 package modelo;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
@@ -272,6 +273,9 @@ public class Enemigo extends GameObject {
 	public void render(Graphics g) {
 
 		g.drawImage(getSkin(), getX(), getY(), null);
+		
+		g.setColor(Color.RED.brighter());
+		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
 
 		for (int i = 0; i < disparos.size(); i++) {
 
