@@ -53,7 +53,7 @@ public class Explosion extends Thread {
 
 			try {
 
-				Thread.sleep(3);
+				Thread.sleep(5);
 				animation.runAnimation();
 
 			} catch (Exception ex) {
