@@ -13,7 +13,7 @@ import modelo.Jugador;
 import tools.ManagerFPS;
 import tools.ScreenResolution;
 import tools.SoundPlayer;
-import tools.ToolManager;
+import tools.ImageLoader;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -27,7 +27,7 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
-	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy3.jpg");
+	public static final Image BACKGROUND = ImageLoader.cargarImagen("fondos/galaxy3.jpg");
 
 	private PanelOpciones opciones;
 	private PanelPausa panelPausa;

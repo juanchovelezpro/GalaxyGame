@@ -14,7 +14,7 @@ import modelo.Explosion;
 import modelo.Juego;
 import tools.ScreenResolution;
 import tools.SoundPlayer;
-import tools.ToolManager;
+import tools.ImageLoader;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -32,7 +32,7 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(ScreenResolution.WIDTH, ScreenResolution.HEIGHT);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
-		setIconImage(ToolManager.cargarImagen("iconos/icon2.jpg"));
+		setIconImage(ImageLoader.cargarImagen("iconos/icon2.jpg"));
 
 		threads = new LinkedList<HiloAbstract>();
 

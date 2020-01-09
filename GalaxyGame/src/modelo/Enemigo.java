@@ -7,8 +7,13 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import tools.ScreenResolution;
-import tools.ToolManager;
+import tools.ImageLoader;
 
+/**
+ * Representa un enemigo en el juego.
+ * @author juanchovelezpro
+ *
+ */
 public class Enemigo extends GameObject {
 
 	public static final int WIDTH = 80;
@@ -26,22 +31,56 @@ public class Enemigo extends GameObject {
 	public static final int MOVER_NORMAL = 1;
 	public static final int MOVER_ZIGZAG = 2;
 
-	public static final Image SKIN_NORMAL = ToolManager.cargarImagen("naves/nave_enemigo.png");
-	public static final Image SKIN_FAST = ToolManager.cargarImagen("naves/fastEnemy.png");
-	public static final Image DISPARO_NORMAL = ToolManager.cargarImagen("disparos/laserEnemigo.png");
-	public static final Image DISPARO_FAST = ToolManager.cargarImagen("disparos/laserGama.png");
+	public static final Image SKIN_NORMAL = ImageLoader.cargarImagen("naves/nave_enemigo.png");
+	public static final Image SKIN_FAST = ImageLoader.cargarImagen("naves/fastEnemy.png");
+	public static final Image DISPARO_NORMAL = ImageLoader.cargarImagen("disparos/laserEnemigo.png");
+	public static final Image DISPARO_FAST = ImageLoader.cargarImagen("disparos/laserGama.png");
 
+	/**
+	 * 
+	 */
 	private int tipo;
+	
+	/**
+	 * 
+	 */
 	private int vida;
+	
+	/**
+	 * 
+	 */
 	private boolean vivo;
+	
+	/**
+	 * 
+	 */
 	private LinkedList<Disparo> disparos;
+	
+	/**
+	 * 
+	 */
 	private Juego juego;
 
+	/**
+	 * 
+	 */
 	private int movimiento;
+	
+	/**
+	 * 
+	 */
 	private double auxMovs;
 
+	/**
+	 * 
+	 */
 	private Random r;
 
+	/**
+	 * 
+	 * @param tipo
+	 * @param juego
+	 */
 	public Enemigo(int tipo, Juego juego) {
 
 		super(WIDTH, HEIGHT);
@@ -66,6 +105,10 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * 
+	 * @param tipo
+	 */
 	public void crearPorTipo(int tipo) {
 
 		switch (tipo) {
@@ -93,22 +136,41 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * 
+	 * @param tipo
+	 */
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getVida() {
 		return vida;
 	}
 
+	/**
+	 * 
+	 * @param vida
+	 */
 	public void setVida(int vida) {
 		this.vida = vida;
 	}
 
+	/**
+	 * 
+	 */
 	public void mover() {
 
 		if (vivo) {
@@ -150,12 +212,18 @@ public class Enemigo extends GameObject {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void movimientoNormal() {
 
 		super.setY(super.getY() + super.getVelY());
 
 	}
 
+	/**
+	 * 
+	 */
 	public void movimientoZigZag() {
 
 		if (auxMovs >= Math.PI * 2) {
@@ -178,6 +246,9 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void movimientoCircular() {
 
 		if (auxMovs >= Math.PI * 2) {
@@ -200,14 +271,25 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isVivo() {
 		return vivo;
 	}
 
+	/**
+	 * 
+	 * @param vivo
+	 */
 	public void setVivo(boolean vivo) {
 		this.vivo = vivo;
 	}
 
+	/**
+	 * 
+	 */
 	public void morir() {
 
 		setX(X_DEATH);
@@ -217,14 +299,25 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public LinkedList<Disparo> getDisparos() {
 		return disparos;
 	}
 
+	/**
+	 * 
+	 * @param disparos
+	 */
 	public void setDisparos(LinkedList<Disparo> disparos) {
 		this.disparos = disparos;
 	}
 
+	/**
+	 * 
+	 */
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
@@ -238,10 +331,16 @@ public class Enemigo extends GameObject {
 		}
 	}
 
+	/*
+	 * 
+	 */
 	public void eliminarDisparo(Disparo d) {
 		disparos.remove(d);
 	}
 
+	/**
+	 * 
+	 */
 	public void disparar() {
 
 		Disparo disparoTemporal = null;

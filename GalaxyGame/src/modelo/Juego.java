@@ -4,16 +4,41 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+/**
+ * 
+ * @author juanchovelezpro
+ *
+ */
 public class Juego {
 
+	/**
+	 * 
+	 */
 	private Jugador jugador;
+
+	/**
+	 * 
+	 */
 	private boolean pausa;
 
+	/**
+	 * 
+	 */
 	private LinkedList<Enemigo> enemigos;
+
+	/**
+	 * 
+	 */
 	private LinkedList<Explosion> explosiones;
 
+	/**
+	 * 
+	 */
 	private int enemigosRestantes;
 
+	/**
+	 * 
+	 */
 	public Juego() {
 
 		pausa = false;
@@ -23,26 +48,50 @@ public class Juego {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public LinkedList<Explosion> getExplosiones() {
 		return explosiones;
 	}
 
+	/**
+	 * 
+	 * @param explosiones
+	 */
 	public void setExplosiones(LinkedList<Explosion> explosiones) {
 		this.explosiones = explosiones;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isPausa() {
 		return pausa;
 	}
 
+	/**
+	 * 
+	 * @param pausa
+	 */
 	public void setPausa(boolean pausa) {
 		this.pausa = pausa;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Jugador getJugador() {
 		return jugador;
 	}
 
+	/**
+	 * 
+	 * @param jugador
+	 */
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
 	}
@@ -55,27 +104,31 @@ public class Juego {
 		this.enemigos = enemigos;
 	}
 
-	public void spawnEnemigos(int cantidad) {
-		for (int i = 0; i < cantidad; i++) {
-			agregarEnemigo();
-		}
-
-	}
-
+	/**
+	 * 
+	 */
 	public void agregarEnemigo() {
 
 		Random r = new Random();
 
-		enemigos.add(new Enemigo(r.nextInt(2)+1, this));
+		enemigos.add(new Enemigo(r.nextInt(2) + 1, this));
 
 		enemigosRestantes++;
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public int getEnemigosRestantes() {
 		return enemigosRestantes;
 	}
 
+	/**
+	 * 
+	 * @param enemigosRestantes
+	 */
 	public void setEnemigosRestantes(int enemigosRestantes) {
 		this.enemigosRestantes = enemigosRestantes;
 	}

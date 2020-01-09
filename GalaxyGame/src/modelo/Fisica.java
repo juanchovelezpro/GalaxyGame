@@ -4,8 +4,19 @@ import java.util.LinkedList;
 
 import tools.SoundPlayer;
 
+/**
+ * Esta clase permite verificar las interacciones fisicas entre objetos de tipo {@code GameObject}
+ * @author juanchovelezpro
+ *
+ */
 public class Fisica {
 
+	/**
+	 * Verifica si un {@code GameObject} colisiona con algun {@code Enemigo} de una {@code LinkedList<Enemigo>}.
+	 * @param objeto Un {@code GameObject}
+	 * @param enemigos La {@code LinkedList} de enemigos
+	 * @return {@code true} si el  objeto y algun {@code Enemigo} de la {@code LinkedList} han colisionado, {@code false} en caso contrario.
+	 */
 	public static boolean colision(GameObject objeto, LinkedList<Enemigo> enemigos) {
 
 		boolean colision = false;
@@ -30,6 +41,12 @@ public class Fisica {
 		return colision;
 	}
 
+	/**
+	 * Verifica si un {@code GameObject} colisiona con otro {@code GameObject}.
+	 * @param objeto El {@code GameObject} uno.
+	 * @param objeto2 El {@code GameObject} dos.
+	 * @return true si los dos {@code GameObject} han colisionado, {@code false} en caso contrario.
+	 */
 	public static boolean colision(GameObject objeto, GameObject objeto2) {
 
 		boolean colision = false;

@@ -5,13 +5,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class ToolManager {
+public class ImageLoader {
 
 	public static Image cargarImagen(String ruta) {
 
 		Image image = null;
 
-		ImageIcon icon = new ImageIcon(ToolManager.class.getClassLoader().getResource(ruta));
+		ImageIcon icon = new ImageIcon(ImageLoader.class.getClassLoader().getResource(ruta));
 
 		image = icon.getImage();
 
@@ -23,7 +23,7 @@ public class ToolManager {
 
 		Image image = null;
 
-		ImageIcon icon = new ImageIcon(ToolManager.class.getClassLoader().getResource(ruta));
+		ImageIcon icon = new ImageIcon(ImageLoader.class.getClassLoader().getResource(ruta));
 
 		image = icon.getImage();
 

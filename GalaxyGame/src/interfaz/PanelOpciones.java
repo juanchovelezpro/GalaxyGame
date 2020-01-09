@@ -5,7 +5,7 @@ import javax.swing.*;
 import modelo.Explosion;
 import tools.ScreenResolution;
 import tools.SoundPlayer;
-import tools.ToolManager;
+import tools.ImageLoader;
 import tools.Timer;
 
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.io.File;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
-	public static final Image BACKGROUND = ToolManager.cargarImagen("fondos/galaxy2.jpg");
+	public static final Image BACKGROUND = ImageLoader.cargarImagen("fondos/galaxy2.jpg");
 
 	private Game game;
 	private JButton butJugar;
