@@ -30,7 +30,7 @@ public class PanelPausa extends JPanel implements ActionListener {
 		setBackground(new Color(0, 0, 0, 125));
 
 		Font font = new Font("Broadway", 1, 36);
-		Color color = new Color(255, 255, 255, 125);
+		Color color = new Color(255 , 255, 255, 125);
 
 		butReanudar = new JButton("Reanudar");
 		butReanudar.setBackground(color);

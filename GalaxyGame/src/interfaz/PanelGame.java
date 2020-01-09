@@ -120,7 +120,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	for(int i = 0; i<opciones.getGame().getThreads().size();i++) {
 			
-			opciones.getGame().getThreads().get(i).reanudar();;
+			opciones.getGame().getThreads().get(i).reanudar();
 			
 		}
 
