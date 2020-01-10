@@ -415,6 +415,8 @@ public class Jugador extends GameObject {
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
 
+			disparoTemporal.avanzarDisparo();
+
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
 
 				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY()));
@@ -427,7 +429,6 @@ public class Jugador extends GameObject {
 			if (disparoTemporal.getY() < SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
-			disparoTemporal.avanzarDisparo();
 		}
 	}
 

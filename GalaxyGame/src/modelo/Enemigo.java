@@ -11,6 +11,7 @@ import tools.ImageLoader;
 
 /**
  * Representa un enemigo en el juego.
+ * 
  * @author juanchovelezpro
  *
  */
@@ -40,22 +41,22 @@ public class Enemigo extends GameObject {
 	 * 
 	 */
 	private int tipo;
-	
+
 	/**
 	 * 
 	 */
 	private int vida;
-	
+
 	/**
 	 * 
 	 */
 	private boolean vivo;
-	
+
 	/**
 	 * 
 	 */
 	private LinkedList<Disparo> disparos;
-	
+
 	/**
 	 * 
 	 */
@@ -65,7 +66,7 @@ public class Enemigo extends GameObject {
 	 * 
 	 */
 	private int movimiento;
-	
+
 	/**
 	 * 
 	 */
@@ -348,6 +349,8 @@ public class Enemigo extends GameObject {
 		for (int i = 0; i < disparos.size(); i++) {
 			disparoTemporal = disparos.get(i);
 
+			disparoTemporal.avanzarDisparoEnemigo();
+
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 
 				juego.getExplosiones().add(
@@ -363,7 +366,6 @@ public class Enemigo extends GameObject {
 			if (disparoTemporal.getY() > SHOT_LIMIT)
 				eliminarDisparo(disparoTemporal);
 
-			disparoTemporal.avanzarDisparoEnemigo();
 		}
 
 	}
@@ -372,7 +374,7 @@ public class Enemigo extends GameObject {
 	public void render(Graphics g) {
 
 		g.drawImage(getSkin(), getX(), getY(), null);
-		
+
 //		g.setColor(Color.RED.brighter());
 //		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
 
