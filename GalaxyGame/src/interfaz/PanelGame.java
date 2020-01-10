@@ -65,63 +65,43 @@ public class PanelGame extends JPanel implements KeyListener {
 	@Override
 	public void paintComponent(Graphics g) {
 
-		if (!opciones.getGame().getJuego().isPausa()) {
+		ManagerFPS.StartCounter();
 
-			ManagerFPS.StartCounter();
+		super.paintComponent(g);
 
-			super.paintComponent(g);
+		g.drawImage(BACKGROUND, 0, 0, null);
 
-			g.drawImage(BACKGROUND, 0, 0, null);
-
+		if (!opciones.getGame().getJuego().isPausa())
 			renderHUD();
 
-			renderJugador(g);
+		renderJugador(g);
 
-			renderEnemigos(g);
+		renderEnemigos(g);
 
-			renderExplosiones(g);
+		renderExplosiones(g);
 
-			repaint();
+		repaint();
 
-			ManagerFPS.StopAndPost();
-		} else {
-
-			ManagerFPS.StartCounter();
-
-			super.paintComponent(g);
-
-			g.drawImage(BACKGROUND, 0, 0, null);
-
-			renderJugador(g);
-
-			renderEnemigos(g);
-
-			renderExplosiones(g);
-
-			repaint();
-
-			ManagerFPS.StopAndPost();
-
-		}
+		ManagerFPS.StopAndPost();
 
 	}
 
 	public void iniciar() {
 
-		for(int i = 0; i<opciones.getGame().getThreads().size();i++) {
-			
+		for (int i = 0; i < opciones.getGame().getThreads().size(); i++) {
+
 			opciones.getGame().getThreads().get(i).start();
-			
+
 		}
 
 	}
 
 	public void reanudar() {
 
-	for(int i = 0; i<opciones.getGame().getThreads().size();i++) {
-			
+		for (int i = 0; i < opciones.getGame().getThreads().size(); i++) {
+
 			opciones.getGame().getThreads().get(i).reanudar();
-			
+
 		}
 
 	}

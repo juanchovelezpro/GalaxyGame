@@ -45,7 +45,7 @@ public class Fisica {
 	 * Verifica si un {@code GameObject} colisiona con otro {@code GameObject}.
 	 * @param objeto El {@code GameObject} uno.
 	 * @param objeto2 El {@code GameObject} dos.
-	 * @return true si los dos {@code GameObject} han colisionado, {@code false} en caso contrario.
+	 * @return {@code true} si los dos {@code GameObject} han colisionado, {@code false} en caso contrario.
 	 */
 	public static boolean colision(GameObject objeto, GameObject objeto2) {
 

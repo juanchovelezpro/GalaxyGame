@@ -19,7 +19,17 @@ import tools.ImageLoader;
  */
 public class Jugador extends GameObject {
 
+	/**
+	 * La altura del {@code Jugador}. 
+	 * <p> Valor: {@value #HEIGHT} </p>
+	 */
 	public static final int HEIGHT = 80;
+	
+	/**
+	 * El ancho del {@code Jugador}.
+	 * 
+	 * <p> Valor: {@value #WIDTH} </p>
+	 */
 	public static final int WIDTH = 80;
 
 	/**
