@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import tools.GameManager;
+
 /**
  * Representa un disparo en el juego. 
  * @author juanchovelezpro
@@ -48,7 +50,10 @@ public class Disparo extends GameObject {
 		
 		g.drawImage(getSkin(), getX(), getY(), null);
 		
-//		g.setColor(Color.RED.brighter());
-//		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
+		if(GameManager.TEST) {
+			
+			GameManager.renderBounds(g, this);
+			
+		}
 	}
 }

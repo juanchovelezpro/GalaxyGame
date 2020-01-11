@@ -2,7 +2,7 @@ package interfaz;
 
 import javax.swing.*;
 
-import tools.ScreenResolution;
+import tools.GameManager;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +26,7 @@ public class PanelPausa extends JPanel implements ActionListener {
 
 	public void configPanel() {
 
-		setBounds(0, -1, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
+		setBounds(0, -1, GameManager.WIDTH_GAME, GameManager.HEIGHT_GAME);
 		setBackground(new Color(0, 0, 0, 125));
 
 		Font font = new Font("Broadway", 1, 36);
@@ -37,8 +37,8 @@ public class PanelPausa extends JPanel implements ActionListener {
 		butReanudar.setFont(font);
 		butReanudar.setFocusable(false);
 		butReanudar.setSize(450, 40);
-		butReanudar.setLocation(ScreenResolution.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
-				ScreenResolution.HEIGHT_GAME / 4 + ScreenResolution.HEIGHT_GAME / 8);
+		butReanudar.setLocation(GameManager.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
+				GameManager.HEIGHT_GAME / 4 + GameManager.HEIGHT_GAME / 8);
 		butReanudar.addActionListener(this);
 
 		butGuardar = new JButton("Guardar");
@@ -46,8 +46,8 @@ public class PanelPausa extends JPanel implements ActionListener {
 		butGuardar.setFont(font);
 		butGuardar.setFocusable(false);
 		butGuardar.setSize(450, 40);
-		butGuardar.setLocation(ScreenResolution.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
-				butReanudar.getY() + ScreenResolution.HEIGHT_GAME / 16);
+		butGuardar.setLocation(GameManager.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
+				butReanudar.getY() + GameManager.HEIGHT_GAME / 16);
 		butGuardar.addActionListener(this);
 
 		butGuardarSalir = new JButton("Guardar y salir");
@@ -55,8 +55,8 @@ public class PanelPausa extends JPanel implements ActionListener {
 		butGuardarSalir.setFont(font);
 		butGuardarSalir.setFocusable(false);
 		butGuardarSalir.setSize(450, 40);
-		butGuardarSalir.setLocation(ScreenResolution.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
-				butGuardar.getY() + ScreenResolution.HEIGHT_GAME / 16);
+		butGuardarSalir.setLocation(GameManager.WIDTH_GAME / 2 - butReanudar.getWidth() / 2,
+				butGuardar.getY() + GameManager.HEIGHT_GAME / 16);
 		butGuardarSalir.addActionListener(this);
 
 		add(butReanudar);

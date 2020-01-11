@@ -3,7 +3,7 @@ package interfaz;
 import javax.swing.*;
 
 import modelo.Explosion;
-import tools.ScreenResolution;
+import tools.GameManager;
 import tools.SoundPlayer;
 import tools.ImageLoader;
 import tools.Timer;
@@ -44,7 +44,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		butJugar.setBackground(background);
 		butJugar.setFocusable(false);
 		butJugar.setSize(450, 60);
-		butJugar.setLocation(ScreenResolution.WIDTH / 2 - butJugar.getWidth() / 2, ScreenResolution.HEIGHT / 2);
+		butJugar.setLocation(GameManager.WIDTH / 2 - butJugar.getWidth() / 2, GameManager.HEIGHT / 2);
 
 		butJugar.addActionListener(this);
 

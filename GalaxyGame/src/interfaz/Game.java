@@ -12,7 +12,7 @@ import hilos.HiloMovimientoJugador;
 import hilos.HiloRevivirJugador;
 import modelo.Explosion;
 import modelo.Juego;
-import tools.ScreenResolution;
+import tools.GameManager;
 import tools.SoundPlayer;
 import tools.ImageLoader;
 
@@ -30,7 +30,7 @@ public class Game extends JFrame {
 		setTitle("Galaxy Game");
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(ScreenResolution.WIDTH, ScreenResolution.HEIGHT);
+		setSize(GameManager.WIDTH, GameManager.HEIGHT);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setIconImage(ImageLoader.cargarImagen("iconos/icon2.jpg"));
 

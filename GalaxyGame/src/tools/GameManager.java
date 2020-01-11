@@ -1,5 +1,7 @@
 package tools;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,7 +9,9 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
-public class ScreenResolution {
+import modelo.GameObject;
+
+public class GameManager {
 
 	// Screen
 	public static final int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -27,5 +31,14 @@ public class ScreenResolution {
 	public static final int SCALE_HEIGHT_SHOT = 1080 / 70;
 	public static final int WIDTH_SHOT = WIDTH / SCALE_WIDTH_SHOT;
 	public static final int HEIGHT_SHOT = HEIGHT / SCALE_HEIGHT_SHOT;
+
+	public static final boolean TEST = false;
+
+	public static void renderBounds(Graphics g, GameObject go) {
+
+		g.setColor(Color.RED.brighter());
+		g.drawRect((int) go.getBounds().getX(), (int) go.getBounds().getY(), (int) go.getBounds().getWidth(),
+				(int) go.getBounds().getHeight());
+	}
 
 }

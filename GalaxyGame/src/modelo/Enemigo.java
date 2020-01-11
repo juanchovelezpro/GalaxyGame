@@ -10,7 +10,7 @@ import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
-import tools.ScreenResolution;
+import tools.GameManager;
 import tools.ImageLoader;
 
 /**
@@ -50,12 +50,12 @@ public class Enemigo extends GameObject {
 	/**
 	 * El limite en el eje Y al que un {@code Enemigo} puede llegar.
 	 */
-	public static final int Y_LIMIT = ScreenResolution.HEIGHT_GAME + HEIGHT + 50;
+	public static final int Y_LIMIT = GameManager.HEIGHT_GAME + HEIGHT + 50;
 
 	/**
 	 * El limite en el eje X en el debe aparece el {@code Enemigo}.
 	 */
-	public static final int X_BOUND = ScreenResolution.WIDTH_GAME - WIDTH;
+	public static final int X_BOUND = GameManager.WIDTH_GAME - WIDTH;
 
 	/**
 	 * Valor maximo en el eje Y en el que el {@code Enemigo} puede Spawnear.
@@ -70,7 +70,7 @@ public class Enemigo extends GameObject {
 	/**
 	 * El limite que un {@code Disparo} del {@code Enemigo} puede alcanzar.
 	 */
-	public static final int SHOT_LIMIT = ScreenResolution.HEIGHT_GAME + 50;
+	public static final int SHOT_LIMIT = GameManager.HEIGHT_GAME + 50;
 
 	/**
 	 * Diferencia en el eje X para el lugar de un {@code Disparo} del
@@ -478,8 +478,11 @@ public class Enemigo extends GameObject {
 
 		g.drawImage(getSkin(), getX(), getY(), null);
 
-//		g.setColor(Color.RED.brighter());
-//		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
+		if(GameManager.TEST) {
+			
+			GameManager.renderBounds(g, this);
+			
+		}
 
 		for (int i = 0; i < disparos.size(); i++) {
 

@@ -11,7 +11,7 @@ import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
 import tools.ManagerFPS;
-import tools.ScreenResolution;
+import tools.GameManager;
 import tools.SoundPlayer;
 import tools.ImageLoader;
 
@@ -36,7 +36,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		this.opciones = opciones;
 
-		setBounds(ScreenResolution.WIDTH / 4, 0, ScreenResolution.WIDTH_GAME, ScreenResolution.HEIGHT_GAME);
+		setBounds(GameManager.WIDTH / 4, 0, GameManager.WIDTH_GAME, GameManager.HEIGHT_GAME);
 
 		iniciar();
 

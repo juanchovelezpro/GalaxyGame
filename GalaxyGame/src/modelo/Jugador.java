@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 import hilos.HiloDisparoJugador;
 import hilos.HiloMovimientoJugador;
-import tools.ScreenResolution;
+import tools.GameManager;
 import tools.SoundPlayer;
 import tools.ImageLoader;
 
@@ -20,15 +20,19 @@ import tools.ImageLoader;
 public class Jugador extends GameObject {
 
 	/**
-	 * La altura del {@code Jugador}. 
-	 * <p> Valor: {@value #HEIGHT} </p>
+	 * La altura del {@code Jugador}.
+	 * <p>
+	 * Valor: {@value #HEIGHT}
+	 * </p>
 	 */
 	public static final int HEIGHT = 80;
-	
+
 	/**
 	 * El ancho del {@code Jugador}.
 	 * 
-	 * <p> Valor: {@value #WIDTH} </p>
+	 * <p>
+	 * Valor: {@value #WIDTH}
+	 * </p>
 	 */
 	public static final int WIDTH = 80;
 
@@ -36,7 +40,7 @@ public class Jugador extends GameObject {
 	 * Limite horizontal derecho para evitar que el {@code Jugador} se salga de la
 	 * vision del juego.
 	 */
-	public static final int X_RIGHT_LIMIT = ScreenResolution.WIDTH_GAME - WIDTH;
+	public static final int X_RIGHT_LIMIT = GameManager.WIDTH_GAME - WIDTH;
 
 	/**
 	 * Limite horizontal izquierod para evitar que el {@code Jugador} se salga de la
@@ -74,12 +78,12 @@ public class Jugador extends GameObject {
 	/**
 	 * Coordenada x en la que aparece el {@code Jugador}.
 	 */
-	public static final int SPAWN_X = ScreenResolution.WIDTH_GAME / 2 - Jugador.WIDTH / 2;
+	public static final int SPAWN_X = GameManager.WIDTH_GAME / 2 - Jugador.WIDTH / 2;
 
 	/**
 	 * Coordenada y en la que aparece el {@code Jugador}.
 	 */
-	public static final int SPAWN_Y = ScreenResolution.HEIGHT_GAME - Jugador.HEIGHT;
+	public static final int SPAWN_Y = GameManager.HEIGHT_GAME - Jugador.HEIGHT;
 
 	/**
 	 * Coordenada x a la que se traslada el {@code Jugador} cuando "muere".
@@ -446,9 +450,11 @@ public class Jugador extends GameObject {
 	public void render(Graphics g) {
 
 		g.drawImage(super.getSkin(), super.getX(), super.getY(), null);
-//		g.setColor(Color.RED.brighter());
-//		g.drawRect((int)getBounds().getX(), (int)getBounds().getY(), (int)getBounds().getWidth(), (int)getBounds().getHeight());
 
+		if (GameManager.TEST) {
+			
+			GameManager.renderBounds(g, this);
+		}
 		for (int i = 0; i < disparos.size(); i++) {
 
 			Disparo temp = disparos.get(i);
