@@ -104,6 +104,16 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		}
 
+		for (int i = 0; i < opciones.getGame().getJuego().getExplosiones().size(); i++) {
+
+			if (opciones.getGame().getJuego().getExplosiones().get(i).isAlive()) {
+
+				opciones.getGame().getJuego().getExplosiones().get(i).reanudar();
+
+			}
+
+		}
+
 	}
 
 	@Override

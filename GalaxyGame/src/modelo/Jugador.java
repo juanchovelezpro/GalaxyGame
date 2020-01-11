@@ -429,7 +429,7 @@ public class Jugador extends GameObject {
 
 			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
 
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY()));
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY(), juego));
 				juego.getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);

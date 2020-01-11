@@ -260,7 +260,7 @@ public class Enemigo extends GameObject {
 
 				vida--;
 
-				juego.getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT));
+				juego.getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT, juego));
 				juego.getExplosiones().getLast().start();
 
 				if (!juego.getJugador().isInvulnerable())
@@ -457,7 +457,7 @@ public class Enemigo extends GameObject {
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 
 				juego.getExplosiones().add(
-						new Explosion(disparoTemporal.getX(), disparoTemporal.getY() + disparoTemporal.getAltura()));
+						new Explosion(disparoTemporal.getX(), disparoTemporal.getY() + disparoTemporal.getAltura(), juego));
 				juego.getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);

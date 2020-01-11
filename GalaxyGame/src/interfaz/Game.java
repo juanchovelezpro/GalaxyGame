@@ -47,7 +47,7 @@ public class Game extends JFrame {
 		setLocationRelativeTo(null);
 
 		// Cargar recurso de explosion.
-		getJuego().getExplosiones().add(new Explosion(0, 0));
+		getJuego().getExplosiones().add(new Explosion(0, 0, juego));
 		getJuego().getExplosiones().getLast().start();
 
 	}

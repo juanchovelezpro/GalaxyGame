@@ -3,6 +3,7 @@ package modelo;
 import java.awt.image.BufferedImage;
 
 import animation.Animation;
+import hilos.HiloAbstract;
 import tools.ImageLoader;
 
 /**
@@ -22,7 +23,7 @@ import tools.ImageLoader;
  * @author juanchovelezpro
  *
  */
-public class Explosion extends Thread {
+public class Explosion extends HiloAbstract {
 
 	/**
 	 * La imagen que contiene los Sprites para realizar la animacion de una
@@ -52,7 +53,9 @@ public class Explosion extends Thread {
 	 * @param x La coordenada X de la {@code Explosion}
 	 * @param y La coordenadas Y de la {@code Explosion}
 	 */
-	public Explosion(int x, int y) {
+	public Explosion(int x, int y, Juego juego) {
+
+		super(juego);
 
 		this.x = x;
 		this.y = y;
@@ -130,9 +133,18 @@ public class Explosion extends Thread {
 
 			try {
 
-				Thread.sleep(5);
-				animation.runAnimation();
+				if (!getJuego().isPausa()) {
+					Thread.sleep(5);
+					animation.runAnimation();
+				} else {
 
+					synchronized (this) {
+
+						wait();
+
+					}
+
+				}
 			} catch (Exception ex) {
 
 				ex.printStackTrace();
