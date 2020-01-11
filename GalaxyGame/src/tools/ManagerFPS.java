@@ -5,7 +5,7 @@ public final class ManagerFPS {
 	private static int startTime;
 	private static int endTime;
 	private static int frameTimes = 0;
-	private static short frames = 0;
+	private static int frames = 0;
 	public static int fps;
 
 	/** Start counting the fps **/
