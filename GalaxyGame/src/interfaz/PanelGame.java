@@ -27,7 +27,7 @@ import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {
 
-	public static final Image BACKGROUND = ImageLoader.cargarImagen("fondos/galaxy3.jpg");
+	public static final Image BACKGROUND = GameManager.imagenes.get("galaxy3");
 
 	private PanelOpciones opciones;
 	private PanelPausa panelPausa;

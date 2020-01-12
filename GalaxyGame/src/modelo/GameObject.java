@@ -129,8 +129,8 @@ public abstract class GameObject {
 	}
 
 	/**
-	 * Metodo para renderizar la <b> skin </b> del {@code GameObject} en
-	 * las coordenadas (X,Y)
+	 * Metodo para renderizar la <b> skin </b> del {@code GameObject} en las
+	 * coordenadas (X,Y)
 	 * 
 	 * @param g Los graficos para renderizar de tipo {@link Graphics}
 	 */
@@ -272,6 +272,12 @@ public abstract class GameObject {
 	public Rectangle getBounds() {
 
 		return new Rectangle(x + ancho / 8, y + altura / 8, ancho - ancho / 4, altura - altura / 4);
+
+	}
+
+	public Rectangle getVision() {
+
+		return new Rectangle(x, y - 300, ancho, altura + 200);
 
 	}
 

@@ -15,7 +15,7 @@ import java.io.File;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
-	public static final Image BACKGROUND = ImageLoader.cargarImagen("fondos/galaxy2.jpg");
+	public static final Image BACKGROUND = GameManager.imagenes.get("galaxy2");
 
 	private Game game;
 	private JButton butJugar;

@@ -2,12 +2,9 @@ package tools;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.Arrays;
-
-import javax.imageio.ImageIO;
+import java.util.HashMap;
 
 import modelo.GameObject;
 
@@ -32,13 +29,49 @@ public class GameManager {
 	public static final int WIDTH_SHOT = WIDTH / SCALE_WIDTH_SHOT;
 	public static final int HEIGHT_SHOT = HEIGHT / SCALE_HEIGHT_SHOT;
 
-	public static final boolean TEST = false;
+	public static final boolean TEST = true;
+
+	public static HashMap<String, Image> imagenes = new HashMap<String, Image>();
+
+	public static void loadResources() {
+
+		// Fondos
+		imagenes.put("galaxy1", ImageLoader.cargarImagen("fondos/galaxy1.jpg"));
+		imagenes.put("galaxy2", ImageLoader.cargarImagen("fondos/galaxy2.jpg"));
+		imagenes.put("galaxy3", ImageLoader.cargarImagen("fondos/galaxy3.jpg"));
+		
+		
+		// Naves
+		imagenes.put("nave1", ImageLoader.cargarImagen("naves/nave1.png"));
+		imagenes.put("nave2", ImageLoader.cargarImagen("naves/nave2.png"));
+		imagenes.put("nave3", ImageLoader.cargarImagen("naves/nave3.png"));
+		imagenes.put("nave4", ImageLoader.cargarImagen("naves/nave4.png"));
+		imagenes.put("nave5", ImageLoader.cargarImagen("naves/nave5.png"));
+		imagenes.put("nave6", ImageLoader.cargarImagen("naves/nave6.png"));
+
+		imagenes.put("nave1invulnerable", ImageLoader.cargarImagen("naves/nave1invulnerable.png"));
+		
+		
+		// Disparos 
+		imagenes.put("disparo1", ImageLoader.cargarImagen("disparos/laser1.png"));
+		imagenes.put("disparo2", ImageLoader.cargarImagen("disparos/laser2.png"));
+		imagenes.put("disparo3", ImageLoader.cargarImagen("disparos/laser3.png"));
+		imagenes.put("disparo4", ImageLoader.cargarImagen("disparos/laser4.png"));
+		
+		// Iconos
+		imagenes.put("icono", ImageLoader.cargarImagen("iconos/icon.jpg"));
+		
+		
+	}
 
 	public static void renderBounds(Graphics g, GameObject go) {
 
 		g.setColor(Color.RED.brighter());
 		g.drawRect((int) go.getBounds().getX(), (int) go.getBounds().getY(), (int) go.getBounds().getWidth(),
 				(int) go.getBounds().getHeight());
+		g.setColor(Color.BLUE.brighter());
+		g.drawRect((int) go.getVision().getX(), (int)go.getVision().getY(), (int)go.getVision().getWidth(), (int)go.getVision().getHeight());
+		
 	}
 
 }

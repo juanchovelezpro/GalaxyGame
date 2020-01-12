@@ -93,10 +93,6 @@ public class Jugador extends GameObject {
 	 */
 	public static final int X_DEATH = -100;
 
-	public static final Image SKIN_NORMAL = ImageLoader.cargarImagen("naves/nave_jugador.png");
-	public static final Image SKIN_INVULNERABLE = ImageLoader.cargarImagen("naves/skinInvulnerableJugador.png");
-	public static final Image DISPARO = ImageLoader.cargarImagen("disparos/laserJugador.png");
-
 	/**
 	 * El nick del {@code Jugador}.
 	 */
@@ -156,7 +152,7 @@ public class Jugador extends GameObject {
 	public Jugador(Juego juego) {
 
 		super(WIDTH, HEIGHT);
-		super.setSkin(SKIN_NORMAL);
+		super.setSkin(GameManager.imagenes.get("nave1"));
 		super.setX(SPAWN_X);
 		super.setY(SPAWN_Y);
 
@@ -389,7 +385,7 @@ public class Jugador extends GameObject {
 	 * @see #disparos
 	 */
 	public void agregarDisparo() {
-		disparos.add(new Disparo(DISPARO, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 30, 70, 0, 15));
+		disparos.add(new Disparo(GameManager.imagenes.get("disparo4"), super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 30, 70, 0, 15));
 	}
 
 	/**
@@ -452,7 +448,7 @@ public class Jugador extends GameObject {
 		g.drawImage(super.getSkin(), super.getX(), super.getY(), null);
 
 		if (GameManager.TEST) {
-			
+
 			GameManager.renderBounds(g, this);
 		}
 		for (int i = 0; i < disparos.size(); i++) {

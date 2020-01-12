@@ -27,12 +27,14 @@ public class Game extends JFrame {
 
 	public Game() {
 
+		GameManager.loadResources();
+		
 		setTitle("Galaxy Game");
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(GameManager.WIDTH, GameManager.HEIGHT);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
-		setIconImage(ImageLoader.cargarImagen("iconos/icon2.jpg"));
+		setIconImage(GameManager.imagenes.get("icono"));
 
 		threads = new LinkedList<HiloAbstract>();
 

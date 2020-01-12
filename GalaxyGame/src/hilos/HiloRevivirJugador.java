@@ -2,6 +2,7 @@ package hilos;
 
 import modelo.Juego;
 import modelo.Jugador;
+import tools.GameManager;
 
 public class HiloRevivirJugador extends HiloAbstract {
 
@@ -21,13 +22,13 @@ public class HiloRevivirJugador extends HiloAbstract {
 					if (!getJuego().getJugador().isVivo()) {
 
 						Thread.sleep(2000);
-						getJuego().getJugador().setSkin(Jugador.SKIN_INVULNERABLE);
+						getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1invulnerable"));
 						getJuego().getJugador().revivir();
 						getJuego().getJugador().setInvulnerable(true);
 
 						Thread.sleep(3000);
 
-						getJuego().getJugador().setSkin(Jugador.SKIN_NORMAL);
+						getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1"));
 						getJuego().getJugador().setInvulnerable(false);
 
 					}

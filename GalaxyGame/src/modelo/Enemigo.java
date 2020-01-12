@@ -92,10 +92,6 @@ public class Enemigo extends GameObject {
 	 */
 	public static final int X_DEATH = -500;
 
-	public static final Image SKIN_NORMAL = ImageLoader.cargarImagen("naves/nave_enemigo.png");
-	public static final Image SKIN_FAST = ImageLoader.cargarImagen("naves/fastEnemy.png");
-	public static final Image DISPARO_NORMAL = ImageLoader.cargarImagen("disparos/laserEnemigo.png");
-	public static final Image DISPARO_FAST = ImageLoader.cargarImagen("disparos/laserGama.png");
 
 	/**
 	 * Para diferenciar un {@code Enemigo} de otro. Cada tipo de {@code Enemigo}
@@ -150,7 +146,6 @@ public class Enemigo extends GameObject {
 	public Enemigo(int tipo, Juego juego) {
 
 		super(WIDTH, HEIGHT);
-		super.setSkin(SKIN_NORMAL);
 		super.setVelY(SPEED);
 
 		r = new Random();
@@ -182,12 +177,12 @@ public class Enemigo extends GameObject {
 		case 1:
 			vida = 1;
 			movimiento = 1;
-			setSkin(SKIN_NORMAL);
+			setSkin(GameManager.imagenes.get("nave2"));
 			break;
 		case 2:
 			vida = 2;
 			movimiento = 1;
-			setSkin(SKIN_FAST);
+			setSkin(GameManager.imagenes.get("nave6"));
 			setVelY(SPEED_FAST);
 			break;
 		case 3:
@@ -411,12 +406,12 @@ public class Enemigo extends GameObject {
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(DISPARO_FAST, super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 30,
+			disparos.add(new Disparo(GameManager.imagenes.get("disparo1"), super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 30,
 					70, 0, 15));
 		}
 
 		if (tipo == 2) {
-			disparos.add(new Disparo(DISPARO_NORMAL, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 35, 85,
+			disparos.add(new Disparo(GameManager.imagenes.get("disparo1"), super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 35, 85,
 					0, 20));
 		}
 	}
