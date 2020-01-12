@@ -70,6 +70,8 @@ public class GameManager {
 		g.drawRect((int) go.getBounds().getX(), (int) go.getBounds().getY(), (int) go.getBounds().getWidth(),
 				(int) go.getBounds().getHeight());
 		g.setColor(Color.BLUE.brighter());
+		
+		if(go.getVision() != null)
 		g.drawRect((int) go.getVision().getX(), (int)go.getVision().getY(), (int)go.getVision().getWidth(), (int)go.getVision().getHeight());
 		
 	}

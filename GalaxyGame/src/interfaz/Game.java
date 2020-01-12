@@ -13,8 +13,7 @@ import hilos.HiloRevivirJugador;
 import modelo.Explosion;
 import modelo.Juego;
 import tools.GameManager;
-import tools.SoundPlayer;
-import tools.ImageLoader;
+
 
 import java.awt.*;
 import java.util.LinkedList;

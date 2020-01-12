@@ -1,15 +1,9 @@
 package modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Rectangle;
 import java.util.LinkedList;
-
-import hilos.HiloDisparoJugador;
-import hilos.HiloMovimientoJugador;
 import tools.GameManager;
-import tools.SoundPlayer;
-import tools.ImageLoader;
 
 /**
  * Representa al jugador del juego.
@@ -151,10 +145,10 @@ public class Jugador extends GameObject {
 	 */
 	public Jugador(Juego juego) {
 
-		super(WIDTH, HEIGHT);
-		super.setSkin(GameManager.imagenes.get("nave1"));
-		super.setX(SPAWN_X);
-		super.setY(SPAWN_Y);
+		super(SPAWN_X, SPAWN_Y);
+		setSkin(GameManager.imagenes.get("nave1"));
+		setAltura(HEIGHT);
+		setAncho(WIDTH);
 
 		disparos = new LinkedList<>();
 
@@ -385,7 +379,7 @@ public class Jugador extends GameObject {
 	 * @see #disparos
 	 */
 	public void agregarDisparo() {
-		disparos.add(new Disparo(GameManager.imagenes.get("disparo4"), super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 30, 70, 0, 15));
+		disparos.add(new Disparo(4, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15));
 	}
 
 	/**
@@ -459,6 +453,12 @@ public class Jugador extends GameObject {
 
 		}
 
+	}
+
+	@Override
+	public Rectangle getVision() {
+
+		return null;
 	}
 
 }

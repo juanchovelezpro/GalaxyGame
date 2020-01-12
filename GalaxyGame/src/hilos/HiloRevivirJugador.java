@@ -1,7 +1,6 @@
 package hilos;
 
 import modelo.Juego;
-import modelo.Jugador;
 import tools.GameManager;
 
 public class HiloRevivirJugador extends HiloAbstract {

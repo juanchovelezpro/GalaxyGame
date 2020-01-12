@@ -1,10 +1,7 @@
 package hilos;
 
-import java.io.File;
 import java.util.Random;
-
 import modelo.Juego;
-import tools.SoundPlayer;
 
 public class HiloAlternarDisparoEnemigo extends HiloAbstract {
 

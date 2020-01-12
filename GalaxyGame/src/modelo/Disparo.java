@@ -1,35 +1,99 @@
 package modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Rectangle;
 
 import tools.GameManager;
 
 /**
- * Representa un disparo en el juego. 
+ * Representa un disparo en el juego.
+ * 
  * @author juanchovelezpro
  *
  */
 public class Disparo extends GameObject {
 
 	/**
-	 * Constructor que permite crear un {@code Disparo}
-	 * @param skin La skin del {@code Disparo}
-	 * @param x La coordenada X del {@code Disparo}
-	 * @param y La coordenada Y del {@code Disparo}
-	 * @param ancho El ancho del {@code Disparo}
-	 * @param altura La altura del {@code Disparo}
-	 * @param velX La velocidad en el eje X del {@code Disparo}
-	 * @param velY La velocidad en el eje Y del {@code Disparo}
+	 * Numero entero que representa el tipo de disparo.
 	 */
-	public Disparo(Image skin, int x, int y, int ancho, int altura, int velX, int velY) {
-		super(skin, x, y, ancho, altura, 0, velY);
+	private int tipo;
+
+	/**
+	 * Constructor que permite crear un {@code Disparo}
+	 * 
+	 * @param tipo El tipo de {@code Disparo} a crear.
+	 * @param x    La coordenada X del {@code Disparo}.
+	 * @param y    La coordenada Y del {@code Disparo}.
+	 * @param velX La velocidad en el eje X del {@code Disparo}.
+	 * @param velY La velocidad en el eje Y del {@code Disparo}.
+	 */
+	public Disparo(int tipo, int x, int y, int velX, int velY) {
+		super(x, y);
+		setVelX(velX);
+		setVelY(velY);
+
+		crearPorTipo(tipo);
 	}
 
 	/**
-	 * <p>Este metodo permite realizar el movimiento de abajo hacia arriba del {@code Disparo}.</p>
-	 * <p> Es utilizado por la clase {@link Jugador} para realizar los movimientos de sus disparos.</p> 
+	 * Crea un {@code Disparo} segun el tipo especificado.
+	 * 
+	 * @param tipo El tipo de {@code Disparo} a crear.
+	 */
+	private void crearPorTipo(int tipo) {
+
+		switch (tipo) {
+
+		case 1:
+
+			crearPorSkin("disparo1");
+
+			break;
+
+		case 2:
+
+			crearPorSkin("disparo2");
+
+			break;
+
+		case 3:
+
+			crearPorSkin("disparo3");
+
+			break;
+
+		case 4:
+
+			crearPorSkin("disparo4");
+
+			break;
+
+		}
+
+	}
+
+	/**
+	 * Modifica la skin junto con el ancho y la altura del {@code Disparo}.
+	 * 
+	 * @param skin
+	 */
+	private void crearPorSkin(String skin) {
+
+		setSkin(GameManager.imagenes.get(skin));
+		setAncho(getSkin().getWidth(null));
+		setAltura(getSkin().getHeight(null));
+
+	}
+
+	/**
+	 * <p>
+	 * Este metodo permite realizar el movimiento de abajo hacia arriba del
+	 * {@code Disparo}.
+	 * </p>
+	 * <p>
+	 * Es utilizado por la clase {@link Jugador} para realizar los movimientos de
+	 * sus disparos.
+	 * </p>
 	 */
 	public void avanzarDisparo() {
 
@@ -37,23 +101,43 @@ public class Disparo extends GameObject {
 	}
 
 	/**
-	 * <p>Este metodo permite realizar el movimiento de arriba hacia abajo del {@code Disparo}.</p>
-	 * <p> Es utilizado por la clase {@link Enemigo} para realizar los movimientos de sus disparos. </p>
+	 * <p>
+	 * Este metodo permite realizar el movimiento de arriba hacia abajo del
+	 * {@code Disparo}.
+	 * </p>
+	 * <p>
+	 * Es utilizado por la clase {@link Enemigo} para realizar los movimientos de
+	 * sus disparos.
+	 * </p>
 	 */
 	public void avanzarDisparoEnemigo() {
 
 		super.setY(super.getY() + super.getVelY());
 	}
 
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public void render(Graphics g) {
-		
+
 		g.drawImage(getSkin(), getX(), getY(), null);
-		
-		if(GameManager.TEST) {
-			
+
+		if (GameManager.TEST) {
+
 			GameManager.renderBounds(g, this);
-			
+
 		}
+	}
+
+	@Override
+	public Rectangle getVision() {
+
+		return null;
 	}
 }

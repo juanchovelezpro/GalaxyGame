@@ -2,27 +2,15 @@ package interfaz;
 
 import javax.swing.*;
 
-import animation.Animation;
-import hilos.HiloDisparoJugador;
-import modelo.Disparo;
-import modelo.Enemigo;
 import modelo.Explosion;
-import modelo.Fisica;
 import modelo.Juego;
 import modelo.Jugador;
 import tools.ManagerFPS;
 import tools.GameManager;
 import tools.SoundPlayer;
-import tools.ImageLoader;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.Console;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class PanelGame extends JPanel implements KeyListener {

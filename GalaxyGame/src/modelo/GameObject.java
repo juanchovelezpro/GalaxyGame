@@ -110,19 +110,35 @@ public abstract class GameObject {
 	}
 
 	/**
-	 * Constructor que permite crear un {@code GameObject} solo con el ancho y la
-	 * altura del {@code GameObject}.
+	 * Constructor que permite crear un {@code GameObject} solo con la coordenada x
+	 * y la coodernada y del {@code GameObject}.
 	 * 
-	 * @param ancho  El ancho del {@code GameObject} de tipo {@code int}
-	 * @param altura La altura del {@code GameObject} de tipo {@code int}
+	 * @param x La coordenada x del {@code GameObject}
+	 * @param y La coordenada y del {@code GameObject}
 	 */
-	public GameObject(int ancho, int altura) {
+	public GameObject(int x, int y) {
 
-		this.altura = altura;
-		this.ancho = ancho;
+		this.x = x;
+		this.y = y;
 		skin = null;
+		altura = 0;
+		ancho = 0;
+		velX = 0;
+		velY = 0;
+
+	}
+
+	/**
+	 * Constructor vacio que crea un {@code GameObject} con todas sus variables
+	 * iniciadas en {@code 0} o en {@code null} segun el caso.
+	 */
+	public GameObject() {
+
 		x = 0;
 		y = 0;
+		skin = null;
+		altura = 0;
+		ancho = 0;
 		velX = 0;
 		velY = 0;
 
@@ -275,10 +291,13 @@ public abstract class GameObject {
 
 	}
 
-	public Rectangle getVision() {
-
-		return new Rectangle(x, y - 300, ancho, altura + 200);
-
-	}
+	/**
+	 * Retorna un rectangulo que representa la visibilidad frontal de un
+	 * {@code GameObject}.
+	 * 
+	 * @return Retorna el rectangulo de la visibilidad frontal de un
+	 *         {@code GameObject}
+	 */
+	public abstract Rectangle getVision();
 
 }

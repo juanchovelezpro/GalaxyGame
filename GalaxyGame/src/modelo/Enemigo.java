@@ -1,17 +1,12 @@
 package modelo;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+
+import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.Random;
 
-import hilos.HiloDisparoEnemigo;
-import hilos.HiloDisparoJugador;
-import hilos.HiloMovimientoEnemigos;
-import hilos.HiloMovimientoJugador;
 import tools.GameManager;
-import tools.ImageLoader;
 
 /**
  * Representa un enemigo en el juego.
@@ -92,7 +87,6 @@ public class Enemigo extends GameObject {
 	 */
 	public static final int X_DEATH = -500;
 
-
 	/**
 	 * Para diferenciar un {@code Enemigo} de otro. Cada tipo de {@code Enemigo}
 	 * tiene diferentes caracteristicas.
@@ -145,16 +139,15 @@ public class Enemigo extends GameObject {
 	 */
 	public Enemigo(int tipo, Juego juego) {
 
-		super(WIDTH, HEIGHT);
-		super.setVelY(SPEED);
+		super();
 
 		r = new Random();
 
-		super.setX(r.nextInt(X_BOUND));
-		super.setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+		setX(r.nextInt(X_BOUND));
+		setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+		vivo = true;
 
 		this.tipo = tipo;
-		vivo = true;
 
 		movimiento = 0;
 		auxMovs = 0.0;
@@ -175,26 +168,33 @@ public class Enemigo extends GameObject {
 
 		switch (tipo) {
 		case 1:
-			vida = 1;
-			movimiento = 1;
-			setSkin(GameManager.imagenes.get("nave2"));
+
+			crearEnemigo("nave2", 1, 1, 1);
 			break;
 		case 2:
-			vida = 2;
-			movimiento = 1;
-			setSkin(GameManager.imagenes.get("nave6"));
-			setVelY(SPEED_FAST);
+			crearEnemigo("nave6", 2, 3, 1);
 			break;
 		case 3:
-			vida = 3;
+
 			break;
 		case 4:
-			vida = 4;
+
 			break;
 		default:
-			vida = 5;
+
 			break;
 		}
+
+	}
+
+	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento) {
+
+		this.vida = vida;
+		this.movimiento = movimiento;
+		setVelY(velocidad);
+		setSkin(GameManager.imagenes.get(skin));
+		setAltura(getSkin().getHeight(null));
+		setAncho(getSkin().getWidth(null));
 
 	}
 
@@ -260,6 +260,13 @@ public class Enemigo extends GameObject {
 
 				if (!juego.getJugador().isInvulnerable())
 					juego.getJugador().morir();
+
+			}
+
+			if (Fisica.detect(getVision(), juego.getJugador().getDisparos())) {
+
+				if (tipo == 1)
+					setX(getX() + 3);
 
 			}
 
@@ -344,6 +351,10 @@ public class Enemigo extends GameObject {
 
 	}
 
+	public void esquivar() {
+
+	}
+
 	/**
 	 * Retorna si el {@code Enemigo} se encuentra vivo.
 	 * 
@@ -386,6 +397,7 @@ public class Enemigo extends GameObject {
 
 	/**
 	 * Retorna la lista de disparos del {@code Enemigo}.
+	 * 
 	 * @return La lista de disparos del {@code Enemigo}.
 	 */
 	public LinkedList<Disparo> getDisparos() {
@@ -394,6 +406,7 @@ public class Enemigo extends GameObject {
 
 	/**
 	 * Modifica la lista de disparos del {@code Enemigo}.
+	 * 
 	 * @param disparos La nueva lista de disparos del {@code Enemigo}.
 	 */
 	public void setDisparos(LinkedList<Disparo> disparos) {
@@ -406,18 +419,18 @@ public class Enemigo extends GameObject {
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(GameManager.imagenes.get("disparo1"), super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 30,
-					70, 0, 15));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 0, 15));
 		}
 
 		if (tipo == 2) {
-			disparos.add(new Disparo(GameManager.imagenes.get("disparo1"), super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 35, 85,
-					0, 20));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 20));
 		}
 	}
 
 	/**
-	 * Elimina el {@code Disparo} <b> d </b> de la lista de disparos del {@code Enemigo}.
+	 * Elimina el {@code Disparo} <b> d </b> de la lista de disparos del
+	 * {@code Enemigo}.
+	 * 
 	 * @param d
 	 */
 	public void eliminarDisparo(Disparo d) {
@@ -451,8 +464,8 @@ public class Enemigo extends GameObject {
 
 			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
 
-				juego.getExplosiones().add(
-						new Explosion(disparoTemporal.getX(), disparoTemporal.getY() + disparoTemporal.getAltura(), juego));
+				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(),
+						disparoTemporal.getY() + disparoTemporal.getAltura(), juego));
 				juego.getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);
@@ -473,10 +486,10 @@ public class Enemigo extends GameObject {
 
 		g.drawImage(getSkin(), getX(), getY(), null);
 
-		if(GameManager.TEST) {
-			
+		if (GameManager.TEST) {
+
 			GameManager.renderBounds(g, this);
-			
+
 		}
 
 		for (int i = 0; i < disparos.size(); i++) {
@@ -487,6 +500,12 @@ public class Enemigo extends GameObject {
 
 		}
 
+	}
+
+	@Override
+	public Rectangle getVision() {
+
+		return new Rectangle(getX(), getY() + getAltura(), getAncho(), getAltura() * 2);
 	}
 
 }

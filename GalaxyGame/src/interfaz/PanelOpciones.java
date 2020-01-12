@@ -2,16 +2,11 @@ package interfaz;
 
 import javax.swing.*;
 
-import modelo.Explosion;
 import tools.GameManager;
 import tools.SoundPlayer;
-import tools.ImageLoader;
-import tools.Timer;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class PanelOpciones extends JPanel implements ActionListener {
 
