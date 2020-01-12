@@ -187,6 +187,13 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * Modifica la skin, vida, velocidad y movimiento de un {@code Enemigo}.
+	 * @param skin La nueva skin del {@code Enemigo}.
+	 * @param vida La nueva vida del {@code Enemigo}.
+	 * @param velocidad La nueva velocidad del {@code Enemigo}.
+	 * @param movimiento El nuevo movimiento del {@code Enemigo}.
+	 */
 	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento) {
 
 		this.vida = vida;

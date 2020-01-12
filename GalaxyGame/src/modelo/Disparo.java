@@ -75,7 +75,7 @@ public class Disparo extends GameObject {
 	/**
 	 * Modifica la skin junto con el ancho y la altura del {@code Disparo}.
 	 * 
-	 * @param skin
+	 * @param skin La skin a poner al {@code Disparo}.
 	 */
 	private void crearPorSkin(String skin) {
 
@@ -115,10 +115,18 @@ public class Disparo extends GameObject {
 		super.setY(super.getY() + super.getVelY());
 	}
 
+	/**
+	 * Retorna el tipo del {@code Disparo}.
+	 * @return El tipo del {@code Disparo}.
+	 */
 	public int getTipo() {
 		return tipo;
 	}
 
+	/**
+	 * Modifica el tipo del {@code Disparo}.
+	 * @param tipo El nuevo tipo del {@code Disparo}.
+	 */
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}

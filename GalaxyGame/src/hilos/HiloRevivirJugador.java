@@ -3,8 +3,17 @@ package hilos;
 import modelo.Juego;
 import tools.GameManager;
 
+/**
+ * {@code HiloRevivirJugador} se encarga de revivir al {@code Jugador} cuando se encuentre muerto despues de un determinado tiempo.
+ * @author juanchovelezpro
+ *
+ */
 public class HiloRevivirJugador extends HiloAbstract {
 
+	/**
+	 * Crea un {@code HiloRevivirJugador} con el {@code Juego} del proceso.
+	 * @param juego El {@code Juego} del proceso.
+	 */
 	public HiloRevivirJugador(Juego juego) {
 
 		super(juego);

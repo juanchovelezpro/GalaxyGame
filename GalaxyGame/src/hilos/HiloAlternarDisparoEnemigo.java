@@ -3,8 +3,17 @@ package hilos;
 import java.util.Random;
 import modelo.Juego;
 
+/**
+ * {@code HiloAlternarDisparoEnemigo} se encarga de modificar la decision del enemigo si debe disparar o no.
+ * @author juanchovelezpro
+ *
+ */
 public class HiloAlternarDisparoEnemigo extends HiloAbstract {
 
+	/**
+	 * Crea un {@code HiloAlternarDisparoEnemigo} 
+	 * @param juego El juego del proceso.
+	 */
 	public HiloAlternarDisparoEnemigo(Juego juego) {
 
 		super(juego);

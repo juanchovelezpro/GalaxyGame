@@ -69,6 +69,12 @@ public class Fisica {
 		return colision;
 	}
 
+	/**
+	 * Retorna si la vision de algun {@code GameObject} intersecta, es decir detecta algun disparo de la lista.
+	 * @param vision La vision del {@code GameObject}.
+	 * @param disparos Una lista de disparos de un {@code GameObject}.
+	 * @return Retorna si la vision detecta algun {@code Disparo}.
+	 */
 	public static boolean detect(Rectangle vision, LinkedList<Disparo> disparos) {
 
 		boolean detected = false;
