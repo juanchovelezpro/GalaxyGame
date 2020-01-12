@@ -92,5 +92,29 @@ public class Fisica {
 		return detected;
 
 	}
+	
+	/**
+	 * Retorna si la vision de un {@code Enemigo} detecta a otro {@code Enemigo}.
+	 * @param enemigo El {@code Enemigo} con el que se detectara a otro {@code Enemigo}
+	 * @param enemigos La lista de enemigos.
+	 * @return {@code true} la vision del {@code Enemigo} ha detectado a otro {@code Enemigo}.
+	 */
+	public static boolean detect(Enemigo enemigo, LinkedList<Enemigo> enemigos) {
+		
+		boolean detected = false;
+
+		for (int i = 0; i < enemigos.size(); i++) {
+
+			if (enemigo.getVision().getBounds().intersects(enemigos.get(i).getBounds())) {
+
+				detected = true;
+
+			}
+
+		}
+
+		return detected;
+		
+	}
 
 }

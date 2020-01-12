@@ -123,6 +123,19 @@ public class Enemigo extends GameObject {
 	 * Auxiliar para los movimientos especiales del {@code Enemigo}.
 	 */
 	private double auxMovs;
+	
+	
+	/**
+	 * Determina si el {@code Enemigo} puede esquivar o no.
+	 */
+	private boolean esquivar;
+	
+
+	/**
+	 * Determina a que lado el {@code Enemigo} va a esquivar.
+	 * <p>{@code true} = derecha, {@code false} = izquierda.</p>
+	 */
+	private boolean ladoEsquivar;
 
 	/**
 	 * Objeto {@code Random} que permite obtener numeros al azar.
@@ -151,6 +164,8 @@ public class Enemigo extends GameObject {
 
 		movimiento = 0;
 		auxMovs = 0.0;
+		esquivar = false;
+		ladoEsquivar = false;
 
 		crearPorTipo(tipo);
 
@@ -169,10 +184,10 @@ public class Enemigo extends GameObject {
 		switch (tipo) {
 		case 1:
 
-			crearEnemigo("nave2", 1, 1, 1);
+			crearEnemigo("nave2", 1, 1, 1, true);
 			break;
 		case 2:
-			crearEnemigo("nave6", 2, 3, 1);
+			crearEnemigo("nave6", 2, 3, 1, false);
 			break;
 		case 3:
 
@@ -189,13 +204,16 @@ public class Enemigo extends GameObject {
 
 	/**
 	 * Modifica la skin, vida, velocidad y movimiento de un {@code Enemigo}.
-	 * @param skin La nueva skin del {@code Enemigo}.
-	 * @param vida La nueva vida del {@code Enemigo}.
-	 * @param velocidad La nueva velocidad del {@code Enemigo}.
+	 * 
+	 * @param skin       La nueva skin del {@code Enemigo}.
+	 * @param vida       La nueva vida del {@code Enemigo}.
+	 * @param velocidad  La nueva velocidad del {@code Enemigo}.
 	 * @param movimiento El nuevo movimiento del {@code Enemigo}.
+	 * @param esquivar   El nuevo esquivar del {@code Enemigo}, {@code true} esquiva, {@code false} no esquiva.
 	 */
-	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento) {
+	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento, boolean esquivar) {
 
+		this.esquivar = esquivar;
 		this.vida = vida;
 		this.movimiento = movimiento;
 		setVelY(velocidad);
@@ -272,8 +290,15 @@ public class Enemigo extends GameObject {
 
 			if (Fisica.detect(getVision(), juego.getJugador().getDisparos())) {
 
-				if (tipo == 1)
-					setX(getX() + 3);
+				if(esquivar)
+				esquivar();
+
+			}
+
+			if (Fisica.detect(this, juego.getEnemigos())) {
+				
+				
+				esquivar();
 
 			}
 
@@ -358,8 +383,37 @@ public class Enemigo extends GameObject {
 
 	}
 
+	/**
+	 * Permite que el enemigo pueda esquivar hacia un lado, dependiendo de la variable {@link #ladoEsquivar}
+	 */
 	public void esquivar() {
 
+		if (ladoEsquivar) {
+
+			setX(getX() + 3);
+
+		} else {
+
+			setX(getX() - 3);
+
+		}
+
+	}
+
+	/**
+	 * Retorna el lado al que va esquivar el {@code Enemigo}
+	 * @return {@code true} si el {@code Enemigo} va a esquivar hacia la derecha o {@code false} en caso contrario.
+	 */
+	public boolean getLadoEsquivar() {
+		return ladoEsquivar;
+	}
+
+	/**
+	 * Modifica el lado a esquivar del {@code Enemigo}.
+	 * @param ladoEsquivar {@code true} esquiva hacia la derecha, {@code false} hacia la izquierda.
+	 */
+	public void setLadoEsquivar(boolean ladoEsquivar) {
+		this.ladoEsquivar = ladoEsquivar;
 	}
 
 	/**
@@ -426,7 +480,7 @@ public class Enemigo extends GameObject {
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X - 3, super.getY() + SHOT_OFFSET_Y, 0, 15));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15));
 		}
 
 		if (tipo == 2) {

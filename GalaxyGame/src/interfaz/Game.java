@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import hilos.HiloAbstract;
 import hilos.HiloAlternarDisparoEnemigo;
+import hilos.HiloAlternarEsquivarEnemigo;
 import hilos.HiloDesplegarEnemigos;
 import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
@@ -61,6 +62,7 @@ public class Game extends JFrame {
 		threads.add(new HiloMovimientoEnemigos(juego));
 		threads.add(new HiloAlternarDisparoEnemigo(juego));
 		threads.add(new HiloDisparoEnemigo(juego));
+		threads.add(new HiloAlternarEsquivarEnemigo(juego));
 		threads.add(new HiloDesplegarEnemigos(juego, 10));
 
 	}
