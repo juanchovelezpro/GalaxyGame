@@ -3,7 +3,6 @@ package modelo;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
-import java.util.Random;
 import hilos.HiloDisparoEnemigo;
 import hilos.HiloMovimientoEnemigos;
 import modelo.Potenciador.PODER;
@@ -161,11 +160,6 @@ public class Enemigo extends GameObject {
 	private Thread controlPowerUp;
 
 	/**
-	 * Objeto {@code Random} que permite obtener numeros al azar.
-	 */
-	private Random r;
-
-	/**
 	 * Constructor que crea un {@code Enemigo} segun el tipo y el {@code Juego} al
 	 * que pertenece. Las coordenadas (x,y) en las que se crea el enemigo son
 	 * aleatorias definidas por los limites establecidos.
@@ -177,10 +171,9 @@ public class Enemigo extends GameObject {
 
 		super(juego);
 
-		r = new Random();
 		this.juego = juego;
-		setX(r.nextInt(X_BOUND));
-		setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+		setX(GameManager.random.nextInt(X_BOUND));
+		setY(GameManager.random.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 		vivo = true;
 
 		this.tipo = tipo;
@@ -303,8 +296,8 @@ public class Enemigo extends GameObject {
 		if (vivo) {
 
 			if (super.getY() >= Y_LIMIT) {
-				super.setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
-				super.setX(r.nextInt(X_BOUND));
+				super.setY(GameManager.random.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
+				super.setX(GameManager.random.nextInt(X_BOUND));
 			}
 
 			// Si la salud es menor a cero se muere.

@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Random;
 
 import modelo.GameObject;
 
@@ -63,6 +64,9 @@ public class GameManager {
 	 * Permite realizar pruebas al juego. (Utilizar en modo debugger)
 	 */
 	public static final boolean TEST = true;
+	
+	public static final Random random = new Random();
+	
 
 	/**
 	 * Las imagenes del juego.
