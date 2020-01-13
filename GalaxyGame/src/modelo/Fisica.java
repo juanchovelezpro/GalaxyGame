@@ -20,10 +20,11 @@ public class Fisica {
 	 * 
 	 * @param objeto   Un {@code GameObject}
 	 * @param enemigos La {@code LinkedList} de enemigos
+	 * @param juego    El {@code Juego} que contiene el objeto y los enemigos.
 	 * @return {@code true} si el objeto y algun {@code Enemigo} de la
 	 *         {@code LinkedList} han colisionado, {@code false} en caso contrario.
 	 */
-	public static boolean colision(GameObject objeto, LinkedList<Enemigo> enemigos) {
+	public static boolean colision(GameObject objeto, LinkedList<Enemigo> enemigos, Juego juego) {
 
 		boolean colision = false;
 
@@ -34,9 +35,9 @@ public class Fisica {
 				colision = true;
 				SoundPlayer.play("/sounds/explosion.wav");
 
-				enemigos.get(i).setVida(enemigos.get(i).getVida() - 1);
+				enemigos.get(i).setSalud(enemigos.get(i).getSalud() - juego.getJugador().getDamage());
 
-				if (enemigos.get(i).getVida() <= 0) {
+				if (enemigos.get(i).getSalud() <= 0) {
 
 					enemigos.get(i).morir();
 
@@ -65,13 +66,36 @@ public class Fisica {
 			SoundPlayer.play("/sounds/explosion.wav");
 
 		}
+		return colision;
 
+	}
+	
+	/**
+	 * Verifica si un {@code Jugador} colisiona con un {@code Potenciador}.
+	 * @param jugador El {@code Jugador} con el que se va a verificar la colision.
+	 * @param powerUp El {@code Potenciador} con el que se va a verificar la colision.
+	 * @return Retorna {@code true} si se presenta la colision, {@code false} en caso contrario.
+	 */
+	public static boolean colision(Jugador jugador, Potenciador powerUp) {
+		
+		boolean colision = false;
+		
+		if(jugador.getBounds().intersects(powerUp.getBounds())) {
+			
+			colision = true;
+			SoundPlayer.play(powerUp.getSonido());
+			
+		}
+		
+		
 		return colision;
 	}
 
 	/**
-	 * Retorna si la vision de algun {@code GameObject} intersecta, es decir detecta algun disparo de la lista.
-	 * @param vision La vision del {@code GameObject}.
+	 * Retorna si la vision de algun {@code GameObject} intersecta, es decir detecta
+	 * algun disparo de la lista.
+	 * 
+	 * @param vision   La vision del {@code GameObject}.
 	 * @param disparos Una lista de disparos de un {@code GameObject}.
 	 * @return Retorna si la vision detecta algun {@code Disparo}.
 	 */
@@ -92,15 +116,18 @@ public class Fisica {
 		return detected;
 
 	}
-	
+
 	/**
 	 * Retorna si la vision de un {@code Enemigo} detecta a otro {@code Enemigo}.
-	 * @param enemigo El {@code Enemigo} con el que se detectara a otro {@code Enemigo}
+	 * 
+	 * @param enemigo  El {@code Enemigo} con el que se detectara a otro
+	 *                 {@code Enemigo}
 	 * @param enemigos La lista de enemigos.
-	 * @return {@code true} la vision del {@code Enemigo} ha detectado a otro {@code Enemigo}.
+	 * @return {@code true} la vision del {@code Enemigo} ha detectado a otro
+	 *         {@code Enemigo}.
 	 */
 	public static boolean detect(Enemigo enemigo, LinkedList<Enemigo> enemigos) {
-		
+
 		boolean detected = false;
 
 		for (int i = 0; i < enemigos.size(); i++) {
@@ -114,7 +141,7 @@ public class Fisica {
 		}
 
 		return detected;
-		
+
 	}
 
 }

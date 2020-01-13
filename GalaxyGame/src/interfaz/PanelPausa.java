@@ -71,7 +71,7 @@ public class PanelPausa extends JPanel implements ActionListener {
 		if (e.getSource().equals(butReanudar)) {
 
 			panelGame.getPanelOpciones().getGame().getJuego().setPausa(false);
-			panelGame.reanudar();
+			panelGame.getOpciones().getGame().getJuego().reanudarProcesos();
 			panelGame.remove(this);
 
 		}

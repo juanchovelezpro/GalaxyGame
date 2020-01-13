@@ -1,11 +1,12 @@
 package modelo;
 
 import java.awt.Graphics;
-
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.Random;
-
+import hilos.HiloDisparoEnemigo;
+import hilos.HiloMovimientoEnemigos;
+import modelo.Potenciador.PODER;
 import tools.GameManager;
 
 /**
@@ -99,6 +100,11 @@ public class Enemigo extends GameObject {
 	private int vida;
 
 	/**
+	 * La cantidad de vida que tiene el {@code Enemigo}.
+	 */
+	private int salud;
+
+	/**
 	 * Para consultar si el {@code Enemigo} se encuentra vivo.
 	 */
 	private boolean vivo;
@@ -123,19 +129,36 @@ public class Enemigo extends GameObject {
 	 * Auxiliar para los movimientos especiales del {@code Enemigo}.
 	 */
 	private double auxMovs;
-	
-	
+
 	/**
 	 * Determina si el {@code Enemigo} puede esquivar o no.
 	 */
 	private boolean esquivar;
-	
 
 	/**
 	 * Determina a que lado el {@code Enemigo} va a esquivar.
-	 * <p>{@code true} = derecha, {@code false} = izquierda.</p>
+	 * <p>
+	 * {@code true} = derecha, {@code false} = izquierda.
+	 * </p>
 	 */
 	private boolean ladoEsquivar;
+
+	/**
+	 * La cantidad de daño que puede infligir un {@code Enemigo}.
+	 */
+	private int damage;
+
+	/**
+	 * El {@code Potenciador} que el {@code Enemigo} puede dropear.
+	 */
+	private Potenciador powerUp;
+
+	/**
+	 * El controlador del {@code Potenciador} para su duracion en el {@code Juego}.
+	 * Dicha duracion es mientras el {@code Jugador} no haya capturado el
+	 * {@code Potenciador}.
+	 */
+	private Thread controlPowerUp;
 
 	/**
 	 * Objeto {@code Random} que permite obtener numeros al azar.
@@ -152,10 +175,10 @@ public class Enemigo extends GameObject {
 	 */
 	public Enemigo(int tipo, Juego juego) {
 
-		super();
+		super(juego);
 
 		r = new Random();
-
+		this.juego = juego;
 		setX(r.nextInt(X_BOUND));
 		setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 		vivo = true;
@@ -166,16 +189,18 @@ public class Enemigo extends GameObject {
 		auxMovs = 0.0;
 		esquivar = false;
 		ladoEsquivar = false;
+		damage = 0;
+		powerUp = null;
+		controlPowerUp = null;
 
 		crearPorTipo(tipo);
 
 		disparos = new LinkedList<>();
-		this.juego = juego;
 
 	}
 
 	/**
-	 * Establece las caracteristica al {@code Enemigo} segun el numero.
+	 * Establece las caracteristicas al {@code Enemigo} segun el numero.
 	 * 
 	 * @param tipo
 	 */
@@ -184,10 +209,10 @@ public class Enemigo extends GameObject {
 		switch (tipo) {
 		case 1:
 
-			crearEnemigo("nave2", 1, 1, 1, true);
+			crearEnemigo("nave2", 1, 1, 1, true, 33, null);
 			break;
 		case 2:
-			crearEnemigo("nave6", 2, 3, 1, false);
+			crearEnemigo("nave6", 2, 3, 1, false, 40, new Potenciador(PODER.CONGELAR, juego));
 			break;
 		case 3:
 
@@ -203,24 +228,31 @@ public class Enemigo extends GameObject {
 	}
 
 	/**
-	 * Modifica la skin, vida, velocidad y movimiento de un {@code Enemigo}.
+	 * Modifica la skin, vida, velocidad, habilidad de esquivar y movimiento de un
+	 * {@code Enemigo}.
 	 * 
 	 * @param skin       La nueva skin del {@code Enemigo}.
 	 * @param vida       La nueva vida del {@code Enemigo}.
 	 * @param velocidad  La nueva velocidad del {@code Enemigo}.
 	 * @param movimiento El nuevo movimiento del {@code Enemigo}.
-	 * @param esquivar   El nuevo esquivar del {@code Enemigo}, {@code true} esquiva, {@code false} no esquiva.
+	 * @param esquivar   El nuevo esquivar del {@code Enemigo}, {@code true}.
+	 *                   esquiva, {@code false} no esquiva.
+	 * @param damage     La cantidad de daño que va a infligir el {@code Enemigo}.
+	 * @param powerUp    El {@code Potenciador} que va a tener el {@code Enemigo}.
 	 */
-	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento, boolean esquivar) {
+	private void crearEnemigo(String skin, int vida, int velocidad, int movimiento, boolean esquivar, int damage,
+			Potenciador powerUp) {
 
+		this.damage = damage;
 		this.esquivar = esquivar;
 		this.vida = vida;
+		this.powerUp = powerUp;
+		salud = vida;
 		this.movimiento = movimiento;
-		setVelY(velocidad);
 		setSkin(GameManager.imagenes.get(skin));
 		setAltura(getSkin().getHeight(null));
 		setAncho(getSkin().getWidth(null));
-
+		setVelY(velocidad);
 	}
 
 	/**
@@ -267,41 +299,55 @@ public class Enemigo extends GameObject {
 	 */
 	public void mover() {
 
+		// Limites en X y Y
 		if (vivo) {
+
 			if (super.getY() >= Y_LIMIT) {
 				super.setY(r.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 				super.setX(r.nextInt(X_BOUND));
 			}
 
-			if (vida <= 0 && vivo)
+			// Si la salud es menor a cero se muere.
+			if (salud <= 0) {
 				morir();
+			}
 
+			// Si colisiona con el jugador.
 			if (Fisica.colision(this, juego.getJugador())) {
 
-				vida--;
+				if (!juego.getJugador().isInvulnerable()) {
+					juego.getJugador().morir();
+
+				}
 
 				juego.getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT, juego));
 				juego.getExplosiones().getLast().start();
 
-				if (!juego.getJugador().isInvulnerable())
-					juego.getJugador().morir();
+				morir();
 
 			}
 
+			// Si detecta un disparo del Jugador
 			if (Fisica.detect(getVision(), juego.getJugador().getDisparos())) {
 
-				if(esquivar)
-				esquivar();
+				if (esquivar)
+					esquivar();
 
 			}
 
+			// Si detecta otro Enemigo
 			if (Fisica.detect(this, juego.getEnemigos())) {
-				
-				
+
 				esquivar();
 
 			}
 
+			// Si el controlador del power up es != de null y no está disponible entonces
+			// poner el power Up en null.
+			if (powerUp != null && !powerUp.isDisponible())
+				powerUp = null;
+
+			// Realizar el debido movimiento.
 			switch (movimiento) {
 
 			case 1:
@@ -317,6 +363,13 @@ public class Enemigo extends GameObject {
 				break;
 
 			}
+		} else {
+
+			// Si el controlador del power up es != de null y no está disponible entonces
+			// poner el power Up en null.
+			if (powerUp != null && !powerUp.isDisponible())
+				powerUp = null;
+
 		}
 	}
 
@@ -384,7 +437,8 @@ public class Enemigo extends GameObject {
 	}
 
 	/**
-	 * Permite que el enemigo pueda esquivar hacia un lado, dependiendo de la variable {@link #ladoEsquivar}
+	 * Permite que el enemigo pueda esquivar hacia un lado, dependiendo de la
+	 * variable {@link #ladoEsquivar}
 	 */
 	public void esquivar() {
 
@@ -402,7 +456,9 @@ public class Enemigo extends GameObject {
 
 	/**
 	 * Retorna el lado al que va esquivar el {@code Enemigo}
-	 * @return {@code true} si el {@code Enemigo} va a esquivar hacia la derecha o {@code false} en caso contrario.
+	 * 
+	 * @return {@code true} si el {@code Enemigo} va a esquivar hacia la derecha o
+	 *         {@code false} en caso contrario.
 	 */
 	public boolean getLadoEsquivar() {
 		return ladoEsquivar;
@@ -410,10 +466,30 @@ public class Enemigo extends GameObject {
 
 	/**
 	 * Modifica el lado a esquivar del {@code Enemigo}.
-	 * @param ladoEsquivar {@code true} esquiva hacia la derecha, {@code false} hacia la izquierda.
+	 * 
+	 * @param ladoEsquivar {@code true} esquiva hacia la derecha, {@code false}
+	 *                     hacia la izquierda.
 	 */
 	public void setLadoEsquivar(boolean ladoEsquivar) {
 		this.ladoEsquivar = ladoEsquivar;
+	}
+
+	/**
+	 * Retorna la cantidad de vida que tiene el {@code Enemigo}.
+	 * 
+	 * @return
+	 */
+	public int getSalud() {
+		return salud;
+	}
+
+	/**
+	 * Modifica la cantidad de vida del {@code Enemigo}.
+	 * 
+	 * @param salud La nueva cantidad de vida del {@code Enemigo}.
+	 */
+	public void setSalud(int salud) {
+		this.salud = salud;
 	}
 
 	/**
@@ -449,6 +525,15 @@ public class Enemigo extends GameObject {
 	 */
 	public void morir() {
 
+		if (powerUp != null) {
+
+			powerUp.setX(getX());
+			powerUp.setY(getY());
+			controlPowerUp = new Thread(powerUp);
+			controlPowerUp.start();
+
+		}
+
 		setX(X_DEATH);
 		setVelY(0);
 		vivo = false;
@@ -475,16 +560,35 @@ public class Enemigo extends GameObject {
 	}
 
 	/**
+	 * Retorna el controlador del {@code Potenciador} que tiene el {@code Enemigo}.
+	 * 
+	 * @return El controlador del {@code Potenciador} del {@code Enemigo}.
+	 */
+	public Thread getControlPowerUp() {
+		return controlPowerUp;
+	}
+
+	/**
+	 * Modifica el controlador del {@code Potenciador} del {@code Enemigo}.
+	 * 
+	 * @param controlPowerUp EL nuevo controlador del {@code Potenciador} del
+	 *                       {@code Enemigo}.
+	 */
+	public void setControlPowerUp(Thread controlPowerUp) {
+		this.controlPowerUp = controlPowerUp;
+	}
+
+	/**
 	 * Agrega un disparo a la lista de disparos del {@code Enemigo}.
 	 */
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, juego));
 		}
 
 		if (tipo == 2) {
-			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 20));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 20, juego));
 		}
 	}
 
@@ -496,6 +600,25 @@ public class Enemigo extends GameObject {
 	 */
 	public void eliminarDisparo(Disparo d) {
 		disparos.remove(d);
+	}
+
+	/**
+	 * Retorna el {@code Potenciador} que puede dropear el {@code Enemigo}. Puede
+	 * ser null si no tiene algun {@code Potenciador}
+	 * 
+	 * @return El {@code Potenciador} del {@code Enemigo}.
+	 */
+	public Potenciador getPowerUp() {
+		return powerUp;
+	}
+
+	/**
+	 * Modifica el {@code Potenciador} del {@code Enemigo}.
+	 * 
+	 * @param powerUp El nuevo {@code Potenciador} del {@code Enemigo}
+	 */
+	public void setPowerUp(Potenciador powerUp) {
+		this.powerUp = powerUp;
 	}
 
 	/**
@@ -531,8 +654,9 @@ public class Enemigo extends GameObject {
 
 				eliminarDisparo(disparoTemporal);
 
-				if (!juego.getJugador().isInvulnerable())
-					juego.getJugador().morir();
+				if (!juego.getJugador().isInvulnerable()) {
+					juego.getJugador().setSalud(juego.getJugador().getSalud() - damage);
+				}
 
 			}
 			if (disparoTemporal.getY() > SHOT_LIMIT)
@@ -546,6 +670,19 @@ public class Enemigo extends GameObject {
 	public void render(Graphics g) {
 
 		g.drawImage(getSkin(), getX(), getY(), null);
+
+		if (powerUp != null && powerUp.isDisponible())
+			powerUp.render(g);
+
+//		g.setColor(new Color(128, 128, 128));
+//		g.fillRect(getX(), getY() - 10, getAncho(), 2);
+//		g.setColor(new Color(0, 255, 0));
+//
+//		if (vivo) {
+//
+//			g.fillRect(getX(), getY() - 10, (getAncho() / vida) * salud, 2);
+//
+//		}
 
 		if (GameManager.TEST) {
 

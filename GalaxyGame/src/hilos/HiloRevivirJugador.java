@@ -4,24 +4,37 @@ import modelo.Juego;
 import tools.GameManager;
 
 /**
- * {@code HiloRevivirJugador} se encarga de revivir al {@code Jugador} cuando se encuentre muerto despues de un determinado tiempo.
+ * {@code HiloRevivirJugador} se encarga de revivir al {@code Jugador} cuando se
+ * encuentre muerto despues de un determinado tiempo.
+ * 
  * @author juanchovelezpro
  *
  */
 public class HiloRevivirJugador extends HiloAbstract {
 
+	private int auxTimeRevivir;
+	private int auxTimeInvulnerabilidad;
+
 	/**
 	 * Crea un {@code HiloRevivirJugador} con el {@code Juego} del proceso.
+	 * 
 	 * @param juego El {@code Juego} del proceso.
 	 */
 	public HiloRevivirJugador(Juego juego) {
 
 		super(juego);
-
+		auxTimeRevivir = 2;
+		auxTimeInvulnerabilidad = 3;
 	}
 
 	@Override
 	public void run() {
+
+		int revivir = auxTimeRevivir;
+		int invulnerabilidad = auxTimeInvulnerabilidad;
+
+		boolean auxRevivir = true;
+		boolean auxInvul = false;
 
 		while (true) {
 			try {
@@ -29,15 +42,32 @@ public class HiloRevivirJugador extends HiloAbstract {
 					Thread.sleep(10);
 					if (!getJuego().getJugador().isVivo()) {
 
-						Thread.sleep(2000);
-						getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1invulnerable"));
-						getJuego().getJugador().revivir();
-						getJuego().getJugador().setInvulnerable(true);
+						if (auxRevivir) {
+							Thread.sleep(1000);
+							auxTimeRevivir--;
+							if (auxTimeRevivir == 0) {
+								getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1invulnerable"));
+								getJuego().getJugador().revivir();
+								getJuego().getJugador().setInvulnerable(true);
+								auxTimeRevivir = revivir;
+								auxInvul = true;
+							}
+						}
 
-						Thread.sleep(3000);
+					} else {
 
-						getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1"));
-						getJuego().getJugador().setInvulnerable(false);
+						if (auxInvul) {
+							auxRevivir = false;
+							Thread.sleep(1000);
+							auxTimeInvulnerabilidad--;
+							if (auxTimeInvulnerabilidad == 0) {
+								getJuego().getJugador().setSkin(GameManager.imagenes.get("nave1"));
+								getJuego().getJugador().setInvulnerable(false);
+								auxTimeInvulnerabilidad = invulnerabilidad;
+								auxInvul = false;
+								auxRevivir = true;
+							}
+						}
 
 					}
 

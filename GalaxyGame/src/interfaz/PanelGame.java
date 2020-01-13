@@ -26,7 +26,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 		setBounds(GameManager.WIDTH / 4, 0, GameManager.WIDTH_GAME, GameManager.HEIGHT_GAME);
 
-		iniciar();
+		opciones.getGame().getJuego().iniciarProcesos();
 
 		addKeyListener(this);
 		setFocusable(true);
@@ -74,35 +74,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 	}
 
-	public void iniciar() {
 
-		for (int i = 0; i < opciones.getGame().getThreads().size(); i++) {
-
-			opciones.getGame().getThreads().get(i).start();
-
-		}
-
-	}
-
-	public void reanudar() {
-
-		for (int i = 0; i < opciones.getGame().getThreads().size(); i++) {
-
-			opciones.getGame().getThreads().get(i).reanudar();
-
-		}
-
-		for (int i = 0; i < opciones.getGame().getJuego().getExplosiones().size(); i++) {
-
-			if (opciones.getGame().getJuego().getExplosiones().get(i).isAlive()) {
-
-				opciones.getGame().getJuego().getExplosiones().get(i).reanudar();
-
-			}
-
-		}
-
-	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -149,7 +121,7 @@ public class PanelGame extends JPanel implements KeyListener {
 			} else {
 
 				juego.setPausa(false);
-				reanudar();
+				opciones.getGame().getJuego().reanudarProcesos();
 				remove(panelPausa);
 				panelPausa = null;
 			}
@@ -211,7 +183,7 @@ public class PanelGame extends JPanel implements KeyListener {
 
 			if (temp.isAlive()) {
 
-				temp.getAnimation().drawAnimation(g, temp.getX(), temp.getY() - 30, 25);
+				temp.render(g);
 
 			}
 		}

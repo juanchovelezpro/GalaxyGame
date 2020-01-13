@@ -3,8 +3,19 @@ package tools;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+/**
+ * Esta clase se encarga de cargar los sonidos en el {@code Juego}.
+ * 
+ * @author velez
+ *
+ */
 public class SoundPlayer {
 
+	/**
+	 * Reproduce un sonido.
+	 * 
+	 * @param path La ruta donde se encuentra el sonido.
+	 */
 	public static void play(String path) {
 
 		try {
@@ -21,7 +32,7 @@ public class SoundPlayer {
 					try {
 						Thread.sleep(sound.getMicrosecondLength() / 1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+
 						e.printStackTrace();
 					}
 

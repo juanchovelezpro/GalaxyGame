@@ -4,9 +4,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
+import hilos.HiloAbstract;
+
 /**
  * <p>
- * Clase abstracta para representar cualquier objeto del juego.
+ * Clase abstracta para representar cualquier objeto del juego. Hereda de
+ * {@code HiloAbstract}, por lo que un objeto {@code GameObject} tambien puede
+ * ser un objeto {@code Thread}.
  * </p>
  * <p>
  * Posee las caracteristicas necesarias para representar un objeto de un juego
@@ -25,7 +29,7 @@ import java.awt.Rectangle;
  * @author juanchovelezpro
  *
  */
-public abstract class GameObject {
+public abstract class GameObject extends HiloAbstract {
 
 	/**
 	 * La skin del {@code GameObject} representada como {@link Image}
@@ -75,8 +79,9 @@ public abstract class GameObject {
 	 * @param velY   La velocidad en el eje Y del {@code GameObject} de tipo
 	 *               {@code int}
 	 */
-	public GameObject(Image skin, int x, int y, int ancho, int altura, int velX, int velY) {
+	public GameObject(Image skin, int x, int y, int ancho, int altura, int velX, int velY, Juego juego) {
 
+		super(juego);
 		this.skin = skin;
 		this.x = x;
 		this.y = y;
@@ -98,8 +103,9 @@ public abstract class GameObject {
 	 * @param velX   La velocidad en el eje X del {@code GameObject} de tipo
 	 *               {@code int}
 	 */
-	public GameObject(int x, int y, int ancho, int altura, int velX) {
+	public GameObject(int x, int y, int ancho, int altura, int velX, Juego juego) {
 
+		super(juego);
 		skin = null;
 		velY = 0;
 		this.x = x;
@@ -116,8 +122,9 @@ public abstract class GameObject {
 	 * @param x La coordenada x del {@code GameObject}
 	 * @param y La coordenada y del {@code GameObject}
 	 */
-	public GameObject(int x, int y) {
+	public GameObject(int x, int y, Juego juego) {
 
+		super(juego);
 		this.x = x;
 		this.y = y;
 		skin = null;
@@ -132,8 +139,9 @@ public abstract class GameObject {
 	 * Constructor vacio que crea un {@code GameObject} con todas sus variables
 	 * iniciadas en {@code 0} o en {@code null} segun el caso.
 	 */
-	public GameObject() {
+	public GameObject(Juego juego) {
 
+		super(juego);
 		x = 0;
 		y = 0;
 		skin = null;
@@ -282,8 +290,8 @@ public abstract class GameObject {
 	 * Retorna un {@code Rectangle} que tiene las coordenadas (x,y) del
 	 * {@code GameObject} y el ancho y la altura del {@code GameObject}
 	 * 
-	 * @return El {@code Rectangle} con coordenas (x,y) del {@code GameObject} y el
-	 *         ancho y la altura del {@code GameObject}
+	 * @return El {@code Rectangle} con coordenadas (x,y) y ancho y la altura del
+	 *         {@code GameObject}
 	 */
 	public Rectangle getBounds() {
 

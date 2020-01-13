@@ -113,6 +113,16 @@ public class Jugador extends GameObject {
 	private int vidas;
 
 	/**
+	 * La vida del {@code Jugador}.
+	 */
+	private int vida;
+
+	/**
+	 * La cantidad de {@link #vida} del {@code Jugador}.
+	 */
+	private int salud;
+
+	/**
 	 * El daño que posee el {@code Jugador}.
 	 */
 	private int damage;
@@ -138,6 +148,11 @@ public class Jugador extends GameObject {
 	private boolean invulnerable;
 
 	/**
+	 * La lista de potenciadores del {@code Jugador}.
+	 */
+	private LinkedList<Potenciador> powerUps;
+
+	/**
 	 * Constructor que crea un {@code Jugador}. Todas los demas parametros del
 	 * {@code Jugador} son diferentes de {@code null}
 	 * 
@@ -145,17 +160,20 @@ public class Jugador extends GameObject {
 	 */
 	public Jugador(Juego juego) {
 
-		super(SPAWN_X, SPAWN_Y);
+		super(SPAWN_X, SPAWN_Y, juego);
 		setSkin(GameManager.imagenes.get("nave1"));
 		setAltura(HEIGHT);
 		setAncho(WIDTH);
 
 		disparos = new LinkedList<>();
+		powerUps = new LinkedList<>();
 
 		nick = "";
 		puntaje = 0;
 		vidas = 3;
-		damage = 1;
+		vida = 100;
+		salud = vida;
+		damage = 2;
 		vivo = true;
 		recargaDisparo = false;
 		invulnerable = false;
@@ -245,6 +263,42 @@ public class Jugador extends GameObject {
 	}
 
 	/**
+	 * Retorna la vida del {@code Jugador}.
+	 * 
+	 * @return La vida del {@code Jugador}.
+	 */
+	public int getVida() {
+		return vida;
+	}
+
+	/**
+	 * Modifica la vida del {@code Jugador}.
+	 * 
+	 * @param vida La nueva vida del {@code Jugador}.
+	 */
+	public void setVida(int vida) {
+		this.vida = vida;
+	}
+
+	/**
+	 * Retorna la cantidad de vida del {@code Jugador}.
+	 * 
+	 * @return La cantidad de vida del {@code Jugador}.
+	 */
+	public int getSalud() {
+		return salud;
+	}
+
+	/**
+	 * Modifica la cantidad de vida del {@code Jugador}.
+	 * 
+	 * @param salud La nueva cantidad del {@code Jugador}.
+	 */
+	public void setSalud(int salud) {
+		this.salud = salud;
+	}
+
+	/**
 	 * Retorna el daño que posee el {@code Jugador}.
 	 * 
 	 * @return El daño que posee el {@code Jugador}.
@@ -306,6 +360,12 @@ public class Jugador extends GameObject {
 	 */
 	public void mover() {
 
+		if (salud <= 0) {
+
+			morir();
+
+		}
+
 		if (vivo) {
 			if (super.getX() >= X_RIGHT_LIMIT) {
 				super.setX(X_RIGHT_LIMIT);
@@ -328,6 +388,7 @@ public class Jugador extends GameObject {
 
 		setX(SPAWN_X);
 		setY(SPAWN_Y);
+		setSalud(vida);
 		setVivo(true);
 
 	}
@@ -374,12 +435,54 @@ public class Jugador extends GameObject {
 	}
 
 	/**
+	 * Retorna la lista de potenciadores del {@code Jugador}.
+	 * 
+	 * @return La lista de potenciadores del {@code Jugador}.
+	 */
+	public LinkedList<Potenciador> getPowerUps() {
+		return powerUps;
+	}
+
+	/**
+	 * Modifica la lista de potenciadores del {@code Jugador}.
+	 * 
+	 * @param powerUps La nueva lista de potenciadores del {@code Jugador}.
+	 */
+	public void setPowerUps(LinkedList<Potenciador> powerUps) {
+		this.powerUps = powerUps;
+	}
+
+	/**
+	 * Agrega un {@code Potenciador} a la lista de potenciadores del
+	 * {@code Jugador}.
+	 * 
+	 * @param powerUp El {@code Potenciador} a agregar.
+	 */
+	public void agregarPowerUp(Potenciador powerUp) {
+
+		powerUps.add(powerUp);
+
+	}
+
+	/**
+	 * Elimina un {@code Potenciador} de la lista de potenciadores del
+	 * {@code Jugador}.
+	 * 
+	 * @param powerUp El {@code Potenciador} a eliminar.
+	 */
+	public void eliminarPowerUp(Potenciador powerUp) {
+
+		powerUps.add(powerUp);
+
+	}
+
+	/**
 	 * Agrega un {@code Disparo} a la lista de disparos del {@code Jugador}.
 	 * 
 	 * @see #disparos
 	 */
 	public void agregarDisparo() {
-		disparos.add(new Disparo(4, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15));
+		disparos.add(new Disparo(4, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, juego));
 	}
 
 	/**
@@ -421,7 +524,7 @@ public class Jugador extends GameObject {
 
 			disparoTemporal.avanzarDisparo();
 
-			if (Fisica.colision(disparoTemporal, juego.getEnemigos())) {
+			if (Fisica.colision(disparoTemporal, juego.getEnemigos(), juego)) {
 
 				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY(), juego));
 				juego.getExplosiones().getLast().start();
@@ -439,7 +542,7 @@ public class Jugador extends GameObject {
 	@Override
 	public void render(Graphics g) {
 
-		g.drawImage(super.getSkin(), super.getX(), super.getY(), null);
+		g.drawImage(getSkin(), getX(), getY(), null);
 
 		if (GameManager.TEST) {
 

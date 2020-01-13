@@ -1,5 +1,10 @@
 package tools;
 
+/**
+ * Esta clase se encarga de calcular los frames per seconds del {@code Juego}.
+ * @author juanchovelezpro
+ *
+ */
 public final class ManagerFPS {
 
 	private static int startTime;
@@ -8,13 +13,17 @@ public final class ManagerFPS {
 	private static int frames = 0;
 	public static int fps;
 
-	/** Start counting the fps **/
+	/**
+	 * Empieza el conteo de frames.
+	 */
 	public final static void StartCounter() {
 		// get the current time
 		startTime = (int) System.currentTimeMillis();
 	}
 
-	/** stop counting the fps and display it at the console */
+	/**
+	 * Postea los frames per second.
+	 */
 	public final static void StopAndPost() {
 		// get the current time
 		endTime = (int) System.currentTimeMillis();

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import tools.GameManager;
 
 /**
- * Representa un disparo en el juego.
+ * Representa un disparo en el {@code Juego}.
  * 
  * @author juanchovelezpro
  *
@@ -27,8 +27,8 @@ public class Disparo extends GameObject {
 	 * @param velX La velocidad en el eje X del {@code Disparo}.
 	 * @param velY La velocidad en el eje Y del {@code Disparo}.
 	 */
-	public Disparo(int tipo, int x, int y, int velX, int velY) {
-		super(x, y);
+	public Disparo(int tipo, int x, int y, int velX, int velY, Juego juego) {
+		super(x, y, juego);
 		setVelX(velX);
 		setVelY(velY);
 

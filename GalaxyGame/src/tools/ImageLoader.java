@@ -5,8 +5,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Esta clase se encarga de cargar las imagenes en el {@code Juego}.
+ * @author juanchovelezpro
+ *
+ */
 public class ImageLoader {
 
+	/**
+	 * Carga la imagen.
+	 * @param ruta La ruta donde se encuentra la imagen.
+	 * @return La imagen de tipo {@code Image}.
+	 */
 	public static Image cargarImagen(String ruta) {
 
 		Image image = null;
@@ -19,6 +29,11 @@ public class ImageLoader {
 
 	}
 
+	/**
+	 * Carga una imagen en un objeto {@code BufferedImage}.
+	 * @param ruta La ruta donde se encuentra la imagen.
+	 * @return La imagen de tipo {@code BufferedImage}
+	 */
 	public static BufferedImage cargarSprites(String ruta) {
 
 		Image image = null;
