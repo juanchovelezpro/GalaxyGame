@@ -79,7 +79,7 @@ public class Juego {
 		threads.add(new HiloDisparoEnemigo(this));
 		threads.add(new HiloMovimientoPotenciadores(this));
 		threads.add(new HiloAlternarEsquivarEnemigo(this));
-		threads.add(new HiloDesplegarEnemigos(this, 1));
+		threads.add(new HiloDesplegarEnemigos(this, 15));
 
 	}
 
@@ -223,7 +223,7 @@ public class Juego {
 
 		Random r = new Random();
 
-		enemigos.add(new Enemigo(2, this));
+		enemigos.add(new Enemigo(r.nextInt(2)+1, this));
 
 		enemigosRestantes++;
 

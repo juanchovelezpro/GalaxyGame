@@ -69,26 +69,47 @@ public class Fisica {
 		return colision;
 
 	}
-	
+
 	/**
 	 * Verifica si un {@code Jugador} colisiona con un {@code Potenciador}.
+	 * 
 	 * @param jugador El {@code Jugador} con el que se va a verificar la colision.
-	 * @param powerUp El {@code Potenciador} con el que se va a verificar la colision.
-	 * @return Retorna {@code true} si se presenta la colision, {@code false} en caso contrario.
+	 * @param powerUp El {@code Potenciador} con el que se va a verificar la
+	 *                colision.
+	 * @return Retorna {@code true} si se presenta la colision, {@code false} en
+	 *         caso contrario.
 	 */
 	public static boolean colision(Jugador jugador, Potenciador powerUp) {
-		
+
 		boolean colision = false;
-		
-		if(jugador.getBounds().intersects(powerUp.getBounds())) {
-			
+
+		if (jugador.getBounds().intersects(powerUp.getBounds())) {
+
 			colision = true;
 			SoundPlayer.play(powerUp.getSonido());
-			
+
 		}
-		
-		
+
 		return colision;
+	}
+
+	public static boolean colision(LinkedList<Disparo> disparos, Potenciador powerUp) {
+
+		boolean colision = false;
+
+		for (int i = 0; i < disparos.size(); i++) {
+
+			if (disparos.get(i).getBounds().intersects(powerUp.getBounds())) {
+
+				colision = true;
+				SoundPlayer.play(powerUp.getSonido());
+
+			}
+
+		}
+
+		return colision;
+
 	}
 
 	/**

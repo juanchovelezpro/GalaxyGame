@@ -97,7 +97,7 @@ public class Potenciador extends GameObject {
 			setSkin(GameManager.imagenes.get("CONGELAR"));
 			setAltura(getSkin().getHeight(null));
 			setAncho(getSkin().getWidth(null));
-			sonido = "/sounds/explosion.wav";
+			sonido = "/sounds/freeze.wav";
 			break;
 
 		default:
@@ -127,6 +127,14 @@ public class Potenciador extends GameObject {
 			disponible = false;
 
 		}
+		
+		if(Fisica.colision(juego.getJugador().getDisparos(), this)) {
+			
+			juego.getJugador().agregarPowerUp(this);
+			disponible = false;
+			
+		}
+		
 
 	}
 
