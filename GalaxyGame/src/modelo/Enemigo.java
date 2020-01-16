@@ -114,11 +114,6 @@ public class Enemigo extends GameObject {
 	private LinkedList<Disparo> disparos;
 
 	/**
-	 * El {@code Juego} al que pertenece el {@code Enemigo}.
-	 */
-	private Juego juego;
-
-	/**
 	 * Para distinguir los tipos de movimientos que el {@code Enemigo} puede
 	 * realizar.
 	 */
@@ -171,7 +166,6 @@ public class Enemigo extends GameObject {
 
 		super(juego);
 
-		this.juego = juego;
 		setX(GameManager.random.nextInt(X_BOUND));
 		setY(GameManager.random.nextInt(Y_MAX + 1 - Y_MIN) + Y_MIN);
 		vivo = true;
@@ -205,7 +199,7 @@ public class Enemigo extends GameObject {
 			crearEnemigo("nave2", 1, 1, 1, true, 33, null);
 			break;
 		case 2:
-			crearEnemigo("nave6", 2, 3, 1, false, 40, new Potenciador(PODER.CONGELAR, juego));
+			crearEnemigo("nave6", 2, 3, 1, false, 40, new Potenciador(PODER.CONGELAR, getJuego()));
 			break;
 		case 3:
 
@@ -306,22 +300,22 @@ public class Enemigo extends GameObject {
 			}
 
 			// Si colisiona con el jugador.
-			if (Fisica.colision(this, juego.getJugador())) {
+			if (Fisica.colision(this, getJuego().getJugador())) {
 
-				if (!juego.getJugador().isInvulnerable()) {
-					juego.getJugador().morir();
+				if (!getJuego().getJugador().isInvulnerable()) {
+					getJuego().getJugador().morir();
 
 				}
 
-				juego.getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT, juego));
-				juego.getExplosiones().getLast().start();
+				getJuego().getExplosiones().add(new Explosion(this.getX() + WIDTH / 2, this.getY() + HEIGHT, getJuego()));
+				getJuego().getExplosiones().getLast().start();
 
 				morir();
 
 			}
 
 			// Si detecta un disparo del Jugador
-			if (Fisica.detect(getVision(), juego.getJugador().getDisparos())) {
+			if (Fisica.detect(getVision(), getJuego().getJugador().getDisparos())) {
 
 				if (esquivar)
 					esquivar();
@@ -329,7 +323,7 @@ public class Enemigo extends GameObject {
 			}
 
 			// Si detecta otro Enemigo
-			if (Fisica.detect(this, juego.getEnemigos())) {
+			if (Fisica.detect(this, getJuego().getEnemigos())) {
 
 				esquivar();
 
@@ -530,7 +524,7 @@ public class Enemigo extends GameObject {
 		setX(X_DEATH);
 		setVelY(0);
 		vivo = false;
-		juego.setEnemigosRestantes(juego.getEnemigosRestantes() - 1);
+		getJuego().setEnemigosRestantes(getJuego().getEnemigosRestantes() - 1);
 
 	}
 
@@ -577,11 +571,11 @@ public class Enemigo extends GameObject {
 	public void agregarDisparo() {
 
 		if (tipo == 1) {
-			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, juego));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, getJuego()));
 		}
 
 		if (tipo == 2) {
-			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 20, juego));
+			disparos.add(new Disparo(1, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 20, getJuego()));
 		}
 	}
 
@@ -639,16 +633,16 @@ public class Enemigo extends GameObject {
 
 			disparoTemporal.avanzarDisparoEnemigo();
 
-			if (Fisica.colision(disparoTemporal, juego.getJugador())) {
+			if (Fisica.colision(disparoTemporal, getJuego().getJugador())) {
 
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(),
-						disparoTemporal.getY() + disparoTemporal.getAltura(), juego));
-				juego.getExplosiones().getLast().start();
+				getJuego().getExplosiones().add(new Explosion(disparoTemporal.getX(),
+						disparoTemporal.getY() + disparoTemporal.getAltura(), getJuego()));
+				getJuego().getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);
 
-				if (!juego.getJugador().isInvulnerable()) {
-					juego.getJugador().setSalud(juego.getJugador().getSalud() - damage);
+				if (!getJuego().getJugador().isInvulnerable()) {
+					getJuego().getJugador().setSalud(getJuego().getJugador().getSalud() - damage);
 				}
 
 			}

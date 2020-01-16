@@ -64,9 +64,8 @@ public class GameManager {
 	 * Permite realizar pruebas al juego. (Utilizar en modo debugger)
 	 */
 	public static final boolean TEST = true;
-	
+
 	public static final Random random = new Random();
-	
 
 	/**
 	 * Las imagenes del juego.
@@ -102,17 +101,25 @@ public class GameManager {
 
 		// Potenciadores
 		imagenes.put("CONGELAR", ImageLoader.cargarImagen("potenciadores/iceBall.png"));
+
+		// Bloques
+		imagenes.put("ROCA", ImageLoader.cargarImagen("bloques/roca.png"));
+		imagenes.put("BRICK", ImageLoader.cargarImagen("bloques/brick.jpg"));
 		
-		
-		//Sprites
-		sprites.put("EXPLOSION", ImageLoader.cargarSprites("sprites/explosion.png"));
-		
+
+		// Sprites
+		sprites.put("EXPLOSION", ImageLoader.cargarBufferedImage("sprites/explosion.png"));
+
+		// Mapas
+		sprites.put("MAPA", ImageLoader.cargarBufferedImage("mapas/mapTest.png"));
 
 	}
 
 	/**
-	 * Se encarga de renderizar los limites que un {@code GameObject} tiene en el {@code Juego}
-	 * @param g Los {@code Graphics} que se encargan de renderizar.
+	 * Se encarga de renderizar los limites que un {@code GameObject} tiene en el
+	 * {@code Juego}
+	 * 
+	 * @param g  Los {@code Graphics} que se encargan de renderizar.
 	 * @param go El {@code GameObject} al cual se le va a renderizar los limites.
 	 */
 	public static void renderBounds(Graphics g, GameObject go) {

@@ -34,7 +34,7 @@ public class ImageLoader {
 	 * @param ruta La ruta donde se encuentra la imagen.
 	 * @return La imagen de tipo {@code BufferedImage}
 	 */
-	public static BufferedImage cargarSprites(String ruta) {
+	public static BufferedImage cargarBufferedImage(String ruta) {
 
 		Image image = null;
 

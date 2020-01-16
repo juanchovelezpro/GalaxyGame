@@ -20,11 +20,6 @@ public class Potenciador extends GameObject {
 	private PODER poder;
 
 	/**
-	 * El {@code Juego} donde se encuentra el {@code Potenciador}
-	 */
-	private Juego juego;
-
-	/**
 	 * Permite verificar si el {@code Potenciador} cuando este moviendose y el
 	 * {@code Jugador} aun no lo haya capturado, este disponible.
 	 */
@@ -57,17 +52,17 @@ public class Potenciador extends GameObject {
 
 		super(x, y, juego);
 		this.poder = poder;
+		setX(-100);
 		setVelX(1);
 		setVelY(1);
 		crearPotenciador(poder);
 		disponible = true;
-		this.juego = juego;
 		sonido = "";
 
 	}
 
 	/**
-	 * Consturye un {@code Potenciador} con un {@code PODER}
+	 * Construye un {@code Potenciador} con un {@code PODER}
 	 * 
 	 * @param poder El {@code PODER} del {@code Potenciador}
 	 * @param juego El {@code Juego}.
@@ -81,7 +76,6 @@ public class Potenciador extends GameObject {
 		setVelY(1);
 		crearPotenciador(poder);
 		disponible = true;
-		this.juego = juego;
 
 	}
 
@@ -120,21 +114,20 @@ public class Potenciador extends GameObject {
 		setX(getX() + getVelX());
 		setY(getY() + getVelY());
 
-		if (Fisica.colision(juego.getJugador(), this)) {
+		if (Fisica.colision(getJuego().getJugador(), this)) {
 
-			juego.getJugador().agregarPowerUp(this);
+			getJuego().getJugador().agregarPowerUp(this);
 
 			disponible = false;
 
 		}
-		
-		if(Fisica.colision(juego.getJugador().getDisparos(), this)) {
-			
-			juego.getJugador().agregarPowerUp(this);
+
+		if (Fisica.colision(getJuego().getJugador().getDisparos(), this)) {
+
+			getJuego().getJugador().agregarPowerUp(this);
 			disponible = false;
-			
+
 		}
-		
 
 	}
 
@@ -209,7 +202,7 @@ public class Potenciador extends GameObject {
 
 		while (disponible) {
 			try {
-				if (!juego.isPausa()) {
+				if (!getJuego().isPausa()) {
 
 					Thread.sleep(1000);
 					seconds--;

@@ -2,12 +2,8 @@ package modelo;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-
 import animation.Animation;
-import hilos.HiloAbstract;
 import tools.GameManager;
-import tools.ImageLoader;
 
 /**
  * <p>

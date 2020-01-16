@@ -93,6 +93,15 @@ public class Fisica {
 		return colision;
 	}
 
+	/**
+	 * Verifica si algun {@code Disparo} de la lista de disparos colisiona con el
+	 * {@code Potenciador}.
+	 * 
+	 * @param disparos Una lista de disparos.
+	 * @param powerUp  Un {@code Potenciador}
+	 * @return {@code true} si algun {@code Disparo} colisiona con el
+	 *         {@code Potenciador}, {@code false} en caso contrario.
+	 */
 	public static boolean colision(LinkedList<Disparo> disparos, Potenciador powerUp) {
 
 		boolean colision = false;

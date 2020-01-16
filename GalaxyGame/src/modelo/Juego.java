@@ -9,6 +9,7 @@ import hilos.HiloAlternarEsquivarEnemigo;
 import hilos.HiloDesplegarEnemigos;
 import hilos.HiloDisparoEnemigo;
 import hilos.HiloDisparoJugador;
+import hilos.HiloMovimientoCamara;
 import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import hilos.HiloMovimientoPotenciadores;
@@ -52,21 +53,105 @@ public class Juego {
 	 * Lista de procesos del {@code Juego}.
 	 */
 	private LinkedList<HiloAbstract> threads;
+	
+	/**
+	 * 
+	 */
+	private MODO modo;
+
+	/**
+	 * 
+	 */
+	private LinkedList<GameObject> objetos;
+	
+	/**
+	 * 
+	 */
+	private Camara camara;
+
+	/**
+	 * Contiene los modos de juego que se pueden jugar.
+	 * 
+	 * @author juanchovelezpro
+	 *
+	 */
+	public enum MODO {
+
+		ORIGINAL, HISTORIA, INVASION,
+
+	}
 
 	/**
 	 * Constructor que crea un {@code Juego} con un {@code Jugador} y una lista de
 	 * enemigos y explosiones.
 	 */
-	public Juego() {
+	public Juego(MODO modo) {
 
-		pausa = false;
-		jugador = new Jugador(this);
-		explosiones = new LinkedList<>();
-		enemigos = new LinkedList<>();
-		threads = new LinkedList<>();
+		this.modo = modo;
+		inicializarJuego(modo);
 
-		crearProcesos();
+	}
 
+	public void inicializarJuego(MODO modo) {
+
+		switch (modo) {
+		case ORIGINAL:
+			pausa = false;
+			jugador = new Jugador(this);
+			explosiones = new LinkedList<>();
+			enemigos = new LinkedList<>();
+			threads = new LinkedList<>();
+			crearProcesos();
+			break;
+
+		case HISTORIA:
+			objetos = new LinkedList<GameObject>();
+			camara = new Camara(0,0);
+			threads = new LinkedList<>();
+			
+			crearHistoria();
+
+			break;
+
+		case INVASION:
+
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	public Camara getCamara() {
+		return camara;
+	}
+
+	public void setCamara(Camara camara) {
+		this.camara = camara;
+	}
+
+	public LinkedList<GameObject> getObjetos() {
+		return objetos;
+	}
+
+	public void setObjetos(LinkedList<GameObject> objetos) {
+		this.objetos = objetos;
+	}
+	
+	public MODO getModo() {
+		return modo;
+	}
+
+	public void setModo(MODO modo) {
+		this.modo = modo;
+	}
+
+	public void crearHistoria() {
+		
+		threads.add(new HiloMovimientoCamara(this));
+		threads.add(new HiloMovimientoJugador(this));
+		
 	}
 
 	public void crearProcesos() {
@@ -127,6 +212,7 @@ public class Juego {
 
 	/**
 	 * Retorna la lista de procesos del {@code Juego}.
+	 * 
 	 * @return La lista de procesos del {@code Juego}.
 	 */
 	public LinkedList<HiloAbstract> getThreads() {
@@ -135,6 +221,7 @@ public class Juego {
 
 	/**
 	 * Modifica la lista de procesos del {@code Juego}.
+	 * 
 	 * @param threads La nueva lista de procesos del {@code Juego}.
 	 */
 	public void setThreads(LinkedList<HiloAbstract> threads) {
@@ -223,7 +310,7 @@ public class Juego {
 
 		Random r = new Random();
 
-		enemigos.add(new Enemigo(r.nextInt(2)+1, this));
+		enemigos.add(new Enemigo(r.nextInt(2) + 1, this));
 
 		enemigosRestantes++;
 

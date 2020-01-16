@@ -14,6 +14,7 @@ import hilos.HiloMovimientoPotenciadores;
 import hilos.HiloRevivirJugador;
 import modelo.Explosion;
 import modelo.Juego;
+import modelo.Juego.MODO;
 import tools.GameManager;
 
 import java.awt.*;
@@ -35,7 +36,7 @@ public class Game extends JFrame {
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setIconImage(GameManager.imagenes.get("icono"));
 
-		juego = new Juego();
+		juego = new Juego(MODO.ORIGINAL);
 
 		opciones = new PanelOpciones(this);
 
@@ -43,9 +44,7 @@ public class Game extends JFrame {
 
 		setLocationRelativeTo(null);
 
-		// Cargar recurso de explosion.
-		getJuego().getExplosiones().add(new Explosion(0, 0, juego));
-		getJuego().getExplosiones().getLast().start();
+
 
 	}
 

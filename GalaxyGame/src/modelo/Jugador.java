@@ -3,10 +3,12 @@ package modelo;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+
+import modelo.Juego.MODO;
 import tools.GameManager;
 
 /**
- * Representa al jugador del juego.
+ * Representa al jugador del Juego.
  * 
  * @author juanchovelezpro
  *
@@ -32,13 +34,13 @@ public class Jugador extends GameObject {
 
 	/**
 	 * Limite horizontal derecho para evitar que el {@code Jugador} se salga de la
-	 * vision del juego.
+	 * vision del Juego.
 	 */
 	public static final int X_RIGHT_LIMIT = GameManager.WIDTH_GAME - WIDTH;
 
 	/**
 	 * Limite horizontal izquierod para evitar que el {@code Jugador} se salga de la
-	 * vision del juego.
+	 * vision del Juego.
 	 * <p>
 	 * Valor: {@value #X_LEFT_LIMIT}
 	 * </p>
@@ -103,11 +105,6 @@ public class Jugador extends GameObject {
 	private LinkedList<Disparo> disparos;
 
 	/**
-	 * El juego al que pertenece el {@code Jugador}.
-	 */
-	private Juego juego;
-
-	/**
 	 * La cantidad de vidas que posee el {@code Jugador}.
 	 */
 	private int vidas;
@@ -159,26 +156,61 @@ public class Jugador extends GameObject {
 	 * @param juego El {@code Juego} al que pertenece el {@code Jugador}.
 	 */
 	public Jugador(Juego juego) {
+		super(juego);
+		
+		crearJugador();
+		
+	}
 
-		super(SPAWN_X, SPAWN_Y, juego);
-		setSkin(GameManager.imagenes.get("nave1"));
-		setAltura(HEIGHT);
-		setAncho(WIDTH);
+	public void crearJugador() {
 
-		disparos = new LinkedList<>();
-		powerUps = new LinkedList<>();
+		switch (getJuego().getModo()) {
+		case ORIGINAL:
+			setX(SPAWN_X);
+			setY(SPAWN_Y);
+			setSkin(GameManager.imagenes.get("nave1"));
+			setAltura(HEIGHT);
+			setAncho(WIDTH);
 
-		nick = "";
-		puntaje = 0;
-		vidas = 3;
-		vida = 100;
-		salud = vida;
-		damage = 2;
-		vivo = true;
-		recargaDisparo = false;
-		invulnerable = false;
+			disparos = new LinkedList<>();
+			powerUps = new LinkedList<>();
 
-		this.juego = juego;
+			nick = "";
+			puntaje = 0;
+			vidas = 3;
+			vida = 100;
+			salud = vida;
+			damage = 2;
+			vivo = true;
+			recargaDisparo = false;
+			invulnerable = false;
+
+			break;
+
+		case HISTORIA:
+
+			setSkin(GameManager.imagenes.get("nave1"));
+			setAltura(getSkin().getHeight(null));
+			setAncho(getSkin().getWidth(null));
+
+			disparos = new LinkedList<>();
+			powerUps = new LinkedList<>();
+
+			nick = "";
+			puntaje = 0;
+			vidas = 3;
+			vida = 100;
+			salud = vida;
+			damage = 2;
+			vivo = true;
+			recargaDisparo = false;
+			invulnerable = false;
+
+			break;
+
+		default:
+			break;
+		}
 
 	}
 
@@ -204,7 +236,7 @@ public class Jugador extends GameObject {
 	}
 
 	/**
-	 * Retorna si el juego debe recargar el disparo. (Ha disparado anteriormente y
+	 * Retorna si el Juego debe recargar el disparo. (Ha disparado anteriormente y
 	 * no ha soltado la tecla de disparar).
 	 * 
 	 * @return {@code true} si el jugador debe recargar el disparo, {@code false},
@@ -366,15 +398,20 @@ public class Jugador extends GameObject {
 
 		}
 
-		if (vivo) {
-			if (super.getX() >= X_RIGHT_LIMIT) {
-				super.setX(X_RIGHT_LIMIT);
-			} else if (super.getX() <= X_LEFT_LIMIT) {
-				super.setX(X_LEFT_LIMIT);
-			}
+		if (getJuego().getModo() == MODO.ORIGINAL) {
+			if (vivo) {
+				if (super.getX() >= X_RIGHT_LIMIT) {
+					super.setX(X_RIGHT_LIMIT);
+				} else if (super.getX() <= X_LEFT_LIMIT) {
+					super.setX(X_LEFT_LIMIT);
+				}
 
-			super.setX(super.getX() + super.getVelX());
+			}
 		}
+
+		super.setX(super.getX() + super.getVelX());
+		super.setY(super.getY() + super.getVelY());
+
 	}
 
 	/**
@@ -482,13 +519,13 @@ public class Jugador extends GameObject {
 	 * @see #disparos
 	 */
 	public void agregarDisparo() {
-		disparos.add(new Disparo(4, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, juego));
+		disparos.add(new Disparo(4, super.getX() + SHOT_OFFSET_X, super.getY() + SHOT_OFFSET_Y, 0, 15, getJuego()));
 	}
 
 	/**
 	 * Elimina un {@code Disparo} de la lista de disparos del {@code Jugador}.
 	 * <p>
-	 * Con el fin de optimizar el rendimiento del juego, aquellos disparos que
+	 * Con el fin de optimizar el rendimiento del Juego, aquellos disparos que
 	 * superen el limite de la vision del jugador se eliminan.
 	 * </p>
 	 * 
@@ -524,10 +561,11 @@ public class Jugador extends GameObject {
 
 			disparoTemporal.avanzarDisparo();
 
-			if (Fisica.colision(disparoTemporal, juego.getEnemigos(), juego)) {
+			if (Fisica.colision(disparoTemporal, getJuego().getEnemigos(), getJuego())) {
 
-				juego.getExplosiones().add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY(), juego));
-				juego.getExplosiones().getLast().start();
+				getJuego().getExplosiones()
+						.add(new Explosion(disparoTemporal.getX(), disparoTemporal.getY(), getJuego()));
+				getJuego().getExplosiones().getLast().start();
 
 				eliminarDisparo(disparoTemporal);
 
