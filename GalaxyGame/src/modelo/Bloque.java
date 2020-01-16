@@ -9,34 +9,34 @@ public class Bloque extends GameObject {
 
 	public enum ID {
 
-		ROCA,BRICK,
+		ROCA, BRICK,
 
 	}
 
 	public Bloque(ID id, int x, int y, Juego juego) {
 		super(juego);
 
-		crearBloque(id,x,y);
+		crearBloque(id, x, y);
 
 	}
 
-	public void crearBloque(ID id,int x, int y) {
+	public void crearBloque(ID id, int x, int y) {
 
 		switch (id) {
 		case ROCA:
 			setSkin(GameManager.imagenes.get("ROCA"));
 			setAltura(getSkin().getHeight(null));
 			setAncho(getSkin().getWidth(null));
-			setX(x*getAncho());
-			setY(y*getAltura());
+			setX(x * getAncho());
+			setY(y * getAltura());
 			break;
-			
+
 		case BRICK:
 			setSkin(GameManager.imagenes.get("BRICK"));
 			setAltura(getSkin().getHeight(null));
 			setAncho(getSkin().getWidth(null));
-			setX(x*getAncho());
-			setY(y*getAltura());
+			setX(x * getAncho());
+			setY(y * getAltura());
 
 		default:
 			break;
@@ -46,19 +46,24 @@ public class Bloque extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(getSkin(),getX(),getY(), null);
-		
-		if(GameManager.TEST) {
-			
+		g.drawImage(getSkin(), getX(), getY(), null);
+
+		if (GameManager.TEST) {
+
 			GameManager.renderBounds(g, this);
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public Rectangle getVision() {
 		return null;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle(getX(), getY(), getAncho(), getAltura());
 	}
 
 }

@@ -293,11 +293,7 @@ public abstract class GameObject extends HiloAbstract {
 	 * @return El {@code Rectangle} con coordenadas (x,y) y ancho y la altura del
 	 *         {@code GameObject}
 	 */
-	public Rectangle getBounds() {
-
-		return new Rectangle(x + ancho / 8, y + altura / 8, ancho - ancho / 4, altura - altura / 4);
-
-	}
+	public abstract Rectangle getBounds();
 
 	/**
 	 * Retorna un rectangulo que representa la visibilidad frontal de un

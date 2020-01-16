@@ -693,4 +693,9 @@ public class Enemigo extends GameObject {
 		return new Rectangle(getX(), getY() + getAltura(), getAncho(), getAltura() * 2);
 	}
 
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle(getX() + getAncho()/ 8, getY() + getAltura()/ 8, getAncho()- getAncho()/ 4, getAltura()- getAltura()/ 4);
+	}
+
 }

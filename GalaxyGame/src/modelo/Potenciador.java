@@ -229,4 +229,9 @@ public class Potenciador extends GameObject {
 
 	}
 
+	@Override
+	public Rectangle getBounds() {
+		return new Rectangle(getX() + getAncho()/ 8, getY() + getAltura()/ 8, getAncho()- getAncho()/ 4, getAltura()- getAltura()/ 4);
+	}
+
 }

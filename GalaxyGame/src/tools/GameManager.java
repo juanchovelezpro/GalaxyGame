@@ -63,7 +63,7 @@ public class GameManager {
 	/**
 	 * Permite realizar pruebas al juego. (Utilizar en modo debugger)
 	 */
-	public static final boolean TEST = true;
+	public static final boolean TEST = false;
 
 	public static final Random random = new Random();
 
@@ -87,6 +87,15 @@ public class GameManager {
 		imagenes.put("nave4", ImageLoader.cargarImagen("naves/nave4.png"));
 		imagenes.put("nave5", ImageLoader.cargarImagen("naves/nave5.png"));
 		imagenes.put("nave6", ImageLoader.cargarImagen("naves/nave6.png"));
+		
+		imagenes.put("naveHistoria", ImageLoader.cargarImagen("naves/naveHistoria.png"));
+		imagenes.put("naveAbajo", ImageLoader.cargarImagen("naves/naveAbajo.png"));
+		imagenes.put("naveDerecha", ImageLoader.cargarImagen("naves/naveDerecha.png"));
+		imagenes.put("naveIzquierda", ImageLoader.cargarImagen("naves/naveIzquierda.png"));
+		imagenes.put("diagLeftUp", ImageLoader.cargarImagen("naves/diagLeftUp.png"));
+		imagenes.put("diagRightUp", ImageLoader.cargarImagen("naves/diagRightUp.png"));
+		imagenes.put("diagRightDown", ImageLoader.cargarImagen("naves/diagRightDown.png"));
+		imagenes.put("diagLeftDown", ImageLoader.cargarImagen("naves/diagLeftDown.png"));
 
 		imagenes.put("nave1invulnerable", ImageLoader.cargarImagen("naves/nave1invulnerable.png"));
 

@@ -126,42 +126,31 @@ public class PanelGameHistoria extends JPanel implements KeyListener {
 		Juego juego = opciones.getGame().getJuego();
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
-		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
+		if (event == KeyEvent.VK_RIGHT) {
 
 			jugador.setVelX(1);
+			jugador.setDerecha(true);
 
 		}
 
-		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
+		if (event == KeyEvent.VK_LEFT) {
 
 			jugador.setVelX(-1);
+			jugador.setIzquierda(true);
 
 		}
-		
-		if(event == KeyEvent.VK_UP) {
-			
+
+		if (event == KeyEvent.VK_UP) {
+
 			jugador.setVelY(-1);
-			
+			jugador.setArriba(true);
 		}
-		
-		if(event == KeyEvent.VK_DOWN) {
-			
+
+		if (event == KeyEvent.VK_DOWN) {
+
 			jugador.setVelY(1);
-			
-		}
+			jugador.setAbajo(true);
 
-		if (event == KeyEvent.VK_SPACE && !juego.getJugador().isRecargaDisparo()) {
-
-			if (!juego.isPausa()) {
-
-				if (jugador.isVivo()) {
-					jugador.agregarDisparo();
-
-					SoundPlayer.play("/sounds/laser.wav");
-
-					jugador.setRecargaDisparo(true);
-				}
-			}
 		}
 
 	}
@@ -169,34 +158,35 @@ public class PanelGameHistoria extends JPanel implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 
-		
 		int event = e.getKeyCode();
-
-		Juego juego = opciones.getGame().getJuego();
 		Jugador jugador = opciones.getGame().getJuego().getJugador();
 
-		if (event == KeyEvent.VK_RIGHT || event == KeyEvent.VK_D) {
+		if (event == KeyEvent.VK_RIGHT) {
 
 			jugador.setVelX(0);
+			jugador.setDerecha(false);
 
 		}
 
-		if (event == KeyEvent.VK_LEFT || event == KeyEvent.VK_A) {
+		if (event == KeyEvent.VK_LEFT) {
 
 			jugador.setVelX(0);
+			jugador.setIzquierda(false);
 
 		}
-		
-		if(event == KeyEvent.VK_UP) {
-			
+
+		if (event == KeyEvent.VK_UP) {
+
 			jugador.setVelY(0);
-			
+			jugador.setArriba(false);
+
 		}
-		
-		if(event == KeyEvent.VK_DOWN) {
-			
+
+		if (event == KeyEvent.VK_DOWN) {
+
 			jugador.setVelY(0);
-			
+			jugador.setAbajo(false);
+
 		}
 	}
 

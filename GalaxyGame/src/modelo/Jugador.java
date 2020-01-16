@@ -149,6 +149,11 @@ public class Jugador extends GameObject {
 	 */
 	private LinkedList<Potenciador> powerUps;
 
+	private boolean izquierda;
+	private boolean derecha;
+	private boolean abajo;
+	private boolean arriba;
+
 	/**
 	 * Constructor que crea un {@code Jugador}. Todas los demas parametros del
 	 * {@code Jugador} son diferentes de {@code null}
@@ -157,9 +162,9 @@ public class Jugador extends GameObject {
 	 */
 	public Jugador(Juego juego) {
 		super(juego);
-		
+
 		crearJugador();
-		
+
 	}
 
 	public void crearJugador() {
@@ -189,7 +194,7 @@ public class Jugador extends GameObject {
 
 		case HISTORIA:
 
-			setSkin(GameManager.imagenes.get("nave1"));
+			setSkin(GameManager.imagenes.get("naveHistoria"));
 			setAltura(getSkin().getHeight(null));
 			setAncho(getSkin().getWidth(null));
 
@@ -205,6 +210,10 @@ public class Jugador extends GameObject {
 			vivo = true;
 			recargaDisparo = false;
 			invulnerable = false;
+			arriba = false;
+			abajo = false;
+			izquierda = false;
+			derecha = false;
 
 			break;
 
@@ -212,6 +221,38 @@ public class Jugador extends GameObject {
 			break;
 		}
 
+	}
+
+	public boolean isIzquierda() {
+		return izquierda;
+	}
+
+	public void setIzquierda(boolean izquierda) {
+		this.izquierda = izquierda;
+	}
+
+	public boolean isDerecha() {
+		return derecha;
+	}
+
+	public void setDerecha(boolean derecha) {
+		this.derecha = derecha;
+	}
+
+	public boolean isAbajo() {
+		return abajo;
+	}
+
+	public void setAbajo(boolean abajo) {
+		this.abajo = abajo;
+	}
+
+	public boolean isArriba() {
+		return arriba;
+	}
+
+	public void setArriba(boolean arriba) {
+		this.arriba = arriba;
 	}
 
 	/**
@@ -409,8 +450,62 @@ public class Jugador extends GameObject {
 			}
 		}
 
+		actualizarSkin();
+
 		super.setX(super.getX() + super.getVelX());
 		super.setY(super.getY() + super.getVelY());
+
+	}
+
+	public void actualizarSkin() {
+
+		if (arriba) {
+
+			setSkin(GameManager.imagenes.get("naveHistoria"));
+
+		}
+
+		if (abajo) {
+
+			setSkin(GameManager.imagenes.get("naveAbajo"));
+
+		}
+
+		if (izquierda) {
+
+			setSkin(GameManager.imagenes.get("naveIzquierda"));
+
+		}
+
+		if (derecha) {
+
+			setSkin(GameManager.imagenes.get("naveDerecha"));
+
+		}
+
+		if (arriba && izquierda) {
+
+			setSkin(GameManager.imagenes.get("diagLeftUp"));
+
+		}
+
+		if (arriba && derecha) {
+
+			setSkin(GameManager.imagenes.get("diagRightUp"));
+
+		}
+
+		if (abajo && izquierda) {
+
+			setSkin(GameManager.imagenes.get("diagLeftDown"));
+
+		}
+
+		if (abajo && derecha) {
+
+			setSkin(GameManager.imagenes.get("diagRightDown"));
+
+		}
 
 	}
 
@@ -600,6 +695,13 @@ public class Jugador extends GameObject {
 	public Rectangle getVision() {
 
 		return null;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+
+		return new Rectangle(getX() + getAncho() / 8, getY() + getAltura() / 8, getAncho() - getAncho() / 4,
+				getAltura() - getAltura() / 4);
 	}
 
 }

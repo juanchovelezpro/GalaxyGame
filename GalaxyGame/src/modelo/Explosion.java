@@ -113,4 +113,10 @@ public class Explosion extends GameObject {
 		return null;
 	}
 
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
