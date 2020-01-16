@@ -148,9 +148,9 @@ public class Juego {
 
 	public void crearHistoria() {
 
-		threads.add(new HiloMovimientoCamara(this));
+//		threads.add(new HiloMovimientoCamara(this));
 		threads.add(new HiloMovimientoJugador(this, 1));
-//		threads.add(new HiloTransicionCamara(this, jugador));
+		threads.add(new HiloTransicionCamara(this, jugador));
 
 	}
 
