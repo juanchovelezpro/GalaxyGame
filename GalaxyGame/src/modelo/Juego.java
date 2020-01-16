@@ -150,13 +150,13 @@ public class Juego {
 	public void crearHistoria() {
 		
 		threads.add(new HiloMovimientoCamara(this));
-		threads.add(new HiloMovimientoJugador(this));
+		threads.add(new HiloMovimientoJugador(this,1));
 		
 	}
 
 	public void crearProcesos() {
 
-		threads.add(new HiloMovimientoJugador(this));
+		threads.add(new HiloMovimientoJugador(this,10));
 		threads.add(new HiloDisparoJugador(this));
 		threads.add(new HiloRevivirJugador(this));
 		threads.add(new HiloMovimientoEnemigos(this));
