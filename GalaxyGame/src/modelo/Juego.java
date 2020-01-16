@@ -14,6 +14,7 @@ import hilos.HiloMovimientoEnemigos;
 import hilos.HiloMovimientoJugador;
 import hilos.HiloMovimientoPotenciadores;
 import hilos.HiloRevivirJugador;
+import hilos.HiloTransicionCamara;
 
 /**
  * Esta clase se encarga de manipular los objetos {@code Jugador} y
@@ -53,7 +54,7 @@ public class Juego {
 	 * Lista de procesos del {@code Juego}.
 	 */
 	private LinkedList<HiloAbstract> threads;
-	
+
 	/**
 	 * 
 	 */
@@ -63,7 +64,7 @@ public class Juego {
 	 * 
 	 */
 	private LinkedList<GameObject> objetos;
-	
+
 	/**
 	 * 
 	 */
@@ -106,10 +107,8 @@ public class Juego {
 
 		case HISTORIA:
 			objetos = new LinkedList<GameObject>();
-			camara = new Camara(0,0);
+			camara = new Camara(0, 0);
 			threads = new LinkedList<>();
-			
-			crearHistoria();
 
 			break;
 
@@ -138,7 +137,7 @@ public class Juego {
 	public void setObjetos(LinkedList<GameObject> objetos) {
 		this.objetos = objetos;
 	}
-	
+
 	public MODO getModo() {
 		return modo;
 	}
@@ -148,15 +147,16 @@ public class Juego {
 	}
 
 	public void crearHistoria() {
-		
+
 		threads.add(new HiloMovimientoCamara(this));
-		threads.add(new HiloMovimientoJugador(this,1));
-		
+		threads.add(new HiloMovimientoJugador(this, 1));
+//		threads.add(new HiloTransicionCamara(this, jugador));
+
 	}
 
 	public void crearProcesos() {
 
-		threads.add(new HiloMovimientoJugador(this,10));
+		threads.add(new HiloMovimientoJugador(this, 10));
 		threads.add(new HiloDisparoJugador(this));
 		threads.add(new HiloRevivirJugador(this));
 		threads.add(new HiloMovimientoEnemigos(this));

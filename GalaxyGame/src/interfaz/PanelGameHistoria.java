@@ -28,9 +28,10 @@ public class PanelGameHistoria extends JPanel implements KeyListener {
 		this.opciones = opciones;
 		setBounds(0, 0, GameManager.WIDTH, GameManager.HEIGHT);
 		cargarMapa(GameManager.sprites.get("MAPA"));
+		opciones.getGame().getJuego().crearHistoria();
 		opciones.getGame().getJuego().iniciarProcesos();
-		opciones.getGame().getJuego().getCamara().setX(opciones.getGame().getJuego().getJugador().getX());
-		opciones.getGame().getJuego().getCamara().setY(opciones.getGame().getJuego().getJugador().getY());
+//		opciones.getGame().getJuego().getCamara().setX(opciones.getGame().getJuego().getJugador().getX());
+//		opciones.getGame().getJuego().getCamara().setY(opciones.getGame().getJuego().getJugador().getY());
 
 		addKeyListener(this);
 		setFocusable(true);
