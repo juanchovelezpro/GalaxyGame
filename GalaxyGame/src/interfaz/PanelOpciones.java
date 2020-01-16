@@ -2,6 +2,8 @@ package interfaz;
 
 import javax.swing.*;
 
+import modelo.Juego;
+import modelo.Juego.MODO;
 import tools.GameManager;
 import tools.SoundPlayer;
 import java.awt.*;
@@ -148,6 +150,8 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		if (e.getSource().equals(butJugarMundos)) {
 
+			game.setJuego(new Juego(MODO.HISTORIA));
+			
 			panelHistoria = new PanelGameHistoria(this);
 			this.removeAll();
 			game.add(panelHistoria);
@@ -159,6 +163,8 @@ public class PanelOpciones extends JPanel implements ActionListener {
 
 		if (e.getSource().equals(butJugarOriginal)) {
 
+			game.setJuego(new Juego(MODO.ORIGINAL));
+			
 			panelGame = new PanelGame(this);
 
 			this.removeAll();

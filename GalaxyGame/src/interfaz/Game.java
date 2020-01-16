@@ -36,8 +36,6 @@ public class Game extends JFrame {
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		setIconImage(GameManager.imagenes.get("icono"));
 
-		juego = new Juego(MODO.ORIGINAL);
-
 		opciones = new PanelOpciones(this);
 
 		setContentPane(opciones);
@@ -49,9 +47,11 @@ public class Game extends JFrame {
 	}
 
 	public Juego getJuego() {
-
 		return juego;
+	}
 
+	public void setJuego(Juego juego) {
+		this.juego = juego;
 	}
 
 	public void refresh() {
