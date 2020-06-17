@@ -39,6 +39,16 @@ public class Animation {
 	 * The number of rows of the image to run the animation
 	 */
 	private int row;
+	
+	/**
+	 * 
+	 */
+	private int startRow;
+	
+	/**
+	 * 
+	 */
+	private int startCol;
 
 	/**
 	 * It is the image to get the sprite sheets.
@@ -71,9 +81,9 @@ public class Animation {
 	public Animation(BufferedImage image, int frames, int speed, int col, int row) {
 
 		this.image = image;
-
+		startCol = 1;
+		startRow = 1;
 		this.frames = frames;
-
 		this.speed = speed;
 		this.col = col;
 		this.row = row;
@@ -83,6 +93,31 @@ public class Animation {
 		fillSprites();
 
 	}
+	
+	/**
+	 * 
+	 * @param image
+	 * @param frames
+	 * @param speed
+	 * @param col
+	 * @param row
+	 */
+	public Animation(BufferedImage image, int frames, int speed,int startCol, int startRow, int col, int row) {
+
+		this.image = image;
+		this.startCol = startCol;
+		this.startRow = startRow;
+		this.frames = frames;
+		this.speed = speed;
+		this.col = col;
+		this.row = row;
+		images = new BufferedImage[frames];
+		alive = true;
+
+		fillSprites();
+
+	}
+
 
 	/**
 	 * Puts all the sprites sheets in an array.
@@ -94,9 +129,9 @@ public class Animation {
 
 		int k = 0;
 
-		for (int i = 1; i <= row; i++) {
+		for (int i = startRow; i <= row; i++) {
 
-			for (int j = 1; j <= col; j++, k++) {
+			for (int j = startCol; j <= col; j++, k++) {
 
 				images[k] = ss.grabImage(i, j, (int) image.getWidth() / col, (int) image.getHeight() / row);
 

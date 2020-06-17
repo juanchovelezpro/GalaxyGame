@@ -62,7 +62,7 @@ public class GameManager {
 	/**
 	 * Permite realizar pruebas al juego. (Utilizar en modo debugger)
 	 */
-	public static final boolean TEST = true;
+	public static final boolean TEST = false;
 
 	/**
 	 * Las imagenes del juego.
